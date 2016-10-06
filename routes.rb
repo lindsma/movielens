@@ -5,8 +5,16 @@ require_relative 'rating'
 require 'sinatra'
 require 'pry'
 
+before do
+  content_type :json
+end
+
+after do
+  ActiveRecord::Base.connection.close
+end
+
 get '/api/movie/' do
-  {movie_id: 1, title: 'Toy Story', avg_rating: 4, sum_ratings: 25}
+  
 end
 
 get '/api/ratings/all' do

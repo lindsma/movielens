@@ -1,77 +1,82 @@
 require_relative 'environment'
 
 #
-class CreateProfessorsTable < ActiveRecord::Migration[5.0]
+class CreateUsersTable < ActiveRecord::Migration[5.0]
   def up
-    create_table :professors do |t|
-      t.string :prof_name
-      t.integer :years_experience
-      t.integer :college_id
+    create_table :users do |t|
+      t.integer :user_id
+      t.integer :age
+      t.string :gender
+      t.string :job
     end
   end
 
   def down
-    drop_table :professors
+    drop_table :users
   end
 end
 
 #
-class CreateStudentsTable < ActiveRecord::Migration[5.0]
+class CreateMoviesTable < ActiveRecord::Migration[5.0]
   def up
-    create_table :students do |t|
-      t.string :student_name
-      t.integer :years_completed, default: 0
-      t.integer :college_id
+    create_table :movies do |t|
+      t.string :title
+      t.string :release_date
+      t.string :video_release
+      t.string :url
+      t.integer :unknown
+      t.integer :action
+      t.integer :adventure
+      t.integer :animation
+      t.integer :children
+      t.integer :comedy
+      t.integer :crime
+      t.integer :documentary
+      t.integer :drama
+      t.integer :fantasy
+      t.integer :filmnoir
+      t.integer :horror
+      t.integer :musical
+      t.integer :mystery
+      t.integer :romance
+      t.integer :scifi
+      t.integer :thriller
+      t.integer :war
+      t.integer :western
     end
   end
 
   def down
-    drop_table :students
+    drop_table :movies
   end
 end
 
 #
-class CreateCollegesTable < ActiveRecord::Migration[5.0]
+class CreateRatingsTable < ActiveRecord::Migration[5.0]
   def up
-    create_table :colleges do |t| # create_join_table
-      t.string :college_name
-      t.integer :ranking
-    end
-  end
-
-  def down
-    drop_table :colleges
-  end
-end
-
-#
-class CreateSemestersTable < ActiveRecord::Migration[5.0]
-  def up
-    create_join_table :professor, :students, table_name: :semesters do |t|
+    create_join_table :users, :movies, table_name: :ratings do |t|
       # t.index :college_id
-      t.references :professor, index: true, foreign_key: true
-      t.references :student, index: true, foreign_key: true
-      t.string :class_name, index: true
+      t.references :users, index: true, foreign_key: true
+      t.references :movies, index: true, foreign_key: true
+      t.integer :rating
+      t.integer :timestamp
     end
   end
 
   def down
-    drop_table :semesters
+    drop_table :ratings
   end
 end
 
 def main
   action = (ARGV[0] || :up).to_sym
-  CreateProfessorsTable.migrate(action)
+  CreateUsersTable.migrate(action)
 
   action = (ARGV[1] || :up).to_sym
-  CreateStudentsTable.migrate(action)
+  CreateMoviesTable.migrate(action)
 
   action = (ARGV[2] || :up).to_sym
-  CreateCollegesTable.migrate(action)
-
-  action = (ARGV[3] || :up).to_sym
-  CreateSemestersTable.migrate(action)
+  CreateRatingsTable.migrate(action)
 end
 
 main if __FILE__ == $PROGRAM_NAME
