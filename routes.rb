@@ -19,6 +19,8 @@ end
 #   ActiveRecord::Base.connection.close
 # end
 
+
+
 # hardcode
 get '/api/search?' do
   JSON.dump({id: 1, title: "Seven"})
@@ -27,15 +29,15 @@ end
 
 # hardcode
 get '/api/genre/horror' do
-  JSON.dump({title: "From Dusk Till Dawn"})
+  JSON.dump '{"title": "From Dusk Till Dawn"}'
   # JSON.dump '{"title": "Random Horror Movie"}'
 end
 
-get '/api/search' do
+get '/api/search/:movie_id' do
   # movie title and its avg rating
+  movie_rating = Rating.where(movie_id: params['movie_id']).average('rating').round(2)
+  movie_rating.to_json
 end
-
-
 
 #
 #
