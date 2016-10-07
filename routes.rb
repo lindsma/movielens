@@ -31,6 +31,12 @@ get '/api/genre/horror' do
   # JSON.dump '{"title": "Random Horror Movie"}'
 end
 
+get '/api/search' do
+  # movie title and its avg rating
+end
+
+
+
 #
 #
 # post '/api/add/rating' do
