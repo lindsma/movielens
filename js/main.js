@@ -11,22 +11,22 @@ $('#userInput').keyup(function() {
 // nav event handlers
 
 $("#action").on("click", function() {
-  movieQuery();
+    movieQuery();
 });
 $("#horror").on("click", function() {
-  movieQuery();
+    movieQuery();
 });
 $("#comedy").on("click", function() {
-  movieQuery();
+    movieQuery();
 });
 $("#fantasy").on("click", function() {
-  movieQuery();
+    movieQuery();
 });
 $("#drama").on("click", function() {
-  movieQuery();
+    movieQuery();
 });
 $("ul li:nth-child(6)").on("click", function() {
-  movieQuery();
+    movieQuery();
 });
 
 //beginings of searchbar function
@@ -34,20 +34,21 @@ $("ul li:nth-child(6)").on("click", function() {
 
 
 function movieQuery() {
-  var searchbar = $("#userInput").val("");
+    var searchbar = $("#userInput").val("");
     $.ajax({
         url: "api/genre/horror",
         dataType: "text/json",
         method: "GET",
     }).done(function(response) {
-      for (var index = 0; response.data.length; index++) {
-    new targetInfo(response.data[index]);
-   }
-});
+        for (var index = 0; response.data.length; index++) {
+            new targetInfo(response.data[index]);
+        }
+    });
 }
 movieQuery();
 
 
+<<<<<<< HEAD
 var apiKey =  '84d2690223f00a8cc05141e0c91c56b8';
 
 function movieSearch() {
@@ -79,6 +80,8 @@ function MovieDetails(movieObject) {
 }
 
 
+=======
+>>>>>>> f5759f73e62d2acb5b8275e25432f4a4c3df88fd
 
 
 
@@ -89,6 +92,40 @@ function MovieDetails(movieObject) {
 
 $('.navBar').on('click', '.genre', function(event) {
 
+<<<<<<< HEAD
  $(this).toggleClass('active');
+=======
+    $(this).toggleClass('active');
+>>>>>>> f5759f73e62d2acb5b8275e25432f4a4c3df88fd
 
 });
+
+
+// implement handlebars - home-template
+
+function populateMovies() {
+
+    var source = $('#home-template').html();
+    var template = Handlebars.compile(source);
+    var context = {
+        testing: "hey",
+    };
+    var html = template(context);
+    $('.movie-container').prepend(html);
+}
+
+// implement handlebars - top20-template
+
+function populateTop20() {
+
+    var source = $('#top20-template').html();
+    var template = Handlebars.compile(source);
+    var context = {
+        testing: "hey again",
+    };
+    var html = template(context);
+    $('.top20-container').prepend(html);
+}
+
+populateMovies();
+populateTop20();
