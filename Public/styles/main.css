@@ -65,22 +65,46 @@ nav {
     #search {
       float: left;
       width: 75%; } }
+  #search img {
+    height: 50px;
+    margin-top: 40px;
+    margin-left: 25%; }
+    @media only screen and (max-width: 760px) {
+      #search img {
+        margin-left: 20%; } }
+    @media only screen and (max-width: 650px) {
+      #search img {
+        margin-left: 5%;
+        height: 30px;
+        margin-top: 50px; } }
   #search #userInput {
     width: 50%;
     align-self: center;
-    height: 50px;
-    font-size: 30px;
+    font-weight: 900;
+    height: 90px;
+    font-size: 70px;
     font-family: "Montserrat", Arial, sans-serif;
-    margin-left: 25%;
-    padding-left: 20px; }
+    margin-left: 3%;
+    padding-left: 20px;
+    background: #AA1420;
+    color: #fff;
+    border: none; }
+    #search #userInput:focus {
+      outline: none; }
+    @media only screen and (max-width: 950px) {
+      #search #userInput {
+        font-size: 50px; } }
+    @media only screen and (max-width: 760px) {
+      #search #userInput {
+        font-size: 40px; } }
     @media only screen and (max-width: 650px) {
       #search #userInput {
         width: 75%;
-        margin-left: 12.5%; } }
+        margin-left: 1%;
+        font-size: 32px; } }
     @media only screen and (max-width: 490px) {
       #search #userInput {
-        width: 85%;
-        margin-left: 7.5%; } }
+        width: 85%; } }
 
 html {
   height: 100%; }
