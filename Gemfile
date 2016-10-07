@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.3.1'
 
 gem 'sinatra'
 gem 'thin'
@@ -6,5 +7,5 @@ gem 'shotgun'
 gem 'pg'
 gem 'activerecord'
 gem 'json'
-gem 'rack', '<2.0'
+gem 'rack'
 gem 'pry'

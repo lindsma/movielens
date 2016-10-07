@@ -53,10 +53,13 @@ DEPENDENCIES
   json
   pg
   pry
-  rack (< 2.0)
+  rack
   shotgun
   sinatra
   thin
+
+RUBY VERSION
+   ruby 2.3.1p112
 
 BUNDLED WITH
    1.13.2
