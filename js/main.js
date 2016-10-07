@@ -48,7 +48,6 @@ function movieQuery() {
 movieQuery();
 
 
-<<<<<<< HEAD
 var apiKey =  '84d2690223f00a8cc05141e0c91c56b8';
 
 function movieSearch() {
@@ -80,8 +79,7 @@ function MovieDetails(movieObject) {
 }
 
 
-=======
->>>>>>> f5759f73e62d2acb5b8275e25432f4a4c3df88fd
+
 
 
 
@@ -92,11 +90,8 @@ function MovieDetails(movieObject) {
 
 $('.navBar').on('click', '.genre', function(event) {
 
-<<<<<<< HEAD
+
  $(this).toggleClass('active');
-=======
-    $(this).toggleClass('active');
->>>>>>> f5759f73e62d2acb5b8275e25432f4a4c3df88fd
 
 });
 
