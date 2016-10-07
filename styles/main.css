@@ -8,6 +8,20 @@ header {
 
 nav {
   background: #383838;
-  height: 70px; }
+  height: 60px; }
+  nav li {
+    float: left;
+    width: 20%;
+    display: flex; }
+    nav li a {
+      text-decoration: none;
+      text-align: center;
+      color: #fff;
+      width: 100%;
+      font-size: 30px; }
+
+#search {
+  background: #AA1420;
+  height: 130px; }
 
 /*# sourceMappingURL=main.css.map */

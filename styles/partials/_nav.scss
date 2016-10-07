@@ -1,4 +1,18 @@
 nav {
   background: $navColor;
-  height: 70px;
+  height: 60px;
+
+  li {
+    float: left;
+    width: 20%;
+    display: flex;
+
+    a {
+      text-decoration: none;
+      text-align: center;
+      color: #fff;
+      width: 100%;
+      font-size: 30px;
+    }
+  }
 }
