@@ -1,4 +1,32 @@
 #search {
   background: $searchBarColor;
   height: 130px;
+  display: flex;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+  @include media(mobile) {
+    float: left;
+    width: 75%;
+  }
+
+  #userInput {
+    width: 50%;
+    align-self: center;
+    height: 50px;
+    font-size: 30px;
+    font-family: $primaryFont;
+    margin-left: 25%;
+    padding-left: 20px;
+
+    @include media(mobile) {
+      width: 75%;
+      margin-left: 12.5%;
+    }
+
+    @include media(mobile2) {
+      width: 85%;
+      margin-left: 7.5%;
+    }
+
+  }
 }

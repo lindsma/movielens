@@ -1,18 +1,49 @@
 nav {
-  background: $navColor;
-  height: 60px;
-
-  li {
-    float: left;
-    width: 20%;
-    display: flex;
-
-    a {
-      text-decoration: none;
-      text-align: center;
-      color: #fff;
-      width: 100%;
-      font-size: 30px;
+    background: $navColor;
+    height: 60px;
+    font-family: $primaryFont;
+    @include media(mobile) {
+        float: left;
+        width: 25%;
+        height: 100%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     }
-  }
+
+    li {
+        float: left;
+        width: 20%;
+        display: flex;
+        @include media(mobile) {
+            float: none;
+            width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+            text-align: center;
+            color: #fff;
+            width: 100%;
+            line-height: 60px;
+            font-size: 30px;
+            transition: font-size 0.5s ease;
+
+            @include media(desktop) {
+                font-size: 25px;
+            }
+            @include media(tablet) {
+                font-size: 22px;
+                text-align: left;
+                padding-left: 10px;
+            }
+            @include media(mobile2) {
+                font-size: 18px;
+            }
+
+            &:active {
+              background: #AA1420;
+              margin-bottom: -3px;
+              border-bottom: 3px solid #fff;
+            }
+        }
+    }
 }

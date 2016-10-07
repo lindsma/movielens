@@ -1,5 +1,11 @@
+*, *:after, *:before {
+  box-sizing: border-box; }
+
 header {
-  background: #fff; }
+  background: #fff;
+  background: url("././images/film_wide.png");
+  background-size: 100% 120px;
+  background-repeat: no-repeat; }
   header h1 {
     font-size: 60px;
     font-family: "Montserrat", Arial, sans-serif;
@@ -8,20 +14,77 @@ header {
 
 nav {
   background: #383838;
-  height: 60px; }
+  height: 60px;
+  font-family: "Montserrat", Arial, sans-serif; }
+  @media only screen and (max-width: 650px) {
+    nav {
+      float: left;
+      width: 25%;
+      height: 100%;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); } }
   nav li {
     float: left;
     width: 20%;
     display: flex; }
+    @media only screen and (max-width: 650px) {
+      nav li {
+        float: none;
+        width: 100%; } }
     nav li a {
       text-decoration: none;
       text-align: center;
       color: #fff;
       width: 100%;
-      font-size: 30px; }
+      line-height: 60px;
+      font-size: 30px;
+      transition: font-size 0.5s ease; }
+      @media only screen and (max-width: 950px) {
+        nav li a {
+          font-size: 25px; } }
+      @media only screen and (max-width: 760px) {
+        nav li a {
+          font-size: 22px;
+          text-align: left;
+          padding-left: 10px; } }
+      @media only screen and (max-width: 490px) {
+        nav li a {
+          font-size: 18px; } }
+      nav li a:active {
+        background: #AA1420;
+        margin-bottom: -3px;
+        border-bottom: 3px solid #fff; }
 
 #search {
   background: #AA1420;
-  height: 130px; }
+  height: 130px;
+  display: flex;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); }
+  @media only screen and (max-width: 650px) {
+    #search {
+      float: left;
+      width: 75%; } }
+  #search #userInput {
+    width: 50%;
+    align-self: center;
+    height: 50px;
+    font-size: 30px;
+    font-family: "Montserrat", Arial, sans-serif;
+    margin-left: 25%;
+    padding-left: 20px; }
+    @media only screen and (max-width: 650px) {
+      #search #userInput {
+        width: 75%;
+        margin-left: 12.5%; } }
+    @media only screen and (max-width: 490px) {
+      #search #userInput {
+        width: 85%;
+        margin-left: 7.5%; } }
+
+html {
+  height: 100%; }
+
+body {
+  background: #F2F2F2;
+  height: 100%; }
 
 /*# sourceMappingURL=main.css.map */
