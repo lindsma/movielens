@@ -4,7 +4,6 @@ require_relative 'environment'
 class CreateUsersTable < ActiveRecord::Migration[5.0]
   def up
     create_table :users do |t|
-      t.integer :user_id
       t.integer :age
       t.string :gender
       t.string :job
@@ -55,11 +54,10 @@ end
 class CreateRatingsTable < ActiveRecord::Migration[5.0]
   def up
     create_join_table :users, :movies, table_name: :ratings do |t|
-      # t.index :college_id
-      t.references :users, index: true, foreign_key: true
-      t.references :movies, index: true, foreign_key: true
-      t.integer :rating
-      t.integer :timestamp
+      t.references :user, index: true, foreign_key: true
+      t.references :movie, index: true, foreign_key: true
+      t.float :rating
+      t.string :timestamp
     end
   end
 
