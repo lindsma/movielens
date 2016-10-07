@@ -73,7 +73,7 @@ function populateMovies() {
         testing: "hey",
     };
     var html = template(context);
-    $('.movie-container').prepend(html);
+    $(html).insertAfter("#search");
 }
 
 // implement handlebars - top20-template
@@ -86,7 +86,7 @@ function populateTop20() {
         testing: "hey again",
     };
     var html = template(context);
-    $('.top20-container').prepend(html);
+    $(html).insertAfter("#search");
 }
 
 populateMovies();
