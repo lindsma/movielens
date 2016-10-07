@@ -40,8 +40,30 @@
 
 
     </div>
-    <script id="home-template" type="text/x-handlebars-template">
 
+
+    <script id="home-template" type="text/x-handlebars-template">
+      <div class="movie-container">
+        <h3 class="movie-title"></h3>
+        <p class="avg-rating"></p>
+        <p class="expand-details"><a class="expand-btn">&#x21E9;</a></p>
+        <div class="movie-details">
+          <ul class="items">
+            <li class = "item-detail release-date"></li>
+            <li class = "item-detail genres"></li>
+            <li class = "item-detail overview"><a href="#"></a></li>
+          </ul>
+        </div>
+      </div>
+    </script>
+
+    <script id="top20-template" type="text/x-handlebars-template">
+      <h2 class="top20-header">Top Rated</h2>
+      <div class="top20-movie">
+        <h3 class="avg-rating"></h3>
+        <h2 class="movie-title"></h2>
+        <a href="#" class="overview"></a>
+      </div>
     </script>
 
     <script src="js/jquery.js"></script>

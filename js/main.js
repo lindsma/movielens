@@ -30,13 +30,3 @@ $("ul li:nth-child(6)").on("click", function() {
 //beginings of searchbar function
 
 var searchbar = $("#userInput").val("");
-
-// toggle classes
-
-$('.navBar').on('click', '.genre', function(event) {
-  console.log(this);
-
-  var genre = $(this).attr('id');
-  $('#' + genre).toggleClass('active');
-
-});
