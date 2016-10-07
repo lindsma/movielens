@@ -1,7 +1,13 @@
 header {
   background: #fff; }
+  header h1 {
+    font-size: 60px;
+    font-family: "Montserrat", Arial, sans-serif;
+    padding: 30px 0;
+    text-align: center; }
 
 nav {
-  background: #383838; }
+  background: #383838;
+  height: 70px; }
 
 /*# sourceMappingURL=main.css.map */

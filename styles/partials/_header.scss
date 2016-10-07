@@ -1,3 +1,11 @@
 header {
   background: $headerColor;
+
+
+  h1 {
+    font-size: 60px;
+    font-family: $primaryFont;
+    padding: 30px 0;
+    text-align: center;
+  }
 }
