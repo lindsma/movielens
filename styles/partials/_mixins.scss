@@ -9,13 +9,11 @@
             @content;
         }
     }
-
     @if $bp == mobile {
          @media only screen and (max-width: 650px){
             @content;
         }
     }
-
     @if $bp == mobile2 {
          @media only screen and (max-width: 490px){
             @content;

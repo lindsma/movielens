@@ -1,14 +1,13 @@
 header {
-  background: $headerColor;
-  background: url('././images/film_wide.png');
-  background-size: 100% 120px;
-  background-repeat: no-repeat;
+    background: $headerColor;
+    background: url('././images/film_wide.png');
+    background-size: 100% 120px;
+    background-repeat: no-repeat;
 
-
-  h1 {
-    font-size: 60px;
-    font-family: $primaryFont;
-    padding: 30px 0;
-    text-align: center;
-  }
+    h1 {
+        font-size: 60px;
+        font-family: $primaryFont;
+        padding: 30px 0;
+        text-align: center;
+    }
 }
