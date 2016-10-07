@@ -1,32 +1,47 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <link rel="stylesheet" href="styles/reset.css" type="text/css">
-  <link rel="stylesheet" href="styles/main.css" type="text/css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Movies!</title>
+    <link rel="stylesheet" href="styles/reset.css" type="text/css">
+    <link rel="stylesheet" href="styles/main.css" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Movies!</title>
 </head>
+
 <body>
-  <div id="container">
-<header>
-  <h1>Fitch's Flicks</h1>
-</header>
-<nav>
-  <input class="button" type="submit" value="ACTION">
-  <input class="button" type="submit" value="DRAMA">
-  <input class="button" type="submit" value="HORROR">
-  <input class="button" type="submit" value="FANTASY">
-  <input class="button" type="submit" value="COMEDY">
-  <input class="button" type="submit" value="ANIMATED">
-</nav>
-<input id="userInput" type="text" name="movieName" placeholder="Movie Name">
-   </div>
-  <script id="home-template" type="text/x-handlebars-template">
+    <div id="container">
+        <header>
+            <h1>Fitch's Flicks</h1>
+        </header>
+        <nav>
+            <ul class="navBar">
+                <li><a href="#">ACTION</a></li>
+                <li><a href="#">HORROR</a></li>
+                <li><a href="#">COMEDY</a></li>
+                <li><a href="#">FANTASY</a></li>
+                <li><a href="#">DRAMA</a></li>
+            </ul>
+        </nav>
+        <div id="search">
+            <input id="userInput" type="text" placeholder="Movie Name">
+        </div>
+    <div class="movies">
+      hush
+    </div>
+    <div class="movies">
+      star wars
+    </div>
+    <div class="movies">
+      ghost
+    </div>
+    </div>
+    <script id="home-template" type="text/x-handlebars-template">
 
-  </script>
+    </script>
 
-<script src="js/jquery.js"></script>
-<script src="js/handlebars.js"></script>
- <script src="js/main.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/handlebars.js"></script>
+    <script src="js/main.js"></script>
 </body>
+
 </html>
