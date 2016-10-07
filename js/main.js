@@ -47,11 +47,48 @@ function movieQuery() {
 }
 movieQuery();
 
+
+var apiKey =  '84d2690223f00a8cc05141e0c91c56b8';
+
+function movieSearch() {
+  var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(searchString) + "&api_key=" + apiKey,
+    "method": "GET",
+    "processData": false,
+    "data": "{}"
+  };
+}
+
+  $.ajax(settings).done(function(response) {
+    return new MovieDetails(response.results[0]);
+  });
+
+
+
+
+function MovieDetails(movieObject) {
+  console.log(movieObject);
+  this.info = {
+    movieId: movieObject.id,
+    title: movieObject.title,
+    overview: movieObject.overview,
+    poster: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + movieObject.poster_path
+  };
+}
+
+
+
+
+
+
+
+
 // toggle classes
 
 $('.navBar').on('click', '.genre', function(event) {
 
- var genre = $(this).attr('id');
- $('#' + genre).toggleClass('active');
+ $(this).toggleClass('active');
 
 });
