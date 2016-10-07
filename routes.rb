@@ -2,16 +2,35 @@ require_relative 'environment'
 require_relative 'movie'
 require_relative 'user'
 require_relative 'rating'
+require 'yaml'
 require 'sinatra'
 require 'pry'
 
-get '/api/movie/' do
-  {movie_id: 1, title: 'Toy Story', avg_rating: 4, sum_ratings: 25}
+# database_config = YAML::load(File.open('config/database.yml'))
+
+# ActiveRecord::Base.establish_connection(ENV['DATABASE_URL']
+
+before do
+  content_type :json
 end
 
-get '/api/ratings/all' do
-
+after do
+  ActiveRecord::Base.connection.close
 end
+
+# hardcode
+get '/api/search?' do
+  JSON.dump '{"id": 1, "title": "Seven"}'
+  JSON.dump '{"id": 2, "title": "GoldenEye"}'
+end
+
+# hardcode
+get '/api/genre/horror' do
+  JSON.dump '{"title": "From Dusk Till Dawn"}'
+  JSON.dump '{"title": "Random Horror Movie"}'
+end
+
+
 
 post '/api/add/rating' do
   new_kid = Student.create(student_name: params[:student_name],
