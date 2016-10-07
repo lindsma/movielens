@@ -30,6 +30,10 @@ nav {
       nav li {
         float: none;
         width: 100%; } }
+    nav li.active {
+      background: #AA1420;
+      margin-bottom: -3px;
+      border-bottom: 3px solid #fff; }
     nav li a {
       text-decoration: none;
       text-align: center;
@@ -49,10 +53,6 @@ nav {
       @media only screen and (max-width: 490px) {
         nav li a {
           font-size: 18px; } }
-      nav li a:active {
-        background: #AA1420;
-        margin-bottom: -3px;
-        border-bottom: 3px solid #fff; }
 
 #search {
   background: #AA1420;

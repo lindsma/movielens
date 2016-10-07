@@ -18,6 +18,12 @@ nav {
             width: 100%;
         }
 
+        &.active {
+            background: #AA1420;
+            margin-bottom: -3px;
+            border-bottom: 3px solid #fff;
+        }
+
         a {
             text-decoration: none;
             text-align: center;
@@ -26,7 +32,6 @@ nav {
             line-height: 60px;
             font-size: 30px;
             transition: font-size 0.5s ease;
-
             @include media(desktop) {
                 font-size: 25px;
             }
@@ -38,12 +43,11 @@ nav {
             @include media(mobile2) {
                 font-size: 18px;
             }
-
-            &:active {
-              background: #AA1420;
-              margin-bottom: -3px;
-              border-bottom: 3px solid #fff;
-            }
+            // &.active {
+            //   background: #AA1420;
+            //   margin-bottom: -3px;
+            //   border-bottom: 3px solid #fff;
+            // }
         }
     }
 }
