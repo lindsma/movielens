@@ -1,32 +1,32 @@
 // nav event handlers
 
 $("#action").on("click", function() {
-    movieQuery("action");
+  movieQuery("action");
 });
 $("#horror").on("click", function() {
-    movieQuery("horror");
+  movieQuery("horror");
 });
 $("#comedy").on("click", function() {
-    movieQuery("comedy");
+  movieQuery("comedy");
 });
 $("#fantasy").on("click", function() {
-    movieQuery("fantasy");
+  movieQuery("fantasy");
 });
 $("#drama").on("click", function() {
-    movieQuery("drama");
+  movieQuery("drama");
 });
 $("ul li:nth-child(6)").on("click", function() {
-    movieQuery();
+  movieQuery();
 });
 
 // On first keypress, ajax search request is made.
 
 $('#userInput').on("keyup", function(event) {
-    if ($('#userInput').val().length > 2) {
-        event.preventDefault();
-        var searchString = $('#userInput').val();
-        movieSearch(searchString);
-    }
+ if ($('#userInput').val().length > 2) {
+event.preventDefault();
+var searchString = $('#userInput').val();
+movieSearch(searchString);
+}
 });
 
 
@@ -44,70 +44,64 @@ $('#userInput').keyup(function() {
 
 //if enter is pressed, the specific movie is searched
 
-$('#userInput').keypress(function(event) {
-    var searchString = $('#userInput').val();
-    if (event.which == 13) {
-        movieSearch(searchString);
-        return false;
-    }
+$('#userInput').keypress(function (event) {
+  var searchString = $('#userInput').val();
+  if (event.which == 13) {
+    movieSearch(searchString);
+    return false;
+  }
 });
 
 
 //Test Ajax for Fitch
+var dataContainer;
+  var searchbar = $("#userInput").val("");
+   $.ajax({
+     "method": "GET",
+      "url": "/genre/horror",
+      "data":{},
+      "datatype": "json",
+      "success": function(data) {
+        dataContainer = data;
+      }
 
-function movieQuery(searchString) {
-    var searchbar = $("#userInput").val("");
-    $.ajax({
-        url: "/api/genre/horror",
-        dataType: "json",
-        method: "GET",
-        data: {},
-    }).done(function(response) {
-        for (var index = 0; response.length; index++) {
-            populateMovies(response[index]);
-        }
-    });
-}
-// movieQuery();
+     });
+
+console.log(dataContainer);
+
+
+
 
 //If we're awesome, we'll get the movie title from fitch's database, then
 //use it to search the movie database for a movie poster.
 
-var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
-
+var apiKey =  'aecec41c5b24a3cdd29ce5c1491c5040';
+var poster;
 function movieSearch(searchString) {
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(searchString) + "&api_key=" + apiKey,
-        "method": "GET",
-        "processData": false,
-        "data": "{}"
-    };
-
-    $.ajax(settings).done(function(response) {
-        return new MovieInfo(response.results[0]);
-    });
-
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(searchString) + "&api_key=" + apiKey,
+  "method": "GET",
+  "processData": false,
+  "data": "{}"
+};
+$.ajax(settings).done(function(response) {
+   poster = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[0].poster_path;
+});
+console.log(poster);
 }
 
+//new MovieInfo(response.results[0]);
 //Movie poster is in this constructor. It needs to be added to populateMovies()
 
-function MovieInfo(movieObject) {
-    console.log(movieObject);
-    this.info = {
-        movieId: movieObject.id,
-        title: movieObject.title,
-        overview: movieObject.overview,
-        poster: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + movieObject.poster_path
-    };
-}
-
-
-
-
-
-
+// function MovieInfo(movieObject) {
+//  info = {
+//    movieId: movieObject.id,
+//    title: movieObject.title,
+//    overview: movieObject.overview,
+//    poster: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + movieObject.poster_path
+//  };
 
 // toggle classes
 
@@ -155,11 +149,11 @@ function populateMovies() {
     var template = Handlebars.compile(source);
     var poster = this.poster;
     var context = {
-        movieTitle: "Halloween",
-        avgRating: "8.5",
-        releaseDate: "(1978)",
-        genres: "horror",
-        overview: "synopsis"
+      movieTitle: movieTitle,
+      moviePoster: poster,
+      releaseDate: releaseDate ,
+      genres: genres,
+      overview: overview
     };
     var html = template(context);
     $(html).insertAfter("#search");
@@ -171,8 +165,10 @@ function populateMovies() {
 function populateTop20() {
     var source = $('#top20-template').html();
     var template = Handlebars.compile(source);
+    var poster = this.info.poster;
     var context = {
         avgRating: "8.5",
+        moviePoster: poster,
         movieTitle: "Halloween",
         overview: "synopsis"
     };

@@ -100,19 +100,18 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!-- <script>
-$.ajax({
-    url: "/api/genre/horror",
-    dataType: "json",
-    method: "GET",
-    data:{},
-}).done(function(response) {
-    for (var index = 0; response.length; index++) {
-        populateMovies(response[index]);
-    }
-});
-
-</script> -->
+<script>
+    $.ajax({
+        url: "/api/genre/horror",
+        dataType: "json",
+        method: "GET",
+        data: {},
+    }).done(function(response) {
+        for (var index = 0; response.length; index++) {
+            populateMovies(response[index]);
+        }
+    });
+</script>
     <script src="js/jquery.js"></script>
     <script src="js/handlebars.js"></script>
     <script src="js/main.js"></script>
