@@ -26,7 +26,7 @@ before do
 end
 
 get '/' do
-  'hi'
+  send_file File.join(settings.public_folder, ’index.html’)
 end
 
 get '/api/movies' do
