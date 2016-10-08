@@ -5,37 +5,67 @@ require 'yaml'
 require 'json'
 require 'sinatra'
 require 'pry'
-require "sinatra/cross_origin"
+require 'sinatra/cross_origin'
 
-register Sinatra::CrossOrigin
+# register Sinatra::CrossOrigin
+#
+# configure do
+#   enable :cross_origin
+# end
+#
+# options '/*' do
+#   response['Access-Control-Allow-Headers'] = 'origin, x-requested-with, content-type'
+# end
+#
+# database_config = YAML::load(File.open('config/database.yml'))
+#
+# ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
+#
+# before do
+#   content_type :json
+# end
+#
+# after do
+#   ActiveRecord::Base.connection.close
+# end
 
-configure do
-  enable :cross_origin
+
+# Lori's stuff start
+database_config = YAML::load(File.open('config/database.yml'))
+
+before do
+  ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
+  content_type :json
+end
+
+after do
+  ActiveRecord::Base.connection.close
+end
+
+get '/foo' do
+  headers 'Access-Control-Allow-Origin' => 'https://arcane-woodland-29724.herokuapp.com'
+  'hello world'
 end
 
 options '/*' do
   response["Access-Control-Allow-Headers"] = "origin, x-requested-with, content-type"
 end
 
-database_config = YAML::load(File.open('config/database.yml'))
+register Sinatra::CrossOrigin
 
-ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
-
-before do
-  content_type :json
+configure do
+  enable :cross_origin
 end
+# lori's stuff
 
-get '/' do
-  send_file File.join(settings.public, 'index.html')
-end
+
+
 
 get '/api/movies' do
   Movie.select(:id, :title).all.to_json
 end
 
-after do
-  ActiveRecord::Base.connection.close
-end
+
 
 get '/api/movie-list' do
   Movie.select(:id, :title).all.to_json
@@ -121,6 +151,6 @@ post '/api/add_user' do
 end
 
 get '/api/top20' do
-  Rating.where.average('rating').all.round(2).to_f.to_json
+  Rating.where.average('rating').all.round(1).to_f.to_json
   # Rating.where(Movie.average('rating').round(2).to_json
 end
