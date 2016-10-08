@@ -37,13 +37,22 @@ end
 
 get '/api/title-search' do
   if !params['search'].nil?
-    movie = Movie.where("title like (?)", "%#{params['search']}%")
-    if movie.empty?
+    movie_data = Movie.where("title like (?)", "%#{params['search']}%")
+    movie_info = movie_data[0]
+    movie_title_and_date = movie_info['title']
+    movie_title = movie_title_and_date[/[^(]+/].rstrip()
+
+    if movie_data.empty?
       halt(404)
     end
     status 200
-    movie.to_json
+    movie_title.to_json
   end
+
+  average_rating = Rating.where(
+    movie_id: movie_info['id']
+  ).average('rating').round(2).to_f.to_json
+  p "#{movie_title} #{average_rating}"
 end
 
 #   movie = Movie.includes(title: params['title'])
@@ -60,7 +69,9 @@ get '/api/search/:movie_id' do
   movie_info = Movie.where(id: params['movie_id'])
   movie_data = movie_info[0]
 
-  movie_title = movie_data['title'].to_json
+  movie_title = movie_data['title']
+  movie_title = movie[/[^(]+/].rstrip()
+  movie_title.to_json
 
   average_rating = Rating.where(
     movie_id: params['movie_id']
