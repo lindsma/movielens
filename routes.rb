@@ -35,15 +35,37 @@ get '/api/genre/horror' do
   # JSON.dump '{"title": "Random Horror Movie"}'
 end
 
+get '/api/title-search' do
+  if !params['search'].nil?
+    movie = Movie.where("title like (?)", "%#{params['search']}%")
+    if movie.empty?
+      halt(404)
+    end
+    status 200
+    movie.to_json
+  end
+end
+
+#   movie = Movie.includes(title: params['title'])
+#   movie.to_json
+# end
+
+get '/api/user-count' do
+  total_users = User.count.to_json
+end
+
+
+
 get '/api/search/:movie_id' do
   movie_info = Movie.where(id: params['movie_id'])
   movie_data = movie_info[0]
+
   movie_title = movie_data['title'].to_json
+
   average_rating = Rating.where(
     movie_id: params['movie_id']
   ).average('rating').round(2).to_json
 
-  p "#{movie_title} - #{average_rating}"
 end
 
 get '/api/top20' do
