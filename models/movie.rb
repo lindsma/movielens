@@ -1,7 +1,6 @@
 require 'active_record'
-require_relative 'schema'
-require_relative 'environment'
-
+require_relative '../db/migrate/002_create_movies'
+#
 class Movie < ActiveRecord::Base
   has_many :ratings
   has_many :users, through: :ratings

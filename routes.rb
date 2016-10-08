@@ -1,15 +1,14 @@
-require_relative 'environment'
-require_relative 'movie'
-require_relative 'user'
-require_relative 'rating'
+require_relative 'models/movie'
+require_relative 'models/user'
+require_relative 'models/rating'
 require 'yaml'
 require 'json'
 require 'sinatra'
 require 'pry'
 
-# database_config = YAML::load(File.open('config/database.yml'))
-#
-# ActiveRecord::Base.establish_connection(database_config)
+database_config = YAML::load(File.open('config/database.yml'))
+
+ActiveRecord::Base.establish_connection(database_config)
 
 before do
   content_type :json
@@ -19,9 +18,9 @@ get '/api/movies' do
   Movie.select(:id, :title).all.to_json
 end
 
-# after do
-#   ActiveRecord::Base.connection.close
-# end
+after do
+  ActiveRecord::Base.connection.close
+end
 
 get '/api/movie-list' do
   Movie.select(:id, :title).all.to_json
