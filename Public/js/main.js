@@ -172,7 +172,7 @@ function populateMovies() {
 function populateTop20() {
     var source = $('#top20-template').html();
     var template = Handlebars.compile(source);
-    var poster = this.info.poster;
+    var poster = this.poster;
     var context = {
         avgRating: "8.5",
         moviePoster: poster,
