@@ -21,12 +21,14 @@ $("ul li:nth-child(6)").on("click", function() {
 
 // On first keypress, ajax search request is made.
 
-$('#userInput').one("keyup", function(event) {
+$('#userInput').on("keyup", function(event) {
+  if ($('#userInput').val().length > 2) {
  event.preventDefault();
  var searchString = $('#userInput').val();
- //$('#userInput').val('');
 movieSearch(searchString);
+}
 });
+
 
 //After first keypress, this function takes over.
 
@@ -57,8 +59,9 @@ function movieQuery(searchString) {
    var searchbar = $("#userInput").val("");
    $.ajax({
        url: "/api/genre/horror",
-       dataType: "text/json",
+       dataType: "json",
        method: "GET",
+       data:{},
    }).done(function(response) {
        for (var index = 0; response.length; index++) {
            populateMovies(response[index]);
@@ -135,10 +138,20 @@ $('#container').on('click', 'p.expand-details', function(event) {
 });
 
 // implement handlebars - home-template
+function MovieInfo(movieObject) {
+ console.log(movieObject);
+
+ this.info = {
+   movieId: movieObject.id,
+   title: movieObject.title,
+   overview: movieObject.overview,
+   poster: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + movieObject.poster_path
+ };
 
 function populateMovies() {
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
+    var poster = this.poster;
     var context = {
         movieTitle: "Halloween",
         avgRating: "8.5",
@@ -148,6 +161,7 @@ function populateMovies() {
     };
     var html = template(context);
     $(html).insertAfter("#search");
+}
 }
 
 // implement handlebars - top20-template
