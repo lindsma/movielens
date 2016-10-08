@@ -10,8 +10,5 @@ gem 'json'
 gem 'rake'
 gem 'pry'
 gem 'rack-flash-session'
+gem 'sinatra-cross_origin'
 # gem 'rack'
-
-group :production do
- gem 'pg'
-end

@@ -5,6 +5,17 @@ require 'yaml'
 require 'json'
 require 'sinatra'
 require 'pry'
+require "sinatra/cross_origin"
+
+register Sinatra::CrossOrigin
+
+configure do
+  enable :cross_origin
+end
+
+options '/*' do
+  response["Access-Control-Allow-Headers"] = "origin, x-requested-with, content-type"
+end
 
 database_config = YAML::load(File.open('config/database.yml'))
 
