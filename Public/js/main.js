@@ -1,30 +1,30 @@
 // nav event handlers
 
 $("#action").on("click", function() {
-  movieQuery("action");
+   movieQuery("action");
 });
 $("#horror").on("click", function() {
-  movieQuery("horror");
+   movieQuery("horror");
 });
 $("#comedy").on("click", function() {
-  movieQuery("comedy");
+   movieQuery("comedy");
 });
 $("#fantasy").on("click", function() {
-  movieQuery("fantasy");
+   movieQuery("fantasy");
 });
 $("#drama").on("click", function() {
-  movieQuery("drama");
+   movieQuery("drama");
 });
 $("ul li:nth-child(6)").on("click", function() {
-  movieQuery();
+   movieQuery();
 });
 
 // On first keypress, ajax search request is made.
 
 $('#userInput').on("keyup", function(event) {
- if ($('#userInput').val().length > 2) {
-event.preventDefault();
-var searchString = $('#userInput').val();
+  if ($('#userInput').val().length > 2) {
+ event.preventDefault();
+ var searchString = $('#userInput').val();
 movieSearch(searchString);
 }
 });
@@ -32,42 +32,42 @@ movieSearch(searchString);
 
 //After first keypress, this function takes over.
 
-var $rows = $('.movies');
-$('#userInput').keyup(function() {
-    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+ var $rows = $('.movies');
+ $('#userInput').keyup(function() {
+     var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
-    $rows.show().filter(function() {
-        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-        return !~text.indexOf(val);
-    }).hide();
-});
+     $rows.show().filter(function() {
+         var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+         return !~text.indexOf(val);
+     }).hide();
+ });
 
-//if enter is pressed, the specific movie is searched
+ //if enter is pressed, the specific movie is searched
 
-$('#userInput').keypress(function (event) {
-  var searchString = $('#userInput').val();
-  if (event.which == 13) {
-    movieSearch(searchString);
-    return false;
-  }
-});
+ $('#userInput').keypress(function (event) {
+   var searchString = $('#userInput').val();
+   if (event.which == 13) {
+     movieSearch(searchString);
+     return false;
+   }
+ });
 
 
 //Test Ajax for Fitch
 var dataContainer;
-  var searchbar = $("#userInput").val("");
-   $.ajax({
-     "method": "GET",
-      "url": "/genre/horror",
-      "data":{},
-      "datatype": "json",
-      "success": function(data) {
-        dataContainer = data;
-      }
+   var searchbar = $("#userInput").val("");
+    $.ajax({
+      "method": "GET",
+       "url": "/genre/horror",
+       "data":{},
+       "datatype": "json",
+       "success": function(data) {
+         dataContainer = data;
+       }
 
-     });
+      });
 
-console.log(dataContainer);
+ console.log(dataContainer);
 
 
 
@@ -78,17 +78,17 @@ console.log(dataContainer);
 var apiKey =  'aecec41c5b24a3cdd29ce5c1491c5040';
 var poster;
 function movieSearch(searchString) {
-var settings = {
-  "async": true,
-  "crossDomain": true,
-  "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(searchString) + "&api_key=" + apiKey,
-  "method": "GET",
-  "processData": false,
-  "data": "{}"
-};
-$.ajax(settings).done(function(response) {
-   poster = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[0].poster_path;
-});
+ var settings = {
+   "async": true,
+   "crossDomain": true,
+   "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(searchString) + "&api_key=" + apiKey,
+   "method": "GET",
+   "processData": false,
+   "data": "{}"
+ };
+ $.ajax(settings).done(function(response) {
+    poster = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[0].poster_path;
+ });
 console.log(poster);
 }
 
@@ -102,6 +102,13 @@ console.log(poster);
 //    overview: movieObject.overview,
 //    poster: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + movieObject.poster_path
 //  };
+
+
+
+
+
+
+
 
 // toggle classes
 
@@ -144,17 +151,11 @@ $('#container').on('click', 'p.expand-details', function(event) {
 
 // implement handlebars - home-template
 
+
 function populateMovies() {
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var poster = this.poster;
-    var context = {
-      movieTitle: movieTitle,
-      moviePoster: poster,
-      releaseDate: releaseDate ,
-      genres: genres,
-      overview: overview
-    };
     var html = template(context);
     $(html).insertAfter("#search");
 }
@@ -168,12 +169,12 @@ function populateTop20() {
     var poster = this.info.poster;
     var context = {
         avgRating: "8.5",
-        moviePoster: poster,
         movieTitle: "Halloween",
         overview: "synopsis"
     };
     var html = template(context);
     $(html).insertAfter("#search");
+}
 }
 
 function populateErrors() {
@@ -189,12 +190,7 @@ function populateErrors() {
 
 // error handlers
 
-function handleErrors(errorObject, textStatus, error) {
-    console.log(errorObject, textStatus, error);
-}
-
 
 populateErrors();
 populateMovies();
 populateTop20();
-handleErrors();
