@@ -1,6 +1,10 @@
 .top20-container {
     font-family: $primaryFont;
 
+    &.hidden {
+      display: none;
+    }
+
     h1 {
         font-size: 40px;
         padding: 30px 40px;

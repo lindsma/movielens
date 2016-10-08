@@ -115,6 +115,8 @@ body {
 
 .top20-container {
   font-family: "Montserrat", Arial, sans-serif; }
+  .top20-container.hidden {
+    display: none; }
   .top20-container h1 {
     font-size: 40px;
     padding: 30px 40px;

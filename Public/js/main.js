@@ -59,6 +59,8 @@ movieQuery();
 $('.navBar').on('click', '.genre', function(event) {
 
     $(this).toggleClass('active');
+    $('#content').empty('');
+    $('.top20-container').toggleClass('hidden');
 
 });
 
