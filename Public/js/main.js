@@ -156,6 +156,12 @@ function populateMovies() {
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var poster = this.poster;
+    var context = {
+        avgRating: "8.5",
+        moviePoster: poster,
+        movieTitle: "Halloween",
+        overview: "synopsis"
+    };
     var html = template(context);
     $(html).insertAfter("#search");
 }
@@ -169,12 +175,12 @@ function populateTop20() {
     var poster = this.info.poster;
     var context = {
         avgRating: "8.5",
+        moviePoster: poster,
         movieTitle: "Halloween",
         overview: "synopsis"
     };
     var html = template(context);
     $(html).insertAfter("#search");
-}
 }
 
 function populateErrors() {
