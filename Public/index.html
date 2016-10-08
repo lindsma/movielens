@@ -24,7 +24,7 @@
             </ul>
         </nav>
         <div id="search">
-          <img src="styles/images/search_icon.png"/>
+            <img src="styles/images/search_icon.png" />
             <input id="userInput" type="text" placeholder="movie name...">
         </div>
 
@@ -40,41 +40,51 @@
         </div>
 
 
+        <script id="home-template" type="text/x-handlebars-template">
+            <div class="movie-container">
+                <div class="movie-snapshot">
+                    <ul class="snapshot-list">
+                        <li class="movie-title">
+                            <h3 class="movie-title">{{movieTitle}}</h3></li>
+                        <!-- <li class="avg-rating">
+                        <p class="avg-rating">{{avgRating}}</p>
+                        <img src="styles/images/star_icon.png" alt="star rating icon" />
+                    </li> -->
+                        <li class="expand-details">
+                            <p class="expand-details">&#x21E9;</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="movie-details">
+                    <ul class="items">
+                        <li class="item-detail release-date">released: {{releaseDate}}</li>
+                        <li class="item-detail genres">genre: {{genres}}</li>
+                        <li class="item-detail overview">
+                            <a href="#">{{overview}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </script>
+
+        <script id="top20-template" type="text/x-handlebars-template">
+            <div class="top20-container">
+                <h1 class="top20-header">Top Rated</h1>
+                <hr>
+                <div class="top20-movie">
+                    <ul class="movie-details">
+                        <li><img src="styles/images/star_icon.png" alt="star rating icon" />
+                            <h3 class="avg-rating">{{avgRating}}</h3>
+                        </li>
+                        <li>
+                            <h2 class="movie-title">{{movieTitle}}</h2></li>
+                        <li><a href="#" class="overview">{{overview}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </script>
+
     </div>
-
-
-    <script id="home-template" type="text/x-handlebars-template">
-        <div class="movie-container">
-            <h3 class="movie-title">{{movieTitle}}</h3>
-            <p class="avg-rating">{{avgRating}}</p>
-            <p class="expand-details"><a class="expand-btn">&#x21E9;</a></p>
-            <div class="movie-details">
-                <ul class="items">
-                    <li class="item-detail release-date">{{releaseDate}}</li>
-                    <li class="item-detail genres">{{genres}}</li>
-                    <li class="item-detail overview">
-                        <a href="#">{{overview}}</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </script>
-
-    <script id="top20-template" type="text/x-handlebars-template">
-        <div class="top20-container">
-            <h1 class="top20-header">Top Rated</h1>
-            <hr>
-            <div class="top20-movie">
-              <ul class="movie-details">
-                <li><img src="styles/images/star_icon.png"/>
-                  <h3 class="avg-rating">{{avgRating}}</h3>             
-                  </li>
-                <li><h2 class="movie-title">{{movieTitle}}</h2></li>
-                <li><a href="#" class="overview">{{overview}}</a></li>
-              </ul>
-            </div>
-        </div>
-    </script>
 
     <script src="js/jquery.js"></script>
     <script src="js/handlebars.js"></script>

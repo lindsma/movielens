@@ -62,6 +62,12 @@ $('.navBar').on('click', '.genre', function(event) {
 
 });
 
+$('#container').on('click', 'p.expand-details', function(event) {
+
+    $('.movie-details').toggleClass('active');
+
+});
+
 
 // implement handlebars - home-template
 
@@ -72,7 +78,7 @@ function populateMovies() {
     var context = {
         movieTitle: "Halloween",
         avgRating: "8.5",
-        releaseDate: "1978",
+        releaseDate: "(1978)",
         genres: "horror",
         overview: "synopsis"
     };
