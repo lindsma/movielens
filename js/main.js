@@ -1,3 +1,4 @@
+console.log("test");
 var $rows = $('.movies');
 $('#userInput').keyup(function() {
     var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
@@ -31,18 +32,19 @@ $("ul li:nth-child(6)").on("click", function() {
 
 //beginings of searchbar function
 
-
+var searchbar = $("#userInput").val("");
 
 function movieQuery() {
-    var searchbar = $("#userInput").val("");
+
     $.ajax({
         url: "/Public/api/genre/horror",
         dataType: "text/json",
         method: "GET",
     }).done(function(response) {
-        for (var index = 0; response.data.length; index++) {
-            new targetInfo(response.data[index]);
-        }
+        //or (var index = 0; response.data.length; index++) {
+            //new targetInfo(response.data[index]);
+            console.log(response);
+
     });
 }
 movieQuery();
@@ -52,31 +54,24 @@ var apiKey =  '84d2690223f00a8cc05141e0c91c56b8';
 
 function movieSearch() {
   var settings = {
-    "async": true,
-    "crossDomain": true,
     "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(searchString) + "&api_key=" + apiKey,
     "method": "GET",
     "processData": false,
     "data": "{}"
   };
+//console.log(settings);
 
-
-  $.ajax(settings).done(function(response) {
-    return new MovieDetails(response.results[0]);
+    $.ajax(settings).done(function(response) {
+    return(movieObject.poster_path);
   });
+  //console.log(movieObject.poster_path);
 }
 
+movieSearch();
 
 
-function MovieDetails(movieObject) {
-  console.log(movieObject);
-  this.info = {
-    movieId: movieObject.id,
-    title: movieObject.title,
-    overview: movieObject.overview,
-    poster: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + movieObject.poster_path
-  };
-}
+//var  poster =  'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + movieObject.poster_path;
+
 
 
 
