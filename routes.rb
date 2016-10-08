@@ -62,7 +62,7 @@ get '/api/title-search' do
 
   average_rating = Rating.where(
     movie_id: movie_info['id']
-  ).average('rating').round(2).to_f.to_json
+  ).average('rating').round(1).to_f.to_json
   p "#{movie_title} #{average_rating}"
 end
 
