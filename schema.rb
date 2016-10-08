@@ -1,7 +1,7 @@
 require_relative 'environment'
-require_relative '../db/migrats/001_create_users'
-require_relative '../db/migrats/002_create_movies'
-require_relative '../db/migrats/003_create_ratings'
+require_relative '../db/migrate/001_create_users'
+require_relative '../db/migrate/002_create_movies'
+require_relative '../db/migrate/003_create_ratings'
 #
 class CreateUsers < ActiveRecord::Migration[5.0]
   def up
