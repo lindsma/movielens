@@ -1,7 +1,9 @@
 require_relative 'environment'
-
+require_relative '../db/migrats/001_create_users'
+require_relative '../db/migrats/002_create_movies'
+require_relative '../db/migrats/003_create_ratings'
 #
-class CreateUsersTable < ActiveRecord::Migration[5.0]
+class CreateUsers < ActiveRecord::Migration[5.0]
   def up
     create_table :users do |t|
       t.integer :age
@@ -16,7 +18,7 @@ class CreateUsersTable < ActiveRecord::Migration[5.0]
 end
 
 #
-class CreateMoviesTable < ActiveRecord::Migration[5.0]
+class CreateMovies < ActiveRecord::Migration[5.0]
   def up
     create_table :movies do |t|
       t.string :title
@@ -51,7 +53,7 @@ class CreateMoviesTable < ActiveRecord::Migration[5.0]
 end
 
 #
-class CreateRatingsTable < ActiveRecord::Migration[5.0]
+class CreateRatings < ActiveRecord::Migration[5.0]
   def up
     create_join_table :users, :movies, table_name: :ratings do |t|
       t.references :user, index: true, foreign_key: true
@@ -68,13 +70,13 @@ end
 
 def main
   action = (ARGV[0] || :up).to_sym
-  CreateUsersTable.migrate(action)
+  CreateUsers.migrate(action)
 
   action = (ARGV[1] || :up).to_sym
-  CreateMoviesTable.migrate(action)
+  CreateMovies.migrate(action)
 
   action = (ARGV[2] || :up).to_sym
-  CreateRatingsTable.migrate(action)
+  CreateRatings.migrate(action)
 end
 
 main if __FILE__ == $PROGRAM_NAME

@@ -27,6 +27,8 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     rack (1.6.4)
+    rack-flash-session (1.0.2)
+      rack (>= 1.0)
     rack-protection (1.5.3)
       rack
     rake (11.3.0)
@@ -54,6 +56,7 @@ DEPENDENCIES
   json
   pg
   pry
+  rack-flash-session
   rake
   shotgun
   sinatra

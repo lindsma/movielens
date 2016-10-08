@@ -8,10 +8,14 @@ require 'pry'
 
 database_config = YAML::load(File.open('config/database.yml'))
 
-ActiveRecord::Base.establish_connection(database_config)
+ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
 
 before do
   content_type :json
+end
+
+get '/' do
+  File.read(File.join('Public', 'index.html'))
 end
 
 get '/api/movies' do
