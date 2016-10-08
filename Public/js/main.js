@@ -64,10 +64,16 @@ var dataContainer;
        "success": function(data) {
          dataContainer = data;
        }
+<<<<<<< HEAD
       });
 
  console.log(dataContainer);
 
+=======
+   });
+}
+// movieQuery();
+>>>>>>> 151836658a23a4a14814113fdb594a0735a31d04
 
 //If we're awesome, we'll get the movie title from fitch's database, then
 //use it to search the movie database for a movie poster.
@@ -104,6 +110,9 @@ console.log(poster);
 
 
 
+
+
+
 // toggle classes
 
 // click on genre, populate with genre movies
@@ -121,6 +130,14 @@ $('.navBar').on('click', '.genre', function(event) {
     });
 });
 
+// error template testing !!!!!!!!!!!!
+
+$('.search-icon').click(function(event) {
+    $('.top20-container').addClass('hidden');
+    $('.movie-container').addClass('hidden');
+    $('.error-container').removeClass('hidden');
+});
+
 // click on header to go back to main page
 
 $('header').click(function(event) {
@@ -136,10 +153,13 @@ $('#container').on('click', 'p.expand-details', function(event) {
 });
 
 // implement handlebars - home-template
+<<<<<<< HEAD
 function MovieInfo(movieObject) {
  console.log(movieObject);
 
 
+=======
+>>>>>>> 151836658a23a4a14814113fdb594a0735a31d04
 
 function populateMovies() {
     var source = $('#home-template').html();
@@ -148,7 +168,7 @@ function populateMovies() {
     var html = template(context);
     $(html).insertAfter("#search");
 }
-}
+
 
 // implement handlebars - top20-template
 
@@ -166,5 +186,20 @@ function populateTop20() {
 }
 }
 
+function populateErrors() {
+    var source = $('#error-template').html();
+    var template = Handlebars.compile(source);
+    var context = {
+        errorType: "404",
+        errorMessage: "Oh s*&%! Try again.",
+    };
+    var html = template(context);
+    $(html).insertAfter("#search");
+}
+
+// error handlers
+
+
+populateErrors();
 populateMovies();
 populateTop20();

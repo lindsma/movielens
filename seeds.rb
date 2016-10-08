@@ -1,13 +1,14 @@
 require 'csv'
-require_relative 'environment'
 require_relative 'models/movie'
 require_relative 'models/user'
 require_relative 'models/rating'
+require_relative 'schema'
 require 'pry'
-
-
+require 'active_record'
 
 # .gsub(/,/, '')
+ActiveRecord::Base.establish_connection(ENV['DATABASE_URL']) #(ENV['DATABASE_URL'])
+
 
 csv = CSV.read('u.user', 'r:ISO-8859-1', col_sep: '|')
 csv.each do |row|
@@ -36,3 +37,5 @@ csv.each do |row|
     user_id: user_id, movie_id: movie_id, rating: rating, timestamp: timestamp
   )
 end
+
+ActiveRecord::Base.connection.close
