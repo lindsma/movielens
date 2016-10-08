@@ -14,6 +14,10 @@ before do
   content_type :json
 end
 
+get '/' do
+  File.read(File.join('Public', 'index.html'))
+end
+
 get '/api/movies' do
   Movie.select(:id, :title).all.to_json
 end
