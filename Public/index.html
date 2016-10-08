@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="styles/reset.css" type="text/css">
     <link rel="stylesheet" href="styles/main.css" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="icon" type="image/png" href="styles/images/red_elephant_error.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Movies!</title>
 </head>
@@ -24,7 +25,7 @@
             </ul>
         </nav>
         <div id="search">
-            <img src="styles/images/search_icon.png" />
+            <img src="styles/images/search_icon.png" class="search-icon" />
             <input id="userInput" type="text" placeholder="movie name...">
         </div>
 
@@ -84,6 +85,15 @@
                 </div>
             </script>
 
+            <script id="error-template" type="text/x-handlebars-template">
+                <div class="error-container">
+                  <ul class="error-list">
+                    <li class="error-image"><img src="styles/images/red_elephant_error.png" alt="elephant-error" /></li>
+                    <li class="error-header"><h1 >{{errorType}}</h1></li>
+                    <li><p class="error-message">{{errorMessage}}</p></li>
+                  </ul>
+                </div>
+            </script>
         </div>
     </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

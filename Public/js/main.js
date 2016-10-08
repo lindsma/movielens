@@ -68,7 +68,7 @@ function movieQuery(searchString) {
        }
    });
 }
-movieQuery();
+// movieQuery();
 
 //If we're awesome, we'll get the movie title from fitch's database, then
 //use it to search the movie database for a movie poster.
@@ -106,6 +106,9 @@ function MovieInfo(movieObject) {
 
 
 
+
+
+
 // toggle classes
 
 // click on genre, populate with genre movies
@@ -123,6 +126,14 @@ $('.navBar').on('click', '.genre', function(event) {
     });
 });
 
+// error template testing !!!!!!!!!!!!
+
+$('.search-icon').click(function(event) {
+    $('.top20-container').addClass('hidden');
+    $('.movie-container').addClass('hidden');
+    $('.error-container').removeClass('hidden');
+});
+
 // click on header to go back to main page
 
 $('header').click(function(event) {
@@ -138,15 +149,6 @@ $('#container').on('click', 'p.expand-details', function(event) {
 });
 
 // implement handlebars - home-template
-function MovieInfo(movieObject) {
- console.log(movieObject);
-
- this.info = {
-   movieId: movieObject.id,
-   title: movieObject.title,
-   overview: movieObject.overview,
-   poster: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + movieObject.poster_path
- };
 
 function populateMovies() {
     var source = $('#home-template').html();
@@ -162,7 +164,7 @@ function populateMovies() {
     var html = template(context);
     $(html).insertAfter("#search");
 }
-}
+
 
 // implement handlebars - top20-template
 
@@ -178,5 +180,20 @@ function populateTop20() {
     $(html).insertAfter("#search");
 }
 
+function populateErrors() {
+    var source = $('#error-template').html();
+    var template = Handlebars.compile(source);
+    var context = {
+        errorType: "404",
+        errorMessage: "Oh s*&%! Try again.",
+    };
+    var html = template(context);
+    $(html).insertAfter("#search");
+}
+
+// error handlers
+
+
+populateErrors();
 populateMovies();
 populateTop20();
