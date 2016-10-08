@@ -15,138 +15,98 @@ before do
   content_type :json
 end
 
+get '/api/movies' do
+  Movie.select(:id, :title).all.to_json
+end
+
 # after do
 #   ActiveRecord::Base.connection.close
 # end
 
-
+get '/api/movie-list' do
+  Movie.select(:id, :title).all.to_json
+end
 
 # hardcode
 get '/api/search?' do
-  JSON.dump({id: 1, title: "Seven"})
+  # JSON.dump({id: 1, title: "Seven"}
   # JSON.dump '{"id": 2, "title": "GoldenEye"}'
 end
 
 # hardcode
 get '/api/genre/horror' do
-  JSON.dump '{"title": "From Dusk Till Dawn"}'
+  JSON.dump [{id: 1, title: "From Dusk Till Dawn"}]
   # JSON.dump '{"title": "Random Horror Movie"}'
+  # title
+  # avg rating
+  # url link
+  # release data
+  # other genres
+  #
 end
 
-get '/api/search/:movie_id' do
-  # movie title and its avg rating
-  movie_rating = Rating.where(movie_id: params['movie_id']).average('rating').round(2)
-  movie_rating.to_json
+get '/api/title-search' do
+  if !params['search'].nil?
+    movie_data = Movie.where("title like (?)", "%#{params['search']}%")
+    movie_info = movie_data[0]
+    movie_title_and_date = movie_info['title']
+    movie_title = movie_title_and_date[/[^(]+/].rstrip()
+
+    # Needs a massive refactor.
+
+    if movie_data.empty?
+      halt(404)
+    end
+    status 200
+    movie_title.to_json
+  end
+
+  average_rating = Rating.where(
+    movie_id: movie_info['id']
+  ).average('rating').round(2).to_f.to_json
+  p "#{movie_title} #{average_rating}"
 end
 
-#
-#
-# post '/api/add/rating' do
-#   new_kid = Student.create(student_name: params[:student_name],
-#                            years_completed: params[:years_completed])
-#   if new_kid.valid?
-#     if new_kid.save
-#       status 201
-#       p '201'
-#       return new_kid.to_json
-#     end
-#     status 400
-#     '400'
-#   end
-#   halt(400)
-#   'end 400'
+#   movie = Movie.includes(title: params['title'])
+#   movie.to_json
 # end
+
+get '/api/user-count' do
+  total_users = User.count.to_json
+end
+
+# get '/api/search/:movie_id' do
+#   movie_info = Movie.where(id: params['movie_id'])
+#   movie_data = movie_info[0]
 #
-# post '/api/semester/' do
-#   Semester.create(
-#     professor_id: params['professor_id'],
-#     student_id: params['student_id'],
-#     class_name: params['class_name']
-#   ).to_json
+#   movie_title = movie_data['title']
+#   movie_title = movie[/[^(]+/].rstrip()
+#   movie_title.to_json
+#
+#   average_rating = Rating.where(
+#     movie_id: params['movie_id']
+#   ).average('rating').round(2).to_json
 # end
-#
-# get '/api/student_names_by_class/:class_name' do
-#   Student.find_by(
-#     Semester.where(class_name: params['class_name']).class_name
-#   ).to_json
-# end
-#
-# # Get student information
-# get '/api/student/:student_id' do
-#   Student.find(
-#     Semester.where(student_id: params['student_id']).first.student_id
-#   ).to_json
-# end
-#
-# # get 'api/semester/:professor_id' do
-# #   Professor.find(Semester.where(professor_id: params['professor_id']).first.
-# #   professor_id).to_json
-# # end
-#
-# # enter in professor ID as a requirement, and class name as a ?class_name=x
-# get '/api/class_list/:professor_id/' do
-#   Semester.where(
-#     professor_id: params['professor_id'],
-#     class_name: params['class_name']
-#   ).to_json
-# end
-#
-# # get '/api/professors' do
-# #   prof_id = params[:professor_id]
-# #
-# #   class_name = params[:class_name]
-# #
-# #   professors = Professor.all
-#
-# #   unless prof_id.nil?
-# #     professors = professors.where(id = prof_id)
-# #     puts 'hi'
-# #     # not getting into these unless statements.
-# #   end
-# #
-# #   unless class_name.nil?
-# #     professors = professors.where(class_name = class_name)
-# #     puts 'hellos'
-# #
-# #   end
-# #   professors.to_json
-# # end
-#
-# put '/api/update_years/:id' do
-#   student = Student.find_by(id: params[:id])
-#   student.update(years_completed: params[:years_completed]).to_json
-# end
-#
-# delete '/api/delete/:id' do
-#   student = Student.find_by(id: params[:id])
-#   student.destroy
-# end
-#
-# # Semester.where(professor_id: params['professor_id'],
-# # class_name: params['class_name'])
-#
-# # get '/api/semester_by_prof' do
-# #   Semester.where(professor_id: params['professor_id'],
-# #   class_name: params['class_name'])
-# # end
-#
-# # get '/' do
-# #   College.select('*').where(id: 1).all.joins(:students).to_json
-# # end
-#
-# # post 'api/coffees' do
-# #   coffee = Coffee.new(name: params['name'], country_id: params['id'])
-# #   if coffee.valid?
-# #     if coffee.save
-# #       status 201
-# #       return coffee.to_json
-# #     end
-# #   end
-# #   status 400
-# # end
-#
-#
-#
-# get '/api/top20' do
-#   p 'Movie'
-# end
+
+post '/api/add_user' do
+  new_user = User.create(
+    id: User.maximum(:id).next, age: params['age'],
+    gender: params['gender'], job: params['job']
+  )
+  if new_user.valid?
+    if new_user.save
+      status 201
+      p '201'
+      return new_user.to_json
+    end
+    status 400
+    p '400'
+  end
+  halt(400)
+  'end 400'
+end
+
+get '/api/top20' do
+  Rating.where.average('rating').all.round(2).to_f.to_json
+  # Rating.where(Movie.average('rating').round(2).to_json
+end

@@ -5,7 +5,7 @@ require_relative 'environment'
 class Movie < ActiveRecord::Base
   has_many :ratings
   has_many :users, through: :ratings
-  #
+
   # attr_reader :movie_id, :title, :release_date, :video_release, :url
   # def initialize(options) #title, genre, rating, release_date)
   #   @movie_id = options['movie_id']
