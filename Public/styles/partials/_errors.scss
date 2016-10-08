@@ -1,0 +1,33 @@
+.error-container {
+    font-family: $primaryFont;
+
+    li {
+        width: 50%;
+        float: left;
+
+        &.error-image {
+          text-align: right;
+          padding-top: 2%;
+          padding-right: 5%;
+        }
+
+        h1 {
+            font-size: 120px;
+            color: #CC0000;
+            font-weight: bold;
+            text-shadow: 3px 6px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            float: right;
+            padding-right: 25%;
+            width: 100%;
+            padding-top: 8%;
+        }
+
+        p {
+            color: #000;
+            font-size: 40px;
+            float: left;
+            padding-top: 20px;
+        }
+    }
+}

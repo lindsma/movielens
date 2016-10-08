@@ -101,8 +101,6 @@ function MovieInfo(movieObject) {
 }
 
 
-
-
 // toggle classes
 
 // click on genre, populate with genre movies
@@ -118,6 +116,13 @@ $('.navBar').on('click', '.genre', function(event) {
         $('#' + previousTab).removeClass('active');
         $('#' + currentTab).addClass('active');
     });
+});
+
+// error template testing !!!!!!!!!!!!
+
+$('.search-icon').click(function(event) {
+    $('.top20-container').addClass('hidden');
+    $('.movie-container').addClass('hidden');
 });
 
 // click on header to go back to main page
@@ -164,5 +169,20 @@ function populateTop20() {
     $(html).insertAfter("#search");
 }
 
+function populateErrors() {
+    var source = $('#error-template').html();
+    var template = Handlebars.compile(source);
+    var context = {
+        errorType: "404",
+        errorMessage: "Oh s*&%! Try again.",
+    };
+    var html = template(context);
+    $(html).insertAfter("#search");
+}
+
+// error handlers
+
+
+populateErrors();
 populateMovies();
 populateTop20();
