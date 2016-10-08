@@ -41,7 +41,7 @@ get '/api/title-search' do
     movie_info = movie_data[0]
     movie_title_and_date = movie_info['title']
     movie_title = movie_title_and_date[/[^(]+/].rstrip()
-
+    # Needs a massive refactor.
     if movie_data.empty?
       halt(404)
     end
@@ -63,25 +63,38 @@ get '/api/user-count' do
   total_users = User.count.to_json
 end
 
+# get '/api/search/:movie_id' do
+#   movie_info = Movie.where(id: params['movie_id'])
+#   movie_data = movie_info[0]
+#
+#   movie_title = movie_data['title']
+#   movie_title = movie[/[^(]+/].rstrip()
+#   movie_title.to_json
+#
+#   average_rating = Rating.where(
+#     movie_id: params['movie_id']
+#   ).average('rating').round(2).to_json
+# end
 
-
-get '/api/search/:movie_id' do
-  movie_info = Movie.where(id: params['movie_id'])
-  movie_data = movie_info[0]
-
-  movie_title = movie_data['title']
-  movie_title = movie[/[^(]+/].rstrip()
-  movie_title.to_json
-
-  average_rating = Rating.where(
-    movie_id: params['movie_id']
-  ).average('rating').round(2).to_json
-
+post '/api/add_user' do
+  new_user = User.create(
+    id: User.maximum(:id).next, age: params['age'],
+    gender: params['gender'], job: params['job']
+  )
+  if new_user.valid?
+    if new_user.save
+      status 201
+      p '201'
+      return new_user.to_json
+    end
+    status 400
+    p '400'
+  end
+  halt(400)
+  'end 400'
 end
 
 get '/api/top20' do
-  average_rating = Rating.where(Movie.all).average('rating').round(2).to_json
-  if average_rating >= 4.6
-
-  end
+  Rating.where.average('rating').all.round(2).to_f.to_json
+  # Rating.where(Movie.average('rating').round(2).to_json
 end
