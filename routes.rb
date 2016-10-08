@@ -79,8 +79,9 @@ end
 
 # hardcode
 get '/api/genre/horror' do
-  JSON.dump [{id: 1, title: "From Dusk Till Dawn"}]
+  JSON.dump [{ id: 1, title: 'From Dusk Till Dawn' }]
   # JSON.dump '{"title": "Random Horror Movie"}'
+
   # title
   # avg rating
   # url link
@@ -88,6 +89,12 @@ get '/api/genre/horror' do
   # other genres
   #
 end
+
+get '/api/genre/test' do
+  horror_movies = Movie.where(horror: '1').all
+  
+end
+
 
 get '/api/title-search' do
   if !params['search'].nil?
