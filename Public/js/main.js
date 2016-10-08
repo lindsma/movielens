@@ -65,15 +65,26 @@ var dataContainer;
          dataContainer = data;
        }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> myBranch
       });
 
  console.log(dataContainer);
 
+<<<<<<< HEAD
 =======
    });
 }
 // movieQuery();
 >>>>>>> 151836658a23a4a14814113fdb594a0735a31d04
+=======
+   });
+}
+// movieQuery();
+
+>>>>>>> myBranch
 
 //If we're awesome, we'll get the movie title from fitch's database, then
 //use it to search the movie database for a movie poster.
@@ -154,8 +165,12 @@ $('#container').on('click', 'p.expand-details', function(event) {
 
 // implement handlebars - home-template
 <<<<<<< HEAD
+<<<<<<< HEAD
 function MovieInfo(movieObject) {
  console.log(movieObject);
+=======
+
+>>>>>>> myBranch
 
 
 =======
