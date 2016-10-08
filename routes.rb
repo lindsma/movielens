@@ -43,7 +43,7 @@ after do
 end
 
 get '/foo' do
-  headers 'Access-Control-Allow-Origin' => 'https://arcane-woodland-29724.herokuapp.com'
+  headers 'Access-Control-Allow-Origin' => 'https://movielens.herokuapp.com'
   'hello world'
 end
 
