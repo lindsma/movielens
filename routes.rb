@@ -15,6 +15,10 @@ before do
   content_type :json
 end
 
+get '/api/movies' do
+  Movie.select(:id, :title).all.to_json
+end
+
 # after do
 #   ActiveRecord::Base.connection.close
 # end
@@ -31,8 +35,14 @@ end
 
 # hardcode
 get '/api/genre/horror' do
-  JSON.dump '{"title": "From Dusk Till Dawn"}'
+  JSON.dump [{id: 1, title: "From Dusk Till Dawn"}]
   # JSON.dump '{"title": "Random Horror Movie"}'
+  # title
+  # avg rating
+  # url link
+  # release data
+  # other genres
+  #
 end
 
 get '/api/title-search' do
@@ -41,7 +51,9 @@ get '/api/title-search' do
     movie_info = movie_data[0]
     movie_title_and_date = movie_info['title']
     movie_title = movie_title_and_date[/[^(]+/].rstrip()
+
     # Needs a massive refactor.
+
     if movie_data.empty?
       halt(404)
     end
