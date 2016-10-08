@@ -5,6 +5,17 @@ require 'yaml'
 require 'json'
 require 'sinatra'
 require 'pry'
+require "sinatra/cross_origin"
+
+register Sinatra::CrossOrigin
+
+configure do
+  enable :cross_origin
+end
+
+options '/*' do
+  response["Access-Control-Allow-Headers"] = "origin, x-requested-with, content-type"
+end
 
 database_config = YAML::load(File.open('config/database.yml'))
 
@@ -12,6 +23,10 @@ ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
 
 before do
   content_type :json
+end
+
+get '/' do
+  'hi'
 end
 
 get '/api/movies' do
@@ -62,7 +77,7 @@ get '/api/title-search' do
 
   average_rating = Rating.where(
     movie_id: movie_info['id']
-  ).average('rating').round(2).to_f.to_json
+  ).average('rating').round(1).to_f.to_json
   p "#{movie_title} #{average_rating}"
 end
 
