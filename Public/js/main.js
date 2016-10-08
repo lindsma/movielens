@@ -56,21 +56,46 @@ movieQuery();
 
 // toggle classes
 
+// click on genre, populate with genre movies
+
 $('.navBar').on('click', '.genre', function(event) {
-
-    $(this).toggleClass('active');
-
+    var currentTab = $(this).attr('id');
+    $('#' + currentTab).toggleClass('active');
+    $('#content').empty('');
+    $('.top20-container').addClass('hidden');
+    $('.navBar').on('click', '.genre', function(event) {
+        var previousTab = currentTab;
+        currentTab = $(this).attr('id');
+        $('#' + previousTab).removeClass('active');
+        $('#' + currentTab).addClass('active');
+    });
 });
 
+// click on header to go back to main page
+
+$('header').click(function(event) {
+    $('.genre').removeClass('active');
+    $('.top20-container').removeClass('hidden');
+    $('.movie-container').addClass('hidden');
+});
+
+// click on arrow down to expand movie details
+
+$('#container').on('click', 'p.expand-details', function(event) {
+    $('.movie-details').toggleClass('active');
+});
 
 // implement handlebars - home-template
 
 function populateMovies() {
-
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var context = {
-        testing: "hey",
+        movieTitle: "Halloween",
+        avgRating: "8.5",
+        releaseDate: "(1978)",
+        genres: "horror",
+        overview: "synopsis"
     };
     var html = template(context);
     $(html).insertAfter("#search");
@@ -79,11 +104,12 @@ function populateMovies() {
 // implement handlebars - top20-template
 
 function populateTop20() {
-
     var source = $('#top20-template').html();
     var template = Handlebars.compile(source);
     var context = {
-        testing: "hey again",
+        avgRating: "8.5",
+        movieTitle: "Halloween",
+        overview: "synopsis"
     };
     var html = template(context);
     $(html).insertAfter("#search");
