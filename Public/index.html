@@ -12,7 +12,7 @@
 <body>
     <div id="container">
         <header>
-            <h1>Fitch's Flicks</h1>
+            <h1>FitchFlix</h1>
         </header>
         <nav>
             <ul class="navBar">
@@ -25,7 +25,7 @@
         </nav>
         <div id="search">
           <img src="styles/images/search_icon.png"/>
-            <input id="userInput" type="text" placeholder="Movie Name">
+            <input id="userInput" type="text" placeholder="movie name...">
         </div>
 
 
@@ -45,15 +45,15 @@
 
     <script id="home-template" type="text/x-handlebars-template">
         <div class="movie-container">
-            <h3 class="movie-title">{{testing}}</h3>
-            <p class="avg-rating"></p>
+            <h3 class="movie-title">{{movieTitle}}</h3>
+            <p class="avg-rating">{{avgRating}}</p>
             <p class="expand-details"><a class="expand-btn">&#x21E9;</a></p>
             <div class="movie-details">
                 <ul class="items">
-                    <li class="item-detail release-date"></li>
-                    <li class="item-detail genres"></li>
+                    <li class="item-detail release-date">{{releaseDate}}</li>
+                    <li class="item-detail genres">{{genres}}</li>
                     <li class="item-detail overview">
-                        <a href="#"></a>
+                        <a href="#">{{overview}}</a>
                     </li>
                 </ul>
             </div>
@@ -62,11 +62,16 @@
 
     <script id="top20-template" type="text/x-handlebars-template">
         <div class="top20-container">
-            <h2 class="top20-header">Top Rated</h2>
+            <h1 class="top20-header">Top Rated</h1>
+            <hr>
             <div class="top20-movie">
-                <h3 class="avg-rating">{{testing}}</h3>
-                <h2 class="movie-title"></h2>
-                <a href="#" class="overview"></a>
+              <ul class="movie-details">
+                <li><img src="styles/images/star_icon.png"/>
+                  <h3 class="avg-rating">{{avgRating}}</h3>             
+                  </li>
+                <li><h2 class="movie-title">{{movieTitle}}</h2></li>
+                <li><a href="#" class="overview">{{overview}}</a></li>
+              </ul>
             </div>
         </div>
     </script>

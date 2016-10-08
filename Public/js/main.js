@@ -70,7 +70,11 @@ function populateMovies() {
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var context = {
-        testing: "hey",
+        movieTitle: "Halloween",
+        avgRating: "8.5",
+        releaseDate: "1978",
+        genres: "horror",
+        overview: "synopsis"
     };
     var html = template(context);
     $(html).insertAfter("#search");
@@ -83,7 +87,9 @@ function populateTop20() {
     var source = $('#top20-template').html();
     var template = Handlebars.compile(source);
     var context = {
-        testing: "hey again",
+        avgRating: "8.5",
+        movieTitle: "Halloween",
+        overview: "synopsis"
     };
     var html = template(context);
     $(html).insertAfter("#search");
