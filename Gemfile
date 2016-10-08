@@ -11,3 +11,7 @@ gem 'rake'
 gem 'pry'
 gem 'rack-flash-session'
 # gem 'rack'
+
+group :production do
+ gem 'pg'
+end
