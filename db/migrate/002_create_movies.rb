@@ -1,3 +1,5 @@
+require 'active_record'
+
 #
 class CreateMovies < ActiveRecord::Migration[5.0]
   def up
