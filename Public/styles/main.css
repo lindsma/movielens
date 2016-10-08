@@ -13,6 +13,9 @@ header {
     font-family: "Montserrat", Arial, sans-serif;
     padding: 30px 0;
     text-align: center; }
+    header h1 a {
+      text-decoration: none;
+      color: #000; }
 
 nav {
   background: #383838;
@@ -173,6 +176,8 @@ body {
   width: 50%;
   margin: 0 auto;
   font-family: "Montserrat", Arial, sans-serif; }
+  .movie-container.hidden {
+    display: none; }
   .movie-container .movie-snapshot {
     height: 80px;
     background: #A9A9A9;

@@ -3,6 +3,10 @@
     margin: 0 auto;
     font-family: $primaryFont;
 
+    &.hidden {
+      display: none;
+    }
+
     .movie-snapshot {
         height: 80px;
         background: #A9A9A9;
