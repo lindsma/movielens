@@ -193,7 +193,12 @@ function populateErrors() {
 
 // error handlers
 
+function handleErrors(errorObject, textStatus, error) {
+        console.log(errorObject, textStatus, error);
+}
+
 
 populateErrors();
 populateMovies();
 populateTop20();
+handleErrors();
