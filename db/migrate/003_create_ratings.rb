@@ -17,5 +17,5 @@ end
 
 def main
   action = (ARGV[0] || :up).to_sym
-  CreateRatings.migrats(action)
+  CreateRatings.migrate(action)
 end
