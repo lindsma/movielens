@@ -54,27 +54,26 @@ movieSearch(searchString);
 
 
 //Test Ajax for Fitch
-
-function movieQuery(searchString) {
+var dataContainer;
    var searchbar = $("#userInput").val("");
-   $.ajax({
-       url: "/api/genre/horror",
-       dataType: "json",
-       method: "GET",
-       data:{},
-   }).done(function(response) {
-       for (var index = 0; response.length; index++) {
-           populateMovies(response[index]);
+    $.ajax({
+      "method": "GET",
+       "url": "/genre/horror",
+       "data":{},
+       "datatype": "json",
+       "success": function(data) {
+         dataContainer = data;
        }
-   });
-}
-movieQuery();
+      });
+
+ console.log(dataContainer);
+
 
 //If we're awesome, we'll get the movie title from fitch's database, then
 //use it to search the movie database for a movie poster.
 
 var apiKey =  'aecec41c5b24a3cdd29ce5c1491c5040';
-
+var poster;
 function movieSearch(searchString) {
  var settings = {
    "async": true,
@@ -84,24 +83,23 @@ function movieSearch(searchString) {
    "processData": false,
    "data": "{}"
  };
-
  $.ajax(settings).done(function(response) {
-   return new MovieInfo(response.results[0]);
+    poster = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[0].poster_path;
  });
-
+console.log(poster);
 }
 
+//new MovieInfo(response.results[0]);
 //Movie poster is in this constructor. It needs to be added to populateMovies()
 
-function MovieInfo(movieObject) {
- console.log(movieObject);
- this.info = {
-   movieId: movieObject.id,
-   title: movieObject.title,
-   overview: movieObject.overview,
-   poster: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + movieObject.poster_path
- };
-}
+// function MovieInfo(movieObject) {
+//  info = {
+//    movieId: movieObject.id,
+//    title: movieObject.title,
+//    overview: movieObject.overview,
+//    poster: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + movieObject.poster_path
+//  };
+
 
 
 
@@ -141,24 +139,12 @@ $('#container').on('click', 'p.expand-details', function(event) {
 function MovieInfo(movieObject) {
  console.log(movieObject);
 
- this.info = {
-   movieId: movieObject.id,
-   title: movieObject.title,
-   overview: movieObject.overview,
-   poster: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + movieObject.poster_path
- };
+
 
 function populateMovies() {
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var poster = this.poster;
-    var context = {
-        movieTitle: "Halloween",
-        avgRating: "8.5",
-        releaseDate: "(1978)",
-        genres: "horror",
-        overview: "synopsis"
-    };
     var html = template(context);
     $(html).insertAfter("#search");
 }
@@ -169,6 +155,7 @@ function populateMovies() {
 function populateTop20() {
     var source = $('#top20-template').html();
     var template = Handlebars.compile(source);
+    var poster = this.info.poster;
     var context = {
         avgRating: "8.5",
         movieTitle: "Halloween",
@@ -176,6 +163,7 @@ function populateTop20() {
     };
     var html = template(context);
     $(html).insertAfter("#search");
+}
 }
 
 populateMovies();
