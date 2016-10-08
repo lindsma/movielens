@@ -25,6 +25,10 @@ before do
   content_type :json
 end
 
+get '/' do
+  'hi'
+end
+
 get '/api/movies' do
   Movie.select(:id, :title).all.to_json
 end
