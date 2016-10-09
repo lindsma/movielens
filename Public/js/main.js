@@ -1,24 +1,3 @@
-// nav event handlers
-
-$("#action").on("click", function() {
-   movieQuery("action");
-});
-$("#horror").on("click", function() {
-   movieQuery("horror");
-});
-$("#comedy").on("click", function() {
-   movieQuery("comedy");
-});
-$("#fantasy").on("click", function() {
-   movieQuery("fantasy");
-});
-$("#drama").on("click", function() {
-   movieQuery("drama");
-});
-$("ul li:nth-child(6)").on("click", function() {
-   movieQuery();
-});
-
 // On first keypress, ajax search request is made.
 
 $('#userInput').on("keyup", function(event) {
@@ -63,6 +42,7 @@ var dataContainer;
        "datatype": "json",
        "success": function(data) {
          dataContainer = data;
+
        }
 
       });
@@ -114,16 +94,34 @@ console.log(poster);
 
 // click on genre, populate with genre movies
 
-$('.navBar').on('click', '.genre', function(event) {
+// $('.navBar').on('click', '.genre', function(event) {
+//     populateMovies();
+//     var currentTab = $(this).attr('id');
+//     $('#' + currentTab).toggleClass('active');
+//     $('#content').empty('');
+//     $('.top20-container').addClass('hidden');
+//     $('.navBar').on('click', '.genre', function(event) {
+//         var previousTab = currentTab;
+//         currentTab = $(this).attr('id');
+//         $('#' + previousTab).removeClass('active');
+//         $('#' + currentTab).addClass('active');
+//     });
+// });
+
+$('#action').click( function(event) {
+    $(this).toggleClass('active');
+    
+    movieQuery("action");
     var currentTab = $(this).attr('id');
-    $('#' + currentTab).toggleClass('active');
     $('#content').empty('');
     $('.top20-container').addClass('hidden');
+    console.log("HEY");
     $('.navBar').on('click', '.genre', function(event) {
         var previousTab = currentTab;
         currentTab = $(this).attr('id');
         $('#' + previousTab).removeClass('active');
         $('#' + currentTab).addClass('active');
+        console.log("NAY");
     });
 });
 
@@ -181,7 +179,6 @@ function populateTop20() {
         movieTitle: "Halloween",
         overview: "synopsis"
     };
-    console.log(poster);
     var html = template(context);
     $(html).insertAfter("#search");
 }
@@ -199,7 +196,32 @@ function populateErrors() {
 
 // error handlers
 
+function handleError(errorObject, textStatus, error) {
+        console.log(errorObject, textStatus, error);
+        populateErrors();
+    }
 
-populateErrors();
-populateMovies();
+// handleError();
+// populateMovies();
 populateTop20();
+
+// nav event handlers
+
+// $("#action").on("click", function() {
+//    movieQuery("action");
+// });
+// $("#horror").on("click", function() {
+//    movieQuery("horror");
+// });
+// $("#comedy").on("click", function() {
+//    movieQuery("comedy");
+// });
+// $("#fantasy").on("click", function() {
+//    movieQuery("fantasy");
+// });
+// $("#drama").on("click", function() {
+//    movieQuery("drama");
+// });
+// $("ul li:nth-child(6)").on("click", function() {
+//    movieQuery();
+// });
