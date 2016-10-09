@@ -1,4 +1,4 @@
-require_relative 'routes'
+require_relative './routes'
 
 run Sinatra::Application
 
