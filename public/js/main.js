@@ -87,17 +87,22 @@ function getRating(movieObject) {
 
   var movieId = movieObject.id;
 
+  console.log(movieId);
+
   $.ajax({
       "method": "GET",
-      "url": "../api/avg-rating?search=" + movieId,
+      "url": "../api/avg-rating?search=" + encodeURIComponent(movieId),
       "data": {},
       "datatype": "json",
       "success": function(data) {
           var avgRating = data[0].average_rating;
           populateMovies(movieObject, avgRating);
+          console.log(avgRating);
       },
       "error": handleError
   });
+  console.log(avgRating);
+  populateMovies(movieObject, avgRating);
 
 }
 
