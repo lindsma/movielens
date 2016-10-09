@@ -134,10 +134,10 @@ body {
     border: none;
     box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5); }
   .top20-container .top20-movie {
-    width: 250px;
+    width: 300px;
     border: 3px solid rgba(51, 51, 51, 0.4);
     margin: 3% 0 0 5%;
-    height: 200px;
+    height: 256px;
     transition: background 0.8s ease; }
     .top20-container .top20-movie:hover {
       background: #333;
@@ -149,33 +149,34 @@ body {
       list-style: none;
       position: relative;
       height: 100%; }
-    .top20-container .top20-movie li h3 {
-      padding: 17px 8px 0 0;
-      font-size: 25px;
-      height: 50px;
-      display: inline;
-      float: right; }
-    .top20-container .top20-movie li img {
-      float: right;
-      height: 40px;
-      padding: 15px 10px 0 0; }
-    .top20-container .top20-movie li h2 {
-      font-size: 40px;
-      line-height: 40px;
-      text-indent: 8%; }
-    .top20-container .top20-movie li .overview {
-      position: absolute;
-      bottom: 20px;
-      left: 8%; }
-    .top20-container .top20-movie li .movie-title {
-      text-align: left;
-      margin: 0;
-      line-height: 50px; }
-    .top20-container .top20-movie li.movie-poster {
-      width: 100%; }
-      .top20-container .top20-movie li.movie-poster img.movie-poster {
-        height: 150px;
-        padding: 0; }
+      .top20-container .top20-movie ul li h3 {
+        padding: 17px 8px 0 0;
+        font-size: 22px;
+        height: 50px;
+        display: inline;
+        float: right; }
+      .top20-container .top20-movie ul li img {
+        float: right;
+        height: 40px;
+        padding: 15px 10px 0 0; }
+      .top20-container .top20-movie ul li h2 {
+        font-size: 25px;
+        text-indent: 8%;
+        float: left; }
+      .top20-container .top20-movie ul li .overview {
+        position: absolute;
+        bottom: 20px;
+        left: 8%; }
+      .top20-container .top20-movie ul li .movie-title {
+        text-align: left;
+        margin: 0;
+        line-height: 50px; }
+      .top20-container .top20-movie ul li.movie-poster {
+        width: 100%; }
+        .top20-container .top20-movie ul li.movie-poster img.movie-poster {
+          height: 250px;
+          padding: 0;
+          float: left; }
 
 .movie-container {
   width: 50%;
