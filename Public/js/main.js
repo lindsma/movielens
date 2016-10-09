@@ -1,3 +1,4 @@
+
 // On first keypress, ajax search request is made.
 
 $('#userInput').on("keyup", function(event) {
@@ -32,22 +33,71 @@ movieSearch(searchString);
  });
 
 
-//Test Ajax for Fitch
-var dataContainer;
+//Test Ajax for Fitch. Right now just for Horror.
+
    var searchbar = $("#userInput").val("");
     $.ajax({
       "method": "GET",
+       "url": "api/genre/horror",
+       "data":{},
+       "datatype": "json",
+       "success": function(data) {
+         for (var index = 0; index < data.length; index++) {
+        populateMovies(data[index]);
+   }
+       }
+
+      });
+
+      //NavBar gernre reguests
+
+      function movieQuery(response) {
+        $.ajax({
+          "method": "GET",
+           "url": "../api/genre/" + response,
+           "data":{},
+           "datatype": "json",
+           "success": function(data) {
+             for (var index = 0; index < data.length; index++) {
+            populateMovies(data[index]);
+          }
+      }
+    });
+  }
+
+ // rate movie
+
+ function rateMovie(movieId, movieRating) {
+   if (movieRating === 'delete') {
+     deleteRating(movieId);
+   } else {
+  $.ajax({
+    "method": "POST",
+     "url": "/genre/horror",
+     "data":{},
+     "datatype": "json",
+     "success": function(data) {
+       dataContainer = data;
+     }
+   });
+    }
+  }
+
+  // delete movie
+
+  function deleteRating(movieId) {
+    $.ajax({
+      "method": "DELETE",
        "url": "/genre/horror",
        "data":{},
        "datatype": "json",
        "success": function(data) {
          dataContainer = data;
-
        }
+     });
+  }
 
-      });
 
- console.log(dataContainer);
 
 
 
@@ -72,22 +122,6 @@ function movieSearch(searchString) {
 console.log(poster);
 }
 
-//new MovieInfo(response.results[0]);
-//Movie poster is in this constructor. It needs to be added to populateMovies()
-
-// function MovieInfo(movieObject) {
-//  info = {
-//    movieId: movieObject.id,
-//    title: movieObject.title,
-//    overview: movieObject.overview,
-//    poster: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + movieObject.poster_path
-//  };
-
-
-
-
-
-
 
 
 // toggle classes
@@ -109,13 +143,7 @@ console.log(poster);
 //     });
 // });
 
-$('.navBar').on('click', '.genre', function(event) {
-  console.log(this);
-    $(this).siblings(".genre").removeClass("active");
-    $(this).toggleClass('active');
-    $('#content').empty('');
-    // movieQuery("action");
-});
+
 
 // error template testing !!!!!!!!!!!!
 
@@ -194,7 +222,8 @@ function handleError(errorObject, textStatus, error) {
     }
 
 // handleError();
-populateMovies();
+// populateMovies();
+movieQuery("horror");
 populateTop20();
 
 // nav event handlers
