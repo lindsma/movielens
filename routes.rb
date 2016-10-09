@@ -111,8 +111,7 @@ get '/api/info-by-title' do
   average_rating = Rating.where(
     movie_id: movie_info['id']
   ).average('rating').round(1).to_f.to_json
-  return average_rating.to_json
-  return movie_title.to_json
+
 end
 
 get '/api/user-count' do
@@ -173,9 +172,29 @@ get '/api/test' do
     status 200
     movie_title.to_json
   end
+end
+
 
   # average_rating = Rating.where(
   #   movie_id: movie_info['id']
   # ).average('rating').round(1).to_f.to_json
   # p "#{movie_title} #{average_rating}"
+# end
+
+# enter a user ID and return all movie titles, ratings and movie id's.
+get '/api/users/:id' do
+  user = User.find_by(id: params['id'])
+  ratings = Rating.select(:movie_id, :rating, :title).joins(
+    'INNER JOIN users ON ratings.user_id = users.id'
+  ).where(user_id: params[:id]).joins(
+    'INNER JOIN movies ON ratings.movie_id = movies.id'
+  ).all
+
+  payload = { 'user' => user, 'ratings' => ratings }
+
+  if user.nil?
+    halt(404)
+  end
+  status 200
+  payload.to_json
 end
