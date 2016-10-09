@@ -39,7 +39,7 @@ configure do
 end
 # lori's stuff
 
-get '/api/movies' do
+get '/api/all-movies' do
   Movie.select(:id, :title).all.to_json
 end
 
@@ -93,25 +93,22 @@ end
 # end
 
 # get movie title without date and avg rating for a single movie
-get '/api/info-by-title' do
+get '/api/movies' do
   if !params['search'].nil?
-    movie_data = Movie.where("title like (?)", "%#{params['search']}%")
-    movie_info = movie_data[0]
-    movie_title_and_date = movie_info['title']
-    movie_title = movie_title_and_date[/[^(]+/].rstrip
+    movies = Movie.where("title like (?)", "%#{params['search']}%")
+    # movie_info = movie_data[0]
+    # movie_title_and_date = movie_info['title']
+    # movie_title = movie_title_and_date[/[^(]+/].rstrip
     # Needs a massive refactor. but it works!
-
-    if movie_data.empty?
+    if movies.empty?
       halt(404)
     end
     status 200
-    movie_title.to_json
+    movies.to_json
   end
-
-  average_rating = Rating.where(
-    movie_id: movie_info['id']
-  ).average('rating').round(1).to_f.to_json
-
+  # average_rating = Rating.where(
+  #   movie_id: movie_info['id']
+  # ).average('rating').round(1).to_f.to_json
 end
 
 get '/api/user-count' do
