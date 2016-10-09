@@ -174,23 +174,13 @@ console.log(poster);
 //     });
 // });
 
-$('#action').click(function(event) {
-    $(this).toggleClass('active');
-
-    movieQuery("action");
-    var currentTab = $(this).attr('id');
-    $('#content').empty('');
-    $('.top20-container').addClass('hidden');
-    console.log("HEY");
-    $('.navBar').on('click', '.genre', function(event) {
-        var previousTab = currentTab;
-        currentTab = $(this).attr('id');
-        $('#' + previousTab).removeClass('active');
-        $('#' + currentTab).addClass('active');
-        console.log("NAY");
-    });
+$('.navBar').on('click', '.genre', function(event) {
+   $(this).siblings(".genre").removeClass("active");
+   $(this).toggleClass('active');
+   var currentTab = $(this).attr('id');
+   $('#content').empty('');
+   movieQuery(currentTab);
 });
-
 // error template testing !!!!!!!!!!!!
 
 $('.search-icon').click(function(event) {
