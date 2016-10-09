@@ -63,9 +63,9 @@ movieSearch(searchString);
           }
       }
     });
-    var junkTitle = "jaws (1975)";
+    //var junkTitle = "jaws (1975)";
     var apiKey =  'aecec41c5b24a3cdd29ce5c1491c5040';
-    var titlePoster = junkTitle.substring(0, junkTitle.indexOf('('));
+    var titlePoster = this.data[index].title.substring(0, this.data[index].title.indexOf('('));
      console.log(titlePoster);
      var settings = {
        "async": true,
@@ -76,7 +76,7 @@ movieSearch(searchString);
        "data": "{}"
      };
      $.ajax(settings).done(function(response) {
-        poster = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[0].poster_path;
+        populateMovies(response.results[0].poster_path);
      });
     console.log(poster);
     }
@@ -206,7 +206,7 @@ $('#container').on('click', 'p.expand-details', function(event) {
 function populateMovies() {
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
-    var poster = this.poster;
+    var poster = this.poster_path;
     var context = {
         avgRating: "8.5",
         // moviePoster: poster,
