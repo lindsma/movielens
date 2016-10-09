@@ -47,7 +47,6 @@ get '/api/movie-list' do
   Movie.select(:id, :title).all.to_json
 end
 
-
 get '/api/genre/action' do
   action_movies = Movie.where(action: '1').all
   action_id = action_movies.select('id')
@@ -87,10 +86,6 @@ get '/api/genre/drama' do
     'id', 'title', 'release_date', 'url'
   ).to_json
 end
-# get '/api/get/movie/:title' do |title|
-#   movies = Movie.where(["title like (?)", "%#{params[:title]}%20"])
-#   movies.to_json
-# end
 
 # get movie title without date and avg rating for a single movie
 get '/api/movies' do
@@ -149,11 +144,6 @@ get '/api/top20' do
   Rating.where.average('rating').all.round(1).to_f.to_json
   # Rating.where(Movie.average('rating').round(2).to_json
 end
-
-
-
-
-
 
 get '/api/test' do
   if !params['search'].nil?
