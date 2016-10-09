@@ -48,20 +48,51 @@ get '/api/movie-list' do
 end
 
 
+get '/api/genre/action' do
+  action_movies = Movie.where(action: '1').all
+  action_id = action_movies.select('id')
+  action_movies = action_movies.select(
+    'id', 'title', 'release_date', 'url'
+  ).to_json
+end
+
 get '/api/genre/horror' do
   horror_movies = Movie.where(horror: '1').all
   horror_id = horror_movies.select('id')
   horror_movies = horror_movies.select(
     'id', 'title', 'release_date', 'url'
   ).to_json
-  # average_rating = Rating.where(
-  #   movie_id: horror_id
-  # ).average('rating').round(1).to_f.to_json
 end
 
+get '/api/genre/comedy' do
+  comedy_movies = Movie.where(comedy: '1').all
+  comedy_id = comedy_movies.select('id')
+  comedy_movies = comedy_movies.select(
+    'id', 'title', 'release_date', 'url'
+  ).to_json
+end
 
+get '/api/genre/fantasy' do
+  fantasy_movies = Movie.where(fantasy: '1').all
+  fantasy_id = fantasy_movies.select('id')
+  fantasy_movies = fantasy_movies.select(
+    'id', 'title', 'release_date', 'url'
+  ).to_json
+end
 
+get '/api/genre/drama' do
+  drama_movies = Movie.where(drama: '1').all
+  drama_id = drama_movies.select('id')
+  drama_movies = drama_movies.select(
+    'id', 'title', 'release_date', 'url'
+  ).to_json
+end
+# get '/api/get/movie/:title' do |title|
+#   movies = Movie.where(["title like (?)", "%#{params[:title]}%20"])
+#   movies.to_json
+# end
 
+# get movie title without date and avg rating for a single movie
 get '/api/info-by-title' do
   if !params['search'].nil?
     movie_data = Movie.where("title like (?)", "%#{params['search']}%")
@@ -69,6 +100,7 @@ get '/api/info-by-title' do
     movie_title_and_date = movie_info['title']
     movie_title = movie_title_and_date[/[^(]+/].rstrip
     # Needs a massive refactor. but it works!
+
     if movie_data.empty?
       halt(404)
     end
@@ -79,31 +111,29 @@ get '/api/info-by-title' do
   average_rating = Rating.where(
     movie_id: movie_info['id']
   ).average('rating').round(1).to_f.to_json
-  p "#{movie_title} #{average_rating}"
+  return average_rating.to_json
+  return movie_title.to_json
 end
-
-#   movie = Movie.includes(title: params['title'])
-#   movie.to_json
-# end
 
 get '/api/user-count' do
-  total_users = User.count.to_json
+  User.count.to_json
 end
 
-# not working
-# get '/api/info-by-id' do
-#   movie_info = Movie.where(id: params['movie_id'])
-#   movie_data = movie_info[0]
-#
-#   movie_title = movie_data['title']
-#   movie_title = movie[/[^(]+/].rstrip()
-#   movie_title.to_json
-#
-#   average_rating = Rating.where(
-#     movie_id: params['movie_id']
-#   ).average('rating').round(2).to_json
-# end
+# enter ?search=id of movie you want to get id and rating.
+get '/api/info-by-id' do
+  if !params['search'].nil?
+    movie_info = Movie.where(id: params['search'])
+    movie_data = movie_info[0]
+    movie_id = movie_data['id'].to_json
+  end
+  average_rating = Rating.where(
+    movie_id: params['search']
+  ).average('rating').round(1).to_json
+  p "#{movie_id} #{average_rating}"
+end
 
+# function is used to add a user.  All that is needed for params is:
+# age=, gender=, job=.
 post '/api/add_user' do
   new_user = User.create(
     id: User.maximum(:id).next, age: params['age'],
@@ -122,4 +152,30 @@ end
 get '/api/top20' do
   Rating.where.average('rating').all.round(1).to_f.to_json
   # Rating.where(Movie.average('rating').round(2).to_json
+end
+
+
+
+
+
+
+get '/api/test' do
+  if !params['search'].nil?
+    movie_data = Movie.where("title like (?)", "%#{params['search']}%")
+    movie_info = movie_data[0]
+    movie_title = movie_info['title']
+
+    # Needs a massive refactor. but it works!
+
+    if movie_data.empty?
+      halt(404)
+    end
+    status 200
+    movie_title.to_json
+  end
+
+  # average_rating = Rating.where(
+  #   movie_id: movie_info['id']
+  # ).average('rating').round(1).to_f.to_json
+  # p "#{movie_title} #{average_rating}"
 end
