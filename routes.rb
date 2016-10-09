@@ -47,11 +47,6 @@ get '/api/movie-list' do
   Movie.select(:id, :title).all.to_json
 end
 
-# hardcode
-get '/api/search?' do
-  # JSON.dump({id: 1, title: "Seven"}
-  # JSON.dump '{"id": 2, "title": "GoldenEye"}'
-end
 
 get '/api/genre/horror' do
   horror_movies = Movie.where(horror: '1').all
@@ -93,19 +88,19 @@ get '/api/user-count' do
   total_users = User.count.to_json
 end
 
-
-get '/api/info-by-id' do
-  movie_info = Movie.where(id: params['movie_id'])
-  movie_data = movie_info[0]
-
-  movie_title = movie_data['title']
-  movie_title = movie[/[^(]+/].rstrip()
-  movie_title.to_json
-
-  average_rating = Rating.where(
-    movie_id: params['movie_id']
-  ).average('rating').round(2).to_json
-end
+# not working
+# get '/api/info-by-id' do
+#   movie_info = Movie.where(id: params['movie_id'])
+#   movie_data = movie_info[0]
+#
+#   movie_title = movie_data['title']
+#   movie_title = movie[/[^(]+/].rstrip()
+#   movie_title.to_json
+#
+#   average_rating = Rating.where(
+#     movie_id: params['movie_id']
+#   ).average('rating').round(2).to_json
+# end
 
 post '/api/add_user' do
   new_user = User.create(
