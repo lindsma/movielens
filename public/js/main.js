@@ -159,8 +159,6 @@ console.log(poster);
 // toggle classes
 
 // click on genre, populate with genre movies
-
-<<<<<<< HEAD
 // $('.navBar').on('click', '.genre', function(event) {
 //     populateMovies();
 //     var currentTab = $(this).attr('id');
