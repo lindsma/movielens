@@ -76,22 +76,22 @@ function movieQuery(response) {
             }
         }
     });
-    // var dataIndex = this.data[index];
-    // var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
-    // var titlePoster = this.dataIndex.title.substring(0, this.data[index].title.indexOf('('));
-    // console.log(titlePoster);
-    // var settings = {
-    //     "async": true,
-    //     "crossDomain": true,
-    //     "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
-    //     "method": "GET",
-    //     "processData": false,
-    //     "data": "{}"
-    // };
-    // $.ajax(settings).done(function(response) {
-    //     populateMovies(response.results[0].poster_path);
-    // });
-    // console.log(poster);
+    var dataIndex = this.data[index];
+    var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
+    var titlePoster = this.dataIndex.title.substring(0, this.data[index].title.indexOf('('));
+    console.log(titlePoster);
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
+        "method": "GET",
+        "processData": false,
+        "data": "{}"
+    };
+    $.ajax(settings).done(function(response) {
+        populateMovies(response.results[0].poster_path);
+    });
+    console.log(poster);
 }
 
 //this.data[index].title
@@ -200,8 +200,8 @@ function populateMovies(movieObject) {
     var poster = this.poster_path;
     var context = {
         avgRating: "8.5",
-        // moviePoster: poster,
-        moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
+        moviePoster: poster,
+        // moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
         movieTitle: movieObject.title,
         overview: movieObject.url
     };
@@ -215,11 +215,11 @@ function populateMovies(movieObject) {
 function populateTop20() {
     var source = $('#top20-template').html();
     var template = Handlebars.compile(source);
-    var poster = this.poster;
+    var poster = this.poster_path;
     var context = {
         avgRating: "8.5",
-        // moviePoster: poster,
-        moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
+        moviePoster: poster,
+        // moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
         movieTitle: movieObject.title,
         overview: movieObject.url
     };
