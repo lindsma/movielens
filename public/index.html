@@ -29,16 +29,6 @@
             <input id="userInput" type="text" placeholder="movie name...">
         </div>
 
-        <!-- <div class="movies">
-            hush
-        </div>
-        <div class="movies">
-            star wars
-        </div>
-        <div class="movies">
-            ghost
-        </div> -->
-
         <div id="content">
 
             <script id="home-template" type="text/x-handlebars-template">
@@ -48,9 +38,9 @@
                             <li class="movie-title">
                                 <h3 class="movie-title">{{movieTitle}}</h3></li>
                             <li class="avg-rating">
-                        <p class="avg-rating">{{avgRating}}</p>
-                        <img src="styles/images/star_icon.png" alt="star rating icon" />
-                    </li>
+                                <p class="avg-rating">{{rating}}</p>
+                                <img src="styles/images/star_icon.png" alt="star rating icon" />
+                            </li>
                             <li class="expand-details">
                                 <p class="expand-details">&#x21E9;</p>
                             </li>
@@ -59,14 +49,16 @@
                     <div class="movie-details">
                         <ul class="items">
                             <li class="item-detail release-date">released: {{releaseDate}}</li>
-                            <li class="movie-poster"><img class="movie-poster" src= "{{moviePoster}}" alt="movie poster"/></li>
+                            <li class="movie-poster"><img class="movie-poster" src="{{moviePoster}}" alt="movie poster" /></li>
                             <li class="item-detail genres">genre: {{genres}}</li>
                             <li class="item-detail overview">
-                                <a href="#">{{overview}}</a>
+                                <a href="{{overview}}">synopsis</a>
                             </li>
-                        <ul class="rating">
-                            <li class="star-1"><div class="star"></div></li>
-                        </ul>
+                            <ul class="rating">
+                                <li class="star-1">
+                                    <div class="star"></div>
+                                </li>
+                            </ul>
                     </div>
                 </div>
             </script>
@@ -77,12 +69,13 @@
                     <hr>
                     <div class="top20-movie">
                         <ul class="movie-details">
-                          <li class="movie-poster"><img class="movie-poster" src= "{{moviePoster}}" /></li>
+                            <li class="movie-poster"><img class="movie-poster" src="{{moviePoster}}" /></li>
                             <li><img src="styles/images/star_icon.png" alt="star rating icon" />
-                                <h3 class="avg-rating">{{avgRating}}</h3>
+                                <h3 class="avg-rating">{{rating}}</h3>
                             </li>
-                            <li><a href="#" class="overview">{{overview}}</a></li>
-                            <li><h2 class="movie-title">{{movieTitle}}</h2></li>
+                            <li><a href="#" class="overview">synopsis</a></li>
+                            <li>
+                                <h2 class="movie-title">{{movieTitle}}</h2></li>
                         </ul>
                     </div>
                 </div>
