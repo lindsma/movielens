@@ -80,21 +80,25 @@ function movieQuery(response) {
         "error": handleError
     });
 
-    var movieId = movieObject.id;
+  getRating(movieObject);
+}
 
-    $.ajax({
-        "method": "GET",
-        "url": "../api/avg-rating?search=" + movieId,
-        "data": {},
-        "datatype": "json",
-        "success": function(data) {
-            var avgRating = data[0].average_rating;
-        },
-        "error": handleError
-    });
+function getRating(movieObject) {
 
-    console.log(avgRating);
-    populateMovies(movieObject, avgRating);
+  var movieId = movieObject.id;
+
+  $.ajax({
+      "method": "GET",
+      "url": "../api/avg-rating?search=" + movieId,
+      "data": {},
+      "datatype": "json",
+      "success": function(data) {
+          var avgRating = data[0].average_rating;
+          populateMovies(movieObject, avgRating);
+      },
+      "error": handleError
+  });
+
 }
 
 function getPoster(title) {
