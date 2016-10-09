@@ -203,7 +203,7 @@ $('#container').on('click', 'p.expand-details', function(event) {
 // implement handlebars - home-template
 
 
-function populateMovies() {
+function populateMovies(movieObject) {
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var poster = this.poster;
@@ -211,8 +211,8 @@ function populateMovies() {
         avgRating: "8.5",
         // moviePoster: poster,
         moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg" ,
-        movieTitle: "Halloween",
-        overview: "synopsis"
+        movieTitle: movieObject.title,
+        overview: movieObject.url
     };
     var html = template(context);
     $(html).insertAfter("#search");
@@ -229,8 +229,8 @@ function populateTop20() {
         avgRating: "8.5",
         // moviePoster: poster,
         moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
-        movieTitle: "Halloween",
-        overview: "synopsis"
+        movieTitle: movieObject.title,
+        overview: movieObject.url
     };
     var html = template(context);
     $(html).insertAfter("#search");
