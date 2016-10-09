@@ -7,11 +7,11 @@
 //         movieSearch(searchString);
 //     }
 // });
-//
+
 
 //After first keypress, this function takes over.
 
-var $rows = $('.movies');
+var $rows = $('#content');
 $('#userInput').keyup(function() {
     var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
@@ -26,7 +26,7 @@ $('#userInput').keyup(function() {
 $('#userInput').keypress(function(event) {
     var searchString = $('#userInput').val();
     if (event.which == 13) {
-        movieSearch(searchString);
+          movieSearch(searchString);
         return false;
     }
 });
@@ -65,19 +65,44 @@ function movieSearch(searchString) {
 //NavBar genre requests
 
 function movieQuery(response) {
-    $.ajax({
-        "method": "GET",
-        "url": "../api/genre/" + response,
-        "data": {},
-        "datatype": "json",
-        "success": function(data) {
-            for (var index = 0; index < data.length; index++) {
-                populateMovies(data[index]);
-            }
-        }
-    });
-  }
+   $.ajax({
+       "method": "GET",
+       "url": "../api/genre/" + response,
+       "data": {},
+       "datatype": "json",
+       "success": function(data) {
+           for (var index = 0; index < data.length; index++) {
+               var movieObject = data[index];
+           }
+       },
+       "error": handleError
+   });
 
+ getRating(movieObject);
+}
+
+function getRating(movieObject) {
+
+ var movieId = movieObject.id;
+
+ console.log(movieId);
+
+ $.ajax({
+     "method": "GET",
+     "url": "../api/avg-rating?search=" + encodeURIComponent(movieId),
+     "data": {},
+     "datatype": "json",
+     "success": function(data) {
+         var avgRating = data[0].average_rating;
+         populateMovies(movieObject, avgRating);
+         console.log(avgRating);
+     },
+     "error": handleError
+ });
+ console.log(avgRating);
+ populateMovies(movieObject, avgRating);
+
+}
     function getPoster(title) {
     var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
     var titlePoster = title.substring(0, title.indexOf('('));
@@ -192,6 +217,7 @@ $('#container').on('click', 'p.expand-details', function(event) {
 
 
 function populateMovies(movieObject) {
+    $('#content').empty('');
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var poster = getPoster(movieObject.title);
