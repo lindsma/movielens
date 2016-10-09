@@ -60,9 +60,9 @@ function movieSearch(searchString) {
      $.ajax(settings).done(function(response) {
         populateMovies(response.results[0].poster_path);
      });
-    console.log(poster);
+    // console.log(poster);
 }
-//NavBar gernre reguests
+//NavBar genre requests
 
 function movieQuery(response) {
     $.ajax({
@@ -76,25 +76,23 @@ function movieQuery(response) {
             }
         }
     });
-    var dataIndex = this.data[index];
-    var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
-    var titlePoster = dataIndex.title.substring(0, dataIndex.title.indexOf('('));
-    console.log(titlePoster);
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
-        "method": "GET",
-        "processData": false,
-        "data": "{}"
-    };
-    $.ajax(settings).done(function(response) {
-        populateMovies(response.results[0].poster_path);
-    });
-    console.log(poster);
+    // var dataIndex = this.data[index];
+    // var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
+    // var titlePoster = dataIndex.title.substring(0, dataIndex.title.indexOf('('));
+    // console.log(titlePoster);
+    // var settings = {
+    //     "async": true,
+    //     "crossDomain": true,
+    //     "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
+    //     "method": "GET",
+    //     "processData": false,
+    //     "data": "{}"
+    // };
+    // $.ajax(settings).done(function(response) {
+    //     populateMovies(response.results[0].poster_path);
+    // });
+    // console.log(poster);
 }
-
-//this.data[index].title
 
 
 // rate movie
