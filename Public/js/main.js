@@ -63,7 +63,25 @@ movieSearch(searchString);
           }
       }
     });
-  }
+    var apiKey =  'aecec41c5b24a3cdd29ce5c1491c5040';
+    var titlePoster = this.data[index].title.replace(/ *\([^)]*\) */g, "");
+     console.log(titlePoster);
+     var settings = {
+       "async": true,
+       "crossDomain": true,
+       "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
+       "method": "GET",
+       "processData": false,
+       "data": "{}"
+     };
+     $.ajax(settings).done(function(response) {
+        poster = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[0].poster_path;
+     });
+    console.log(poster);
+    }
+
+
+
 
  // rate movie
 
@@ -105,9 +123,9 @@ movieSearch(searchString);
 //If we're awesome, we'll get the movie title from fitch's database, then
 //use it to search the movie database for a movie poster.
 
-var apiKey =  'aecec41c5b24a3cdd29ce5c1491c5040';
+/**var apiKey =  'aecec41c5b24a3cdd29ce5c1491c5040';
 var poster;
-function movieSearch(searchString) {
+
  var settings = {
    "async": true,
    "crossDomain": true,
@@ -120,8 +138,8 @@ function movieSearch(searchString) {
     poster = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[0].poster_path;
  });
 console.log(poster);
-}
 
+**/
 
 
 // toggle classes
@@ -232,7 +250,7 @@ function handleError(errorObject, textStatus, error) {
 
 // handleError();
 // populateMovies();
-movieQuery("horror");
+movieQuery("star wars");
 populateTop20();
 
 // nav event handlers
