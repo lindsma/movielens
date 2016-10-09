@@ -143,7 +143,7 @@ get '/api/test' do
   if !params['search'].nil?
     movie_data = Movie.where("title like (?)", "%#{params['search']}%")
     movie_info = movie_data[0]
-    movie_title = movie_info['title']
+    movie_title = movie_info['id', 'title']
 
     # Needs a massive refactor. but it works!
 
@@ -182,13 +182,14 @@ end
 
 get '/api/movies/all/:id' do
   movie = Movie.select(
-    'title, imdb_url, id, avg(rating), count(rating), unknown_genre, action,' \
-    ' adventure, animation, children, comedy, crime, documentary, drama, ' \
-    'fantasy, film_noir, horror, musical, mystery, romance, sci_fi, thriller,' \
-    ' war, western' \
+    'id, title, release_date, video_release, url, unknown, action, adventure,' \
+    'animation, children, comedy, crime, documentary,' \
+    'drama, fantasy, filmnoir, horror,' \
+    'musical, mystery, romance, scifi,' \
+    'thriller, war, western'
   ).joins('INNER JOIN ratings ON movies.id = ratings.movie_id').where(
     id: params['id']
-  ).group('title, imdb_url, id').first
+  ).group('title, url, id').first
 
   ratings = Rating.select(:user_id, :rating).joins(
     'INNER JOIN users ON ratings.user_id = users.id'
