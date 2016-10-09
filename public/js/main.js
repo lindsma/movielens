@@ -76,9 +76,9 @@ function movieQuery(response) {
             }
         }
     });
-    //var junkTitle = "jaws (1975)";
+    var dataIndex = this.data[index];
     var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
-    var titlePoster = this.data[index].title.substring(0, this.data[index].title.indexOf('('));
+    var titlePoster = this.dataIndex.title.substring(0, this.data[index].title.indexOf('('));
     console.log(titlePoster);
     var settings = {
         "async": true,
