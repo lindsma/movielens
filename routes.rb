@@ -59,9 +59,6 @@ get '/api/genre/horror' do
   # ).average('rating').round(1).to_f.to_json
 end
 
-
-
-
 get '/api/info-by-title' do
   if !params['search'].nil?
     movie_data = Movie.where("title like (?)", "%#{params['search']}%")
@@ -91,18 +88,19 @@ get '/api/user-count' do
 end
 
 # not working
-# get '/api/info-by-id' do
-#   movie_info = Movie.where(id: params['movie_id'])
-#   movie_data = movie_info[0]
-#
-#   movie_title = movie_data['title']
-#   movie_title = movie[/[^(]+/].rstrip()
-#   movie_title.to_json
-#
-#   average_rating = Rating.where(
-#     movie_id: params['movie_id']
-#   ).average('rating').round(2).to_json
-# end
+get '/api/info-by-id' do
+  if !params['search'].nil?
+    movie_info = Movie.where(id: params['search'])
+    movie_data = movie_info[0]
+
+    movie_id = movie_data['id'].to_json
+
+  end
+  average_rating = Rating.where(
+    movie_id: params['search']
+  ).average('rating').round(1).to_json
+  p "#{movie_id} #{average_rating}"
+end
 
 post '/api/add_user' do
   new_user = User.create(
