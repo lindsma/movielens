@@ -37,7 +37,7 @@ function movieSearch(searchString) {
     var searchbar = $("#userInput").val("");
     $.ajax({
         "method": "GET",
-        "url": "/api/movies",
+        "url": "/api/movies?search=" + encodeURIComponent(searchString),
         "data": {},
         "datatype": "json",
         "success": function(data) {
@@ -77,6 +77,7 @@ function movieQuery(response) {
         }
     });
   }
+
     function getPoster(title) {
     var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
     var titlePoster = title.substring(0, title.indexOf('('));
