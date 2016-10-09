@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link rel="icon" type="image/png" href="styles/images/red_elephant_error.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Movies!</title>
+    <title>FitchFlix</title>
 </head>
 
 <body>
@@ -29,7 +29,7 @@
             <input id="userInput" type="text" placeholder="movie name...">
         </div>
 
-        <div class="movies">
+        <!-- <div class="movies">
             hush
         </div>
         <div class="movies">
@@ -37,7 +37,7 @@
         </div>
         <div class="movies">
             ghost
-        </div>
+        </div> -->
 
         <div id="content">
 
@@ -59,9 +59,17 @@
                     <div class="movie-details">
                         <ul class="items">
                             <li class="item-detail release-date">released: {{releaseDate}}</li>
+                            <li class="movie-poster"><img class="movie-poster" src= "{{moviePoster}}" alt="movie poster"/></li>
                             <li class="item-detail genres">genre: {{genres}}</li>
                             <li class="item-detail overview">
                                 <a href="#">{{overview}}</a>
+                            </li>
+                            <li class="rating"><p>Your Rating</p>
+                                <fieldset>
+                                  <input type="radio" id="rating5" name="rating" value="5" />
+                                  <label for="rating5" title="5 stars"></label> 
+
+                                </fieldset>
                             </li>
                         </ul>
                     </div>
@@ -74,12 +82,12 @@
                     <hr>
                     <div class="top20-movie">
                         <ul class="movie-details">
+                          <li class="movie-poster"><img class="movie-poster" src= "{{moviePoster}}" /></li>
                             <li><img src="styles/images/star_icon.png" alt="star rating icon" />
                                 <h3 class="avg-rating">{{avgRating}}</h3>
                             </li>
-                            <li>
-                                <h2 class="movie-title">{{movieTitle}}</h2></li>
                             <li><a href="#" class="overview">{{overview}}</a></li>
+                            <li><h2 class="movie-title">{{movieTitle}}</h2></li>
                         </ul>
                     </div>
                 </div>
@@ -87,16 +95,20 @@
 
             <script id="error-template" type="text/x-handlebars-template">
                 <div class="error-container">
-                  <ul class="error-list">
-                    <li class="error-image"><img src="styles/images/red_elephant_error.png" alt="elephant-error" /></li>
-                    <li class="error-header"><h1 >{{errorType}}</h1></li>
-                    <li><p class="error-message">{{errorMessage}}</p></li>
-                  </ul>
+                    <ul class="error-list">
+                        <li class="error-image"><img src="styles/images/red_elephant_error.png" alt="elephant-error" /></li>
+                        <li class="error-header">
+                            <h1>{{errorType}}</h1></li>
+                        <li>
+                            <p class="error-message">{{errorMessage}}</p>
+                        </li>
+                    </ul>
                 </div>
             </script>
         </div>
     </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/handlebars.js"></script>
     <script src="js/main.js"></script>

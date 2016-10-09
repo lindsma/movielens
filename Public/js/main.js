@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 02a32052617f5e09f02225df9a0648c6347183c6
 // On first keypress, ajax search request is made.
 
 $('#userInput').on("keyup", function(event) {
@@ -42,9 +45,14 @@ var dataContainer;
        "data":{},
        "datatype": "json",
        "success": function(data) {
+<<<<<<< HEAD
          for (var index = 0; response.data.length; index++) {
     new targetInfo(response.data[index]);
    }
+=======
+         dataContainer = data;
+
+>>>>>>> 02a32052617f5e09f02225df9a0648c6347183c6
        }
 
       });
@@ -130,16 +138,34 @@ console.log(poster);
 
 // click on genre, populate with genre movies
 
-$('.navBar').on('click', '.genre', function(event) {
+// $('.navBar').on('click', '.genre', function(event) {
+//     populateMovies();
+//     var currentTab = $(this).attr('id');
+//     $('#' + currentTab).toggleClass('active');
+//     $('#content').empty('');
+//     $('.top20-container').addClass('hidden');
+//     $('.navBar').on('click', '.genre', function(event) {
+//         var previousTab = currentTab;
+//         currentTab = $(this).attr('id');
+//         $('#' + previousTab).removeClass('active');
+//         $('#' + currentTab).addClass('active');
+//     });
+// });
+
+$('#action').click( function(event) {
+    $(this).toggleClass('active');
+    
+    movieQuery("action");
     var currentTab = $(this).attr('id');
-    $('#' + currentTab).toggleClass('active');
     $('#content').empty('');
     $('.top20-container').addClass('hidden');
+    console.log("HEY");
     $('.navBar').on('click', '.genre', function(event) {
         var previousTab = currentTab;
         currentTab = $(this).attr('id');
         $('#' + previousTab).removeClass('active');
         $('#' + currentTab).addClass('active');
+        console.log("NAY");
     });
 });
 
@@ -172,6 +198,13 @@ function populateMovies() {
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var poster = this.poster;
+    var context = {
+        avgRating: "8.5",
+        // moviePoster: poster,
+        moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg" ,
+        movieTitle: "Halloween",
+        overview: "synopsis"
+    };
     var html = template(context);
     $(html).insertAfter("#search");
 }
@@ -185,13 +218,18 @@ function populateTop20() {
     var poster = this.poster;
     var context = {
         avgRating: "8.5",
+        // moviePoster: poster,
+        moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
         movieTitle: "Halloween",
         overview: "synopsis"
     };
     var html = template(context);
     $(html).insertAfter("#search");
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 02a32052617f5e09f02225df9a0648c6347183c6
 
 function populateErrors() {
     var source = $('#error-template').html();
@@ -206,7 +244,32 @@ function populateErrors() {
 
 // error handlers
 
+function handleError(errorObject, textStatus, error) {
+        console.log(errorObject, textStatus, error);
+        populateErrors();
+    }
 
-populateErrors();
-populateMovies();
+// handleError();
+// populateMovies();
 populateTop20();
+
+// nav event handlers
+
+// $("#action").on("click", function() {
+//    movieQuery("action");
+// });
+// $("#horror").on("click", function() {
+//    movieQuery("horror");
+// });
+// $("#comedy").on("click", function() {
+//    movieQuery("comedy");
+// });
+// $("#fantasy").on("click", function() {
+//    movieQuery("fantasy");
+// });
+// $("#drama").on("click", function() {
+//    movieQuery("drama");
+// });
+// $("ul li:nth-child(6)").on("click", function() {
+//    movieQuery();
+// });
