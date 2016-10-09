@@ -19,12 +19,12 @@ before do
   content_type :json
 end
 
-after do
-  ActiveRecord::Base.connection.close
-end
+# after do
+#   ActiveRecord::Base.connection.close
+# end
 
 get '/foo' do
-  headers 'Access-Control-Allow-Origin' => 'https://movielens.herokuapp.com'
+  headers 'Access-Control-Allow-Origin' => 'https://shielded-taiga-96422.herokuapp.com/'
   'hello world'
 end
 
@@ -53,30 +53,15 @@ get '/api/search?' do
   # JSON.dump '{"id": 2, "title": "GoldenEye"}'
 end
 
-# hardcode
 get '/api/genre/horror' do
-  JSON.dump [{ id: 1, title: 'From Dusk Till Dawn' }]
-  # JSON.dump '{"title": "Random Horror Movie"}'
-
-  # title
-  # avg rating
-  # url link
-  # release data
-  # other genres
-  #
-end
-
-get '/api/genre/test' do
   horror_movies = Movie.where(horror: '1').all
   horror_id = horror_movies.select('id')
   horror_movies = horror_movies.select(
     'id', 'title', 'release_date', 'url'
   ).to_json
-  average_rating = Rating.where(
-    movie_id: horror_id
-  ).average('rating').round(1).to_f.to_json
-  p "#{horror_id}"
-  binding.pry
+  # average_rating = Rating.where(
+  #   movie_id: horror_id
+  # ).average('rating').round(1).to_f.to_json
 end
 
 
