@@ -202,9 +202,8 @@ function populateMovies(movieObject) {
     var poster = this.poster;
     var context = {
         avgRating: "4.5",
-        // moviePoster: poster,
         releaseDate: movieObject.release_date,
-        moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg" ,
+        moviePoster: this.poster_path,
         movieTitle: movieObject.title,
         overview: movieObject.url
     };
@@ -221,8 +220,7 @@ function populateTop20(movieObject) {
     var poster = this.poster;
     var context = {
         avgRating: "4.5",
-        // moviePoster: poster,
-        moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
+        moviePoster: this.poster_path,
         movieTitle: movieObject.title,
         overview: movieObject.url
     };
@@ -252,24 +250,3 @@ function handleError(errorObject, textStatus, error) {
 // populateMovies();
 movieQuery("star wars");
 populateTop20();
-
-// nav event handlers
-
-// $("#action").on("click", function() {
-//    movieQuery("action");
-// });
-// $("#horror").on("click", function() {
-//    movieQuery("horror");
-// });
-// $("#comedy").on("click", function() {
-//    movieQuery("comedy");
-// });
-// $("#fantasy").on("click", function() {
-//    movieQuery("fantasy");
-// });
-// $("#drama").on("click", function() {
-//    movieQuery("drama");
-// });
-// $("ul li:nth-child(6)").on("click", function() {
-//    movieQuery();
-// });
