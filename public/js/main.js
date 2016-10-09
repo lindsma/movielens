@@ -76,9 +76,9 @@ function movieQuery(response) {
             }
         }
     });
-    //var junkTitle = "jaws (1975)";
+    var dataIndex = this.data[index];
     var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
-    var titlePoster = this.data[index].title.substring(0, this.data[index].title.indexOf('('));
+    var titlePoster = this.dataIndex.title.substring(0, this.data[index].title.indexOf('('));
     console.log(titlePoster);
     var settings = {
         "async": true,
@@ -159,19 +159,7 @@ console.log(poster);
 // toggle classes
 
 // click on genre, populate with genre movies
-// $('.navBar').on('click', '.genre', function(event) {
-//     populateMovies();
-//     var currentTab = $(this).attr('id');
-//     $('#' + currentTab).toggleClass('active');
-//     $('#content').empty('');
-//     $('.top20-container').addClass('hidden');
-//     $('.navBar').on('click', '.genre', function(event) {
-//         var previousTab = currentTab;
-//         currentTab = $(this).attr('id');
-//         $('#' + previousTab).removeClass('active');
-//         $('#' + currentTab).addClass('active');
-//     });
-// });
+
 
 $('.navBar').on('click', '.genre', function(event) {
     $(this).siblings(".genre").removeClass("active");
