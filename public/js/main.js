@@ -37,7 +37,7 @@ function movieSearch(searchString) {
     var searchbar = $("#userInput").val("");
     $.ajax({
         "method": "GET",
-        "url": "/api/movies",
+        "url": "/api/movies?search=" + encodeURIComponent(searchString),
         "data": {},
         "datatype": "json",
         "success": function(data) {
