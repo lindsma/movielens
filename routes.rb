@@ -90,10 +90,7 @@ end
 # get movie title without date and avg rating for a single movie
 get '/api/movies' do
   if !params['search'].nil?
-    movies = Movie.where("title like (?)", "%#{params['search']}%")
-    # movie_info = movie_data[0]
-    # movie_title_and_date = movie_info['title']
-    # movie_title = movie_title_and_date[/[^(]+/].rstrip
+    movies = Movie.where('title like (?)', "%#{params['search']}%")
     # Needs a massive refactor. but it works!
     if movies.empty?
       halt(404)
@@ -101,26 +98,24 @@ get '/api/movies' do
     status 200
     movies.to_json
   end
-  # average_rating = Rating.where(
-  #   movie_id: movie_info['id']
-  # ).average('rating').round(1).to_f.to_json
-end
-
-get '/api/user-count' do
-  User.count.to_json
 end
 
 # enter ?search=id of movie you want to get id and rating.
-get '/api/info-by-id' do
+get '/api/avg-rating' do
   if !params['search'].nil?
     movie_info = Movie.where(id: params['search'])
     movie_data = movie_info[0]
     movie_id = movie_data['id'].to_json
   end
+
   average_rating = Rating.where(
     movie_id: params['search']
   ).average('rating').round(1).to_json
-  p "#{movie_id} #{average_rating}"
+end
+
+# Simple function to call total user count - might be useful might not
+get '/api/user-count' do
+  User.count.to_json
 end
 
 # function is used to add a user.  All that is needed for params is:
