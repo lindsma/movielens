@@ -24,7 +24,7 @@ after do
 end
 
 get '/foo' do
-  headers 'Access-Control-Allow-Origin' => 'https://movielens.herokuapp.com'
+  headers 'Access-Control-Allow-Origin' => 'https://shielded-taiga-96422.herokuapp.com/'
   'hello world'
 end
 
@@ -75,7 +75,7 @@ get '/api/genre/test' do
   average_rating = Rating.where(
     movie_id: horror_id
   ).average('rating').round(1).to_f.to_json
-  p "#{horror_id}"
+  
   binding.pry
 end
 
