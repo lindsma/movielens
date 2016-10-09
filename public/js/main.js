@@ -159,19 +159,7 @@ console.log(poster);
 // toggle classes
 
 // click on genre, populate with genre movies
-// $('.navBar').on('click', '.genre', function(event) {
-//     populateMovies();
-//     var currentTab = $(this).attr('id');
-//     $('#' + currentTab).toggleClass('active');
-//     $('#content').empty('');
-//     $('.top20-container').addClass('hidden');
-//     $('.navBar').on('click', '.genre', function(event) {
-//         var previousTab = currentTab;
-//         currentTab = $(this).attr('id');
-//         $('#' + previousTab).removeClass('active');
-//         $('#' + currentTab).addClass('active');
-//     });
-// });
+
 
 $('.navBar').on('click', '.genre', function(event) {
     $(this).siblings(".genre").removeClass("active");
