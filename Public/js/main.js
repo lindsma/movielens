@@ -158,7 +158,8 @@ function populateMovies() {
     var poster = this.poster;
     var context = {
         avgRating: "8.5",
-        moviePoster: poster,
+        // moviePoster: poster,
+        moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg" ,
         movieTitle: "Halloween",
         overview: "synopsis"
     };
@@ -175,10 +176,12 @@ function populateTop20() {
     var poster = this.poster;
     var context = {
         avgRating: "8.5",
-        moviePoster: poster,
+        // moviePoster: poster,
+        moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
         movieTitle: "Halloween",
         overview: "synopsis"
     };
+    console.log(poster);
     var html = template(context);
     $(html).insertAfter("#search");
 }

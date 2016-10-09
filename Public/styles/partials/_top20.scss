@@ -77,6 +77,17 @@
                 margin: 0;
                 line-height: 50px;
             }
+
+            &.movie-poster {
+
+              width: 100%;
+
+              img.movie-poster {
+                height: 150px;
+                padding: 0;
+              }
+
+            }
         }
     }
 }
