@@ -95,6 +95,7 @@ console.log(poster);
 // click on genre, populate with genre movies
 
 // $('.navBar').on('click', '.genre', function(event) {
+//   console.log(this);
 //     populateMovies();
 //     var currentTab = $(this).attr('id');
 //     $('#' + currentTab).toggleClass('active');
@@ -108,21 +109,12 @@ console.log(poster);
 //     });
 // });
 
-$('#action').click( function(event) {
+$('.navBar').on('click', '.genre', function(event) {
+  console.log(this);
+    $(this).siblings(".genre").removeClass("active");
     $(this).toggleClass('active');
-    
-    movieQuery("action");
-    var currentTab = $(this).attr('id');
     $('#content').empty('');
-    $('.top20-container').addClass('hidden');
-    console.log("HEY");
-    $('.navBar').on('click', '.genre', function(event) {
-        var previousTab = currentTab;
-        currentTab = $(this).attr('id');
-        $('#' + previousTab).removeClass('active');
-        $('#' + currentTab).addClass('active');
-        console.log("NAY");
-    });
+    // movieQuery("action");
 });
 
 // error template testing !!!!!!!!!!!!
@@ -155,7 +147,7 @@ function populateMovies() {
     var template = Handlebars.compile(source);
     var poster = this.poster;
     var context = {
-        avgRating: "8.5",
+        avgRating: "4.5",
         // moviePoster: poster,
         moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg" ,
         movieTitle: "Halloween",
@@ -173,7 +165,7 @@ function populateTop20() {
     var template = Handlebars.compile(source);
     var poster = this.poster;
     var context = {
-        avgRating: "8.5",
+        avgRating: "4.5",
         // moviePoster: poster,
         moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
         movieTitle: "Halloween",
@@ -202,7 +194,7 @@ function handleError(errorObject, textStatus, error) {
     }
 
 // handleError();
-// populateMovies();
+populateMovies();
 populateTop20();
 
 // nav event handlers
