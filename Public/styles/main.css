@@ -198,6 +198,20 @@ body {
         font-size: 40px;
         margin-left: 30px;
         width: 60%; }
+      .movie-container .movie-snapshot li.avg-rating {
+        font-size: 25px;
+        border: 1px solid #red;
+        width: 20%;
+        margin-top: 0; }
+        .movie-container .movie-snapshot li.avg-rating p {
+          float: left;
+          line-height: 80px;
+          margin-left: 60px; }
+        .movie-container .movie-snapshot li.avg-rating img {
+          height: 25px;
+          line-height: 80px;
+          margin-top: 26px;
+          margin-left: 6px; }
       .movie-container .movie-snapshot li.expand-details {
         border-radius: 50px;
         background: #fff;
@@ -230,6 +244,8 @@ body {
           width: 40%;
           float: right;
           padding-left: 20%; }
+        .movie-container .movie-details ul li.rating {
+          padding-top: 15px; }
       .movie-container .movie-details ul img.movie-poster {
         height: 150px; }
 

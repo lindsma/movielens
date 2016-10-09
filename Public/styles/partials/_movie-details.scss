@@ -26,22 +26,27 @@
                 margin-left: 30px;
                 width: 60%;
             }
-            // &.avg-rating {
-            //     font-size: 25px;
-            //     border: 1px solid #red;
-            //     width: 20%;
-            //     margin-top: 0;
-            //
-            //     p {
-            //       float: left;
-            //       line-height: 80px;
-            //     }
-            //
-            //     img {
-            //         height: 25px;
-            //         line-height: 80px;
-            //     }
-            // }
+
+            &.avg-rating {
+                font-size: 25px;
+                border: 1px solid #red;
+                width: 20%;
+                margin-top: 0;
+
+                p {
+                    float: left;
+                    line-height: 80px;
+                    margin-left: 60px;
+                }
+
+                img {
+                    height: 25px;
+                    line-height: 80px;
+                    margin-top: 26px;
+                    margin-left: 6px;
+                }
+            }
+
             &.expand-details {
                 border-radius: 50px;
                 background: #fff;
@@ -85,6 +90,10 @@
                     width: 40%;
                     float: right;
                     padding-left: 20%;
+                }
+
+                &.rating {
+                  padding-top: 15px;
                 }
             }
 
