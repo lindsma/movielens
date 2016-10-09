@@ -60,9 +60,9 @@ function movieSearch(searchString) {
      $.ajax(settings).done(function(response) {
         populateMovies(response.results[0].poster_path);
      });
-    console.log(poster);
+    // console.log(poster);
 }
-//NavBar gernre reguests
+//NavBar genre requests
 
 function movieQuery(response) {
     $.ajax({
@@ -76,25 +76,23 @@ function movieQuery(response) {
             }
         }
     });
-    //var junkTitle = "jaws (1975)";
-    var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
-    var titlePoster = this.data[index].title.substring(0, this.data[index].title.indexOf('('));
-    console.log(titlePoster);
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
-        "method": "GET",
-        "processData": false,
-        "data": "{}"
-    };
-    $.ajax(settings).done(function(response) {
-        populateMovies(response.results[0].poster_path);
-    });
-    console.log(poster);
+    // var dataIndex = this.data[index];
+    // var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
+    // var titlePoster = dataIndex.title.substring(0, dataIndex.title.indexOf('('));
+    // console.log(titlePoster);
+    // var settings = {
+    //     "async": true,
+    //     "crossDomain": true,
+    //     "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
+    //     "method": "GET",
+    //     "processData": false,
+    //     "data": "{}"
+    // };
+    // $.ajax(settings).done(function(response) {
+    //     populateMovies(response.results[0].poster_path);
+    // });
+    // console.log(poster);
 }
-
-//this.data[index].title
 
 
 // rate movie
@@ -160,6 +158,7 @@ console.log(poster);
 
 // click on genre, populate with genre movies
 
+<<<<<<< HEAD
 // $('.navBar').on('click', '.genre', function(event) {
 //     populateMovies();
 //     var currentTab = $(this).attr('id');
@@ -180,6 +179,15 @@ $('.navBar').on('click', '.genre', function(event) {
    var currentTab = $(this).attr('id');
    $('#content').empty('');
    movieQuery(currentTab);
+=======
+
+$('.navBar').on('click', '.genre', function(event) {
+    $(this).siblings(".genre").removeClass("active");
+    $(this).toggleClass('active');
+    var currentTab = $(this).attr('id');
+    $('#content').empty('');
+    movieQuery(currentTab);
+>>>>>>> master
 });
 // error template testing !!!!!!!!!!!!
 
@@ -212,8 +220,8 @@ function populateMovies(movieObject) {
     var poster = this.poster_path;
     var context = {
         avgRating: "8.5",
-        // moviePoster: poster,
-        moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
+        moviePoster: poster,
+        // moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
         movieTitle: movieObject.title,
         overview: movieObject.url
     };
@@ -227,11 +235,11 @@ function populateMovies(movieObject) {
 function populateTop20() {
     var source = $('#top20-template').html();
     var template = Handlebars.compile(source);
-    var poster = this.poster;
+    var poster = this.poster_path;
     var context = {
         avgRating: "8.5",
-        // moviePoster: poster,
-        moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
+        moviePoster: poster,
+        // moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
         movieTitle: movieObject.title,
         overview: movieObject.url
     };
@@ -259,5 +267,5 @@ function handleError(errorObject, textStatus, error) {
 
 // handleError();
 // populateMovies();
-movieQuery("Horror");
+movieQuery("horror");
 populateTop20();
