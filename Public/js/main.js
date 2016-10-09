@@ -143,7 +143,15 @@ console.log(poster);
 //     });
 // });
 
-
+$('.navBar').on('click', '.genre', function(event) {
+  console.log(this);
+    $(this).siblings(".genre").removeClass("active");
+    $(this).toggleClass('active');
+    movieQuery("action");
+    var currentTab = $(this).attr('id');
+    $('#content').empty('');
+    // movieQuery("action");
+});
 
 // error template testing !!!!!!!!!!!!
 
@@ -170,7 +178,7 @@ $('#container').on('click', 'p.expand-details', function(event) {
 // implement handlebars - home-template
 
 
-function populateMovies() {
+function populateMovies(movieObject) {
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var poster = this.poster;
@@ -178,7 +186,7 @@ function populateMovies() {
         avgRating: "4.5",
         // moviePoster: poster,
         moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg" ,
-        movieTitle: "Halloween",
+        movieTitle: this.title,
         overview: "synopsis"
     };
     var html = template(context);
