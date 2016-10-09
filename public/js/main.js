@@ -74,6 +74,7 @@ function movieQuery(response) {
             for (var index = 0; index < data.length; index++) {
                 populateMovies(data[index]);
             }
+            console.log(populateMovies);
         }
     });
     // var dataIndex = this.data[index];
@@ -158,36 +159,13 @@ console.log(poster);
 
 // click on genre, populate with genre movies
 
-<<<<<<< HEAD
-// $('.navBar').on('click', '.genre', function(event) {
-//     populateMovies();
-//     var currentTab = $(this).attr('id');
-//     $('#' + currentTab).toggleClass('active');
-//     $('#content').empty('');
-//     $('.top20-container').addClass('hidden');
-//     $('.navBar').on('click', '.genre', function(event) {
-//         var previousTab = currentTab;
-//         currentTab = $(this).attr('id');
-//         $('#' + previousTab).removeClass('active');
-//         $('#' + currentTab).addClass('active');
-//     });
-// });
-
-$('.navBar').on('click', '.genre', function(event) {
-   $(this).siblings(".genre").removeClass("active");
-   $(this).toggleClass('active');
-   var currentTab = $(this).attr('id');
-   $('#content').empty('');
-   movieQuery(currentTab);
-=======
-
 $('.navBar').on('click', '.genre', function(event) {
     $(this).siblings(".genre").removeClass("active");
     $(this).toggleClass('active');
     var currentTab = $(this).attr('id');
     $('#content').empty('');
     movieQuery(currentTab);
->>>>>>> master
+
 });
 // error template testing !!!!!!!!!!!!
 
@@ -217,7 +195,7 @@ $('#container').on('click', 'p.expand-details', function(event) {
 function populateMovies(movieObject) {
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
-    var poster = this.poster_path;
+    var poster = getPoster(movieObject.title);
     var context = {
         avgRating: "8.5",
         moviePoster: poster,
