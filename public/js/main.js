@@ -213,7 +213,7 @@ $('#container').on('click', 'p.expand-details', function(event) {
 
 function populateMovies(movieObject, avgRating) {
     $('#content').empty('');
-    console.log(avgRating);
+    console.log(this.avgRating);
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var poster = getPoster(movieObject.title);
