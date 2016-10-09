@@ -47,7 +47,6 @@ get '/api/movie-list' do
   Movie.select(:id, :title).all.to_json
 end
 
-
 get '/api/genre/action' do
   action_movies = Movie.where(action: '1').all
   action_id = action_movies.select('id')
@@ -87,18 +86,11 @@ get '/api/genre/drama' do
     'id', 'title', 'release_date', 'url'
   ).to_json
 end
-# get '/api/get/movie/:title' do |title|
-#   movies = Movie.where(["title like (?)", "%#{params[:title]}%20"])
-#   movies.to_json
-# end
 
 # get movie title without date and avg rating for a single movie
 get '/api/movies' do
   if !params['search'].nil?
-    movies = Movie.where("title like (?)", "%#{params['search']}%")
-    # movie_info = movie_data[0]
-    # movie_title_and_date = movie_info['title']
-    # movie_title = movie_title_and_date[/[^(]+/].rstrip
+    movies = Movie.where('title like (?)', "%#{params['search']}%")
     # Needs a massive refactor. but it works!
     if movies.empty?
       halt(404)
@@ -106,26 +98,24 @@ get '/api/movies' do
     status 200
     movies.to_json
   end
-  # average_rating = Rating.where(
-  #   movie_id: movie_info['id']
-  # ).average('rating').round(1).to_f.to_json
-end
-
-get '/api/user-count' do
-  User.count.to_json
 end
 
 # enter ?search=id of movie you want to get id and rating.
-get '/api/info-by-id' do
+get '/api/avg-rating' do
   if !params['search'].nil?
     movie_info = Movie.where(id: params['search'])
     movie_data = movie_info[0]
     movie_id = movie_data['id'].to_json
   end
+
   average_rating = Rating.where(
     movie_id: params['search']
   ).average('rating').round(1).to_json
-  p "#{movie_id} #{average_rating}"
+end
+
+# Simple function to call total user count - might be useful might not
+get '/api/user-count' do
+  User.count.to_json
 end
 
 # function is used to add a user.  All that is needed for params is:
@@ -149,11 +139,6 @@ get '/api/top20' do
   Rating.where.average('rating').all.round(1).to_f.to_json
   # Rating.where(Movie.average('rating').round(2).to_json
 end
-
-
-
-
-
 
 get '/api/test' do
   if !params['search'].nil?
@@ -194,4 +179,25 @@ get '/api/users/:id' do
   end
   status 200
   payload.to_json
+end
+
+get '/api/movies/all/:id' do
+  movie = Movie.select(
+    'title, imdb_url, id, avg(rating), count(rating), unknown_genre, action,' \
+    ' adventure, animation, children, comedy, crime, documentary, drama, ' \
+    'fantasy, film_noir, horror, musical, mystery, romance, sci_fi, thriller,' \
+    ' war, western' \
+  ).joins('INNER JOIN ratings ON movies.id = ratings.movie_id').where(
+    id: params['id']
+  ).group('title, imdb_url, id').first
+
+  ratings = Rating.select(:user_id, :rating).joins(
+    'INNER JOIN users ON ratings.user_id = users.id'
+  ).where(movie_id: params[:id]).joins(
+    'INNER JOIN movies ON ratings.movie_id = movies.id'
+  ).all
+
+  movie_hash = movie.as_json
+  movie_hash['ratings'] = ratings.as_json
+  movie_hash.to_json
 end
