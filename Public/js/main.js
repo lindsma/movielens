@@ -1,23 +1,3 @@
-// nav event handlers
-
-$("#action").on("click", function() {
-   movieQuery("action");
-});
-$("#horror").on("click", function() {
-   movieQuery("horror");
-});
-$("#comedy").on("click", function() {
-   movieQuery("comedy");
-});
-$("#fantasy").on("click", function() {
-   movieQuery("fantasy");
-});
-$("#drama").on("click", function() {
-   movieQuery("drama");
-});
-$("ul li:nth-child(6)").on("click", function() {
-   movieQuery();
-});
 
 // On first keypress, ajax search request is made.
 
@@ -58,16 +38,52 @@ var dataContainer;
    var searchbar = $("#userInput").val("");
     $.ajax({
       "method": "GET",
+       "url": "api/genre/horror",
+       "data":{},
+       "datatype": "json",
+       "success": function(data) {
+         for (var index = 0; response.data.length; index++) {
+    new targetInfo(response.data[index]);
+   }
+       }
+
+      });
+
+ console.log(dataContainer);
+
+ // rate movie
+
+ function rateMovie(movieId, movieRating) {
+   if (movieRating === 'delete') {
+     deleteRating(movieId);
+   } else {
+  $.ajax({
+    "method": "POST",
+     "url": "/genre/horror",
+     "data":{},
+     "datatype": "json",
+     "success": function(data) {
+       dataContainer = data;
+     }
+   });
+    }
+  }
+
+  // delete movie
+
+  function deleteRating(movieId) {
+    $.ajax({
+      "method": "DELETE",
        "url": "/genre/horror",
        "data":{},
        "datatype": "json",
        "success": function(data) {
          dataContainer = data;
        }
+     });
+  }
 
-      });
 
- console.log(dataContainer);
 
 
 
@@ -166,7 +182,7 @@ function populateMovies() {
 function populateTop20() {
     var source = $('#top20-template').html();
     var template = Handlebars.compile(source);
-    var poster = this.info.poster;
+    var poster = this.poster;
     var context = {
         avgRating: "8.5",
         movieTitle: "Halloween",
@@ -175,7 +191,7 @@ function populateTop20() {
     var html = template(context);
     $(html).insertAfter("#search");
 }
-}
+
 
 function populateErrors() {
     var source = $('#error-template').html();
