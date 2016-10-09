@@ -63,8 +63,9 @@ movieSearch(searchString);
           }
       }
     });
+    var junkTitle = "jaws (1975)";
     var apiKey =  'aecec41c5b24a3cdd29ce5c1491c5040';
-    var titlePoster = this.data[index].title.replace(/ *\([^)]*\) */g, "");
+    var titlePoster = junkTitle.substring(0, junkTitle.indexOf('('));
      console.log(titlePoster);
      var settings = {
        "async": true,
@@ -80,7 +81,7 @@ movieSearch(searchString);
     console.log(poster);
     }
 
-
+//this.data[index].title
 
 
  // rate movie
@@ -147,7 +148,6 @@ console.log(poster);
 // click on genre, populate with genre movies
 
 // $('.navBar').on('click', '.genre', function(event) {
-//   console.log(this);
 //     populateMovies();
 //     var currentTab = $(this).attr('id');
 //     $('#' + currentTab).toggleClass('active');
@@ -161,14 +161,21 @@ console.log(poster);
 //     });
 // });
 
-$('.navBar').on('click', '.genre', function(event) {
-  console.log(this);
-    $(this).siblings(".genre").removeClass("active");
+$('#action').click( function(event) {
     $(this).toggleClass('active');
+
     movieQuery("action");
     var currentTab = $(this).attr('id');
     $('#content').empty('');
-    // movieQuery("action");
+    $('.top20-container').addClass('hidden');
+    console.log("HEY");
+    $('.navBar').on('click', '.genre', function(event) {
+        var previousTab = currentTab;
+        currentTab = $(this).attr('id');
+        $('#' + previousTab).removeClass('active');
+        $('#' + currentTab).addClass('active');
+        console.log("NAY");
+    });
 });
 
 // error template testing !!!!!!!!!!!!
@@ -196,17 +203,16 @@ $('#container').on('click', 'p.expand-details', function(event) {
 // implement handlebars - home-template
 
 
-function populateMovies(movieObject) {
+function populateMovies() {
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var poster = this.poster;
     var context = {
-        avgRating: "4.5",
+        avgRating: "8.5",
         // moviePoster: poster,
-        releaseDate: movieObject.release_date,
         moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg" ,
-        movieTitle: movieObject.title,
-        overview: movieObject.url
+        movieTitle: "Halloween",
+        overview: "synopsis"
     };
     var html = template(context);
     $(html).insertAfter("#search");
@@ -215,22 +221,22 @@ function populateMovies(movieObject) {
 
 // implement handlebars - top20-template
 
-function populateTop20(movieObject) {
+function populateTop20() {
     var source = $('#top20-template').html();
     var template = Handlebars.compile(source);
     var poster = this.poster;
     var context = {
-        avgRating: "4.5",
+        avgRating: "8.5",
         // moviePoster: poster,
         moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
-        movieTitle: movieObject.title,
-        overview: movieObject.url
+        movieTitle: "Halloween",
+        overview: "synopsis"
     };
     var html = template(context);
     $(html).insertAfter("#search");
 }
 
-function populateErrors(movieObject) {
+function populateErrors() {
     var source = $('#error-template').html();
     var template = Handlebars.compile(source);
     var context = {
@@ -250,7 +256,7 @@ function handleError(errorObject, textStatus, error) {
 
 // handleError();
 // populateMovies();
-movieQuery("star wars");
+movieQuery("Horror");
 populateTop20();
 
 // nav event handlers
