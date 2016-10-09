@@ -247,5 +247,5 @@ function handleError(errorObject, textStatus, error) {
 
 // handleError();
 // populateMovies();
-movieQuery("Horror");
+movieQuery("horror");
 populateTop20();
