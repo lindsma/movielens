@@ -42,7 +42,7 @@ movieSearch(searchString);
        "data":{},
        "datatype": "json",
        "success": function(data) {
-         for (var index = 0; data.length; index++) {
+         for (var index = 0; index < data.length; index++) {
         populateMovies(data[index]);
    }
        }
@@ -58,7 +58,7 @@ movieSearch(searchString);
            "data":{},
            "datatype": "json",
            "success": function(data) {
-             for (var index = 0; data.length; index++) {
+             for (var index = 0; index < data.length; index++) {
             populateMovies(data[index]);
           }
       }
