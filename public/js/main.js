@@ -74,10 +74,26 @@ function movieQuery(response) {
         "datatype": "json",
         "success": function(data) {
             for (var index = 0; index < data.length; index++) {
-                populateMovies(data[index]);
+                var movieObject = data[index];
             }
-        }
+        },
+        "error": handleError
     });
+
+    var movieId = movieObject.id;
+
+    $.ajax({
+        "method": "GET",
+        "url": "../api/avg-rating?search=" + movieId,
+        "data": {},
+        "datatype": "json",
+        "success": function(data) {
+            var avgRating = data.average_rating;
+        },
+        "error": handleError
+    });
+
+    populateMovies(movieObject, avgRating);
 }
 
 function getPoster(title) {
@@ -194,12 +210,12 @@ $('#container').on('click', 'p.expand-details', function(event) {
 // implement handlebars - home-template
 
 
-function populateMovies(movieObject) {
+function populateMovies(movieObject, avgRating) {
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var poster = getPoster(movieObject.title);
     var context = {
-        rating: "8.5",
+        rating: avgRating,
         moviePoster: poster,
         // moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
         movieTitle: movieObject.title,
@@ -217,7 +233,7 @@ function populateTop20() {
     var template = Handlebars.compile(source);
     var poster = this.poster_path;
     var context = {
-        rating: "8.5",
+        rating: avgRating,
         moviePoster: poster,
         // moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
         movieTitle: movieObject.title,
@@ -244,7 +260,23 @@ function handleError(errorObject, textStatus, error) {
     populateErrors(errorObject);
 }
 
+// get Avg rating
+
+// function getAvgRating(movieObject) {
+//     var movieId = movieObject.id;
+//     $.ajax({
+//         "method": "GET",
+//         "url": "../api/avg-rating?search=" + movieId,
+//         "data": {},
+//         "datatype": "json",
+//         "success": function(data) {
+//           var avgRating = data.average_rating;
+//           populateMovies(avgRating);
+//         }
+//     });
+// }
+
 // handleError();
 // populateMovies();
 //movieQuery("horror");
-populateTop20();
+// populateTop20();
