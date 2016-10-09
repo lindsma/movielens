@@ -49,9 +49,9 @@ end
 
 
 get '/api/genre/action' do
-  horror_movies = Movie.where(action: '1').all
-  horror_id = horror_movies.select('id')
-  horror_movies = horror_movies.select(
+  action_movies = Movie.where(action: '1').all
+  action_id = action_movies.select('id')
+  action_movies = action_movies.select(
     'id', 'title', 'release_date', 'url'
   ).to_json
 end
@@ -60,6 +60,14 @@ get '/api/genre/horror' do
   horror_movies = Movie.where(horror: '1').all
   horror_id = horror_movies.select('id')
   horror_movies = horror_movies.select(
+    'id', 'title', 'release_date', 'url'
+  ).to_json
+end
+
+get '/api/genre/comdedy' do
+  comedy_movies = Movie.where(comedy: '1').all
+  comedy_id = comedy_movies.select('id')
+  comedy_movies = comedy_movies.select(
     'id', 'title', 'release_date', 'url'
   ).to_json
 end
