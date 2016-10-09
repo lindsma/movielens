@@ -46,22 +46,7 @@ function movieSearch(searchString) {
             }
         }
     });
-<<<<<<< HEAD
-    var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
-    var titlePoster = this.data[index].title.substring(0, this.data[index].title.indexOf('('));
-    console.log(titlePoster);
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
-        "method": "GET",
-        "processData": false,
-        "data": "{}"
-    };
-    $.ajax(settings).done(function(response) {
-        populateMovies(response.results[0].poster_path);
-    });
-=======
+
     // var apiKey =  'aecec41c5b24a3cdd29ce5c1491c5040';
     // var titlePoster = this.data[index].title.substring(0, this.data[index].title.indexOf('('));
     //  console.log(titlePoster);
@@ -76,7 +61,6 @@ function movieSearch(searchString) {
     //  $.ajax(settings).done(function(response) {
     //     populateMovies(response.results[0].poster_path);
     //  });
->>>>>>> 30a75630088c598c67bbcbcffa8dc401faafcc0d
     // console.log(poster);
 }
 //NavBar genre requests
