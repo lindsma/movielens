@@ -185,9 +185,10 @@ function populateMovies(movieObject) {
     var context = {
         avgRating: "4.5",
         // moviePoster: poster,
+        releaseDate: movieObject.release_date,
         moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg" ,
-        movieTitle: this.title,
-        overview: "synopsis"
+        movieTitle: movieObject.title,
+        overview: movieObject.url
     };
     var html = template(context);
     $(html).insertAfter("#search");
@@ -196,7 +197,7 @@ function populateMovies(movieObject) {
 
 // implement handlebars - top20-template
 
-function populateTop20() {
+function populateTop20(movieObject) {
     var source = $('#top20-template').html();
     var template = Handlebars.compile(source);
     var poster = this.poster;
@@ -204,14 +205,14 @@ function populateTop20() {
         avgRating: "4.5",
         // moviePoster: poster,
         moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
-        movieTitle: "Halloween",
-        overview: "synopsis"
+        movieTitle: movieObject.title,
+        overview: movieObject.url
     };
     var html = template(context);
     $(html).insertAfter("#search");
 }
 
-function populateErrors() {
+function populateErrors(movieObject) {
     var source = $('#error-template').html();
     var template = Handlebars.compile(source);
     var context = {
