@@ -48,8 +48,8 @@ get '/api/movie-list' do
 end
 
 
-get '/api/genre/horror' do
-  horror_movies = Movie.where(horror: '1').all
+get '/api/genre/action' do
+  horror_movies = Movie.where(action: '1').all
   horror_id = horror_movies.select('id')
   horror_movies = horror_movies.select(
     'id', 'title', 'release_date', 'url'
@@ -64,6 +64,10 @@ get '/api/genre/horror' do
   ).to_json
 end
 
+# get '/api/get/movie/:title' do |title|
+#   movies = Movie.where(["title like (?)", "%#{params[:title]}%20"])
+#   movies.to_json
+# end
 
 get '/api/info-by-title' do
   if !params['search'].nil?
@@ -72,6 +76,7 @@ get '/api/info-by-title' do
     movie_title_and_date = movie_info['title']
     movie_title = movie_title_and_date[/[^(]+/].rstrip
     # Needs a massive refactor. but it works!
+
     if movie_data.empty?
       halt(404)
     end
@@ -90,7 +95,7 @@ end
 # end
 
 get '/api/user-count' do
-  total_users = User.count.to_json
+  User.count.to_json
 end
 
 # not working
