@@ -1,13 +1,13 @@
 // On first keypress, ajax search request is made.
 
-$('#userInput').on("keyup", function(event) {
-    if ($('#userInput').val().length > 2) {
-        event.preventDefault();
-        var searchString = $('#userInput').val();
-        movieSearch(searchString);
-    }
-});
-
+// $('#userInput').on("keyup", function(event) {
+//     if ($('#userInput').val().length > 2) {
+//         event.preventDefault();
+//         var searchString = $('#userInput').val();
+//         movieSearch(searchString);
+//     }
+// });
+//
 
 //After first keypress, this function takes over.
 
@@ -46,6 +46,7 @@ function movieSearch(searchString) {
             }
         }
     });
+<<<<<<< HEAD
     var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
     var titlePoster = this.data[index].title.substring(0, this.data[index].title.indexOf('('));
     console.log(titlePoster);
@@ -60,6 +61,22 @@ function movieSearch(searchString) {
     $.ajax(settings).done(function(response) {
         populateMovies(response.results[0].poster_path);
     });
+=======
+    // var apiKey =  'aecec41c5b24a3cdd29ce5c1491c5040';
+    // var titlePoster = this.data[index].title.substring(0, this.data[index].title.indexOf('('));
+    //  console.log(titlePoster);
+    //  var settings = {
+    //    "async": true,
+    //    "crossDomain": true,
+    //    "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
+    //    "method": "GET",
+    //    "processData": false,
+    //    "data": "{}"
+    //  };
+    //  $.ajax(settings).done(function(response) {
+    //     populateMovies(response.results[0].poster_path);
+    //  });
+>>>>>>> 30a75630088c598c67bbcbcffa8dc401faafcc0d
     // console.log(poster);
 }
 //NavBar genre requests
@@ -76,23 +93,22 @@ function movieQuery(response) {
             }
         }
     });
-    // var dataIndex = this.data[index];
-    // var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
-    // var titlePoster = dataIndex.title.substring(0, dataIndex.title.indexOf('('));
-    // console.log(titlePoster);
-    // var settings = {
-    //     "async": true,
-    //     "crossDomain": true,
-    //     "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
-    //     "method": "GET",
-    //     "processData": false,
-    //     "data": "{}"
-    // };
-    // $.ajax(settings).done(function(response) {
-    //     populateMovies(response.results[0].poster_path);
-    // });
-    // console.log(poster);
-}
+  }
+    function getPoster(title) {
+    var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
+    var titlePoster = title.substring(0, title.indexOf('('));
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
+        "method": "GET",
+        "processData": false,
+        "data": "{}"
+    };
+    $.ajax(settings).done(function(response) {
+        return response.results[0].poster_path;
+    });
+  }
 
 
 // rate movie
@@ -158,15 +174,14 @@ console.log(poster);
 
 // click on genre, populate with genre movies
 
-
 $('.navBar').on('click', '.genre', function(event) {
     $(this).siblings(".genre").removeClass("active");
     $(this).toggleClass('active');
     var currentTab = $(this).attr('id');
     $('#content').empty('');
     movieQuery(currentTab);
-});
 
+});
 // error template testing !!!!!!!!!!!!
 
 $('.search-icon').click(function(event) {
@@ -245,5 +260,5 @@ function handleError(errorObject, textStatus, error) {
 
 // handleError();
 // populateMovies();
-movieQuery("horror");
+//movieQuery("horror");
 populateTop20();
