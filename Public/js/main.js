@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 
-=======
->>>>>>> 02a32052617f5e09f02225df9a0648c6347183c6
 // On first keypress, ajax search request is made.
 
 $('#userInput').on("keyup", function(event) {
@@ -36,8 +33,8 @@ movieSearch(searchString);
  });
 
 
-//Test Ajax for Fitch
-var dataContainer;
+//Test Ajax for Fitch. Right now just for Horror.
+
    var searchbar = $("#userInput").val("");
     $.ajax({
       "method": "GET",
@@ -45,19 +42,28 @@ var dataContainer;
        "data":{},
        "datatype": "json",
        "success": function(data) {
-<<<<<<< HEAD
-         for (var index = 0; response.data.length; index++) {
-    new targetInfo(response.data[index]);
+         for (var index = 0; data.length; index++) {
+        populateMovies(data[index]);
    }
-=======
-         dataContainer = data;
-
->>>>>>> 02a32052617f5e09f02225df9a0648c6347183c6
        }
 
       });
 
- console.log(dataContainer);
+      //NavBar gernre reguests
+
+      function movieQuery(response) {
+        $.ajax({
+          "method": "GET",
+           "url": "../api/genre/" + response,
+           "data":{},
+           "datatype": "json",
+           "success": function(data) {
+             for (var index = 0; data.length; index++) {
+            populateMovies(data[index]);
+          }
+      }
+    });
+  }
 
  // rate movie
 
@@ -116,22 +122,6 @@ function movieSearch(searchString) {
 console.log(poster);
 }
 
-//new MovieInfo(response.results[0]);
-//Movie poster is in this constructor. It needs to be added to populateMovies()
-
-// function MovieInfo(movieObject) {
-//  info = {
-//    movieId: movieObject.id,
-//    title: movieObject.title,
-//    overview: movieObject.overview,
-//    poster: 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + movieObject.poster_path
-//  };
-
-
-
-
-
-
 
 
 // toggle classes
@@ -154,7 +144,7 @@ console.log(poster);
 
 $('#action').click( function(event) {
     $(this).toggleClass('active');
-    
+
     movieQuery("action");
     var currentTab = $(this).attr('id');
     $('#content').empty('');
@@ -226,10 +216,6 @@ function populateTop20() {
     var html = template(context);
     $(html).insertAfter("#search");
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> 02a32052617f5e09f02225df9a0648c6347183c6
 
 function populateErrors() {
     var source = $('#error-template').html();
@@ -251,6 +237,7 @@ function handleError(errorObject, textStatus, error) {
 
 // handleError();
 // populateMovies();
+movieQuery("horror");
 populateTop20();
 
 // nav event handlers
