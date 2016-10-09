@@ -60,6 +60,8 @@ get '/api/genre/horror' do
 end
 
 
+
+
 get '/api/info-by-title' do
   if !params['search'].nil?
     movie_data = Movie.where("title like (?)", "%#{params['search']}%")
