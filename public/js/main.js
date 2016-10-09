@@ -88,11 +88,12 @@ function movieQuery(response) {
         "data": {},
         "datatype": "json",
         "success": function(data) {
-            var avgRating = data.average_rating;
+            var avgRating = data[0].average_rating;
         },
         "error": handleError
     });
 
+    console.log(avgRating);
     populateMovies(movieObject, avgRating);
 }
 
@@ -211,6 +212,8 @@ $('#container').on('click', 'p.expand-details', function(event) {
 
 
 function populateMovies(movieObject, avgRating) {
+    $('#content').empty('');
+    console.log(avgRating);
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var poster = getPoster(movieObject.title);
