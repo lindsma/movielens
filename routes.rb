@@ -91,7 +91,6 @@ end
 get '/api/movies' do
   if !params['search'].nil?
     movies = Movie.where('title like (?)', "%#{params['search']}%")
-    # Needs a massive refactor. but it works!
     if movies.empty?
       halt(404)
     end
