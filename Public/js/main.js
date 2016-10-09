@@ -144,7 +144,6 @@ console.log(poster);
 // });
 
 
-
 // error template testing !!!!!!!!!!!!
 
 $('.search-icon').click(function(event) {
