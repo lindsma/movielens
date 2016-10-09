@@ -92,7 +92,7 @@ end
 
 get '/api/genre/test' do
   horror_movies = Movie.where(horror: '1').all
-  
+
 end
 
 
