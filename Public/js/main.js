@@ -233,7 +233,7 @@ function handleError(errorObject, textStatus, error) {
 // handleError();
 // populateMovies();
 movieQuery("horror");
-// populateTop20();
+populateTop20();
 
 // nav event handlers
 
