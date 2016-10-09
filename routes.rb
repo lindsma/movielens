@@ -29,6 +29,9 @@ require 'sinatra/cross_origin'
 #   ActiveRecord::Base.connection.close
 # end
 
+get '/' do
+ send_file 'public/index.html'
+end
 
 # Lori's stuff start
 database_config = YAML::load(File.open('config/database.yml'))
