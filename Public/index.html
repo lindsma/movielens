@@ -29,7 +29,7 @@
             <input id="userInput" type="text" placeholder="movie name...">
         </div>
 
-        <div class="movies">
+        <!-- <div class="movies">
             hush
         </div>
         <div class="movies">
@@ -37,7 +37,7 @@
         </div>
         <div class="movies">
             ghost
-        </div>
+        </div> -->
 
         <div id="content">
 
@@ -59,6 +59,7 @@
                     <div class="movie-details">
                         <ul class="items">
                             <li class="item-detail release-date">released: {{releaseDate}}</li>
+                            <li class="movie-poster"><img class="movie-poster" src= "{{moviePoster}}" alt="movie poster"/></li>
                             <li class="item-detail genres">genre: {{genres}}</li>
                             <li class="item-detail overview">
                                 <a href="#">{{overview}}</a>
@@ -74,13 +75,12 @@
                     <hr>
                     <div class="top20-movie">
                         <ul class="movie-details">
+                          <li class="movie-poster"><img class="movie-poster" src= "{{moviePoster}}" /></li>
                             <li><img src="styles/images/star_icon.png" alt="star rating icon" />
                                 <h3 class="avg-rating">{{avgRating}}</h3>
                             </li>
-                            <li>
-                                <h2 class="movie-title">{{movieTitle}}</h2></li>
                             <li><a href="#" class="overview">{{overview}}</a></li>
-                            <li>{{moviePoster}}</li>
+                            <li><h2 class="movie-title">{{movieTitle}}</h2></li>                    
                         </ul>
                     </div>
                 </div>
