@@ -54,10 +54,16 @@ get '/api/genre/horror' do
   horror_movies = horror_movies.select(
     'id', 'title', 'release_date', 'url'
   ).to_json
-  # average_rating = Rating.where(
-  #   movie_id: horror_id
-  # ).average('rating').round(1).to_f.to_json
 end
+
+get '/api/genre/horror' do
+  horror_movies = Movie.where(horror: '1').all
+  horror_id = horror_movies.select('id')
+  horror_movies = horror_movies.select(
+    'id', 'title', 'release_date', 'url'
+  ).to_json
+end
+
 
 get '/api/info-by-title' do
   if !params['search'].nil?
