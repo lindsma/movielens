@@ -46,20 +46,20 @@ function movieSearch(searchString) {
             }
         }
     });
-    var apiKey =  'aecec41c5b24a3cdd29ce5c1491c5040';
+    var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
     var titlePoster = this.data[index].title.substring(0, this.data[index].title.indexOf('('));
-     console.log(titlePoster);
-     var settings = {
-       "async": true,
-       "crossDomain": true,
-       "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
-       "method": "GET",
-       "processData": false,
-       "data": "{}"
-     };
-     $.ajax(settings).done(function(response) {
+    console.log(titlePoster);
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
+        "method": "GET",
+        "processData": false,
+        "data": "{}"
+    };
+    $.ajax(settings).done(function(response) {
         populateMovies(response.results[0].poster_path);
-     });
+    });
     // console.log(poster);
 }
 //NavBar genre requests
@@ -186,6 +186,7 @@ $('header').click(function(event) {
 // click on arrow down to expand movie details
 
 $('#container').on('click', 'p.expand-details', function(event) {
+    $(this).toggleClass('active');
     $('.movie-details').toggleClass('active');
 });
 
@@ -195,9 +196,9 @@ $('#container').on('click', 'p.expand-details', function(event) {
 function populateMovies(movieObject) {
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
-    var poster = this.poster_path;
+    var poster = getPoster(movieObject.title);
     var context = {
-        avgRating: "8.5",
+        rating: "8.5",
         moviePoster: poster,
         // moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
         movieTitle: movieObject.title,
@@ -215,7 +216,7 @@ function populateTop20() {
     var template = Handlebars.compile(source);
     var poster = this.poster_path;
     var context = {
-        avgRating: "8.5",
+        rating: "8.5",
         moviePoster: poster,
         // moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
         movieTitle: movieObject.title,
@@ -225,11 +226,11 @@ function populateTop20() {
     $(html).insertAfter("#search");
 }
 
-function populateErrors() {
+function populateErrors(errorObject) {
     var source = $('#error-template').html();
     var template = Handlebars.compile(source);
     var context = {
-        errorType: "404",
+        errorType: errorObject,
         errorMessage: "Oh s*&%! Try again.",
     };
     var html = template(context);
@@ -239,8 +240,7 @@ function populateErrors() {
 // error handlers
 
 function handleError(errorObject, textStatus, error) {
-    console.log(errorObject, textStatus, error);
-    populateErrors();
+    populateErrors(errorObject);
 }
 
 // handleError();
