@@ -80,7 +80,6 @@ function movieQuery(response) {
     function getPoster(title) {
     var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
     var titlePoster = title.substring(0, title.indexOf('('));
-    console.log(titlePoster);
     var settings = {
         "async": true,
         "crossDomain": true,
@@ -244,5 +243,5 @@ function handleError(errorObject, textStatus, error) {
 
 // handleError();
 // populateMovies();
-movieQuery("horror");
+//movieQuery("horror");
 populateTop20();
