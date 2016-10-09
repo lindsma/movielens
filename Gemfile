@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 ruby '2.3.1'
 
@@ -7,8 +8,6 @@ gem 'shotgun'
 gem 'pg'
 gem 'activerecord'
 gem 'json'
-gem 'rake'
 gem 'pry'
-gem 'rack-flash-session'
+gem 'rake'
 gem 'sinatra-cross_origin'
-# gem 'rack'
