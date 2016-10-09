@@ -47,7 +47,9 @@ function movieSearch(searchString) {
         }
     });
 }
+
 //NavBar genre requests
+
 
 function movieQuery(response) {
     $.ajax({
@@ -57,37 +59,43 @@ function movieQuery(response) {
         "datatype": "json",
         "success": function(data) {
             for (var index = 0; index < data.length; index++) {
+                console.log(genre);
                 var movieObject = data[index];
             }
         },
         "error": handleError
     });
 
-  getRating(movieObject);
+    getRating(movieObject);
 }
 
 function getRating(movieObject) {
 
-  var movieId = movieObject.id;
+    var movieId = movieObject.id;
 
-  console.log(movieId);
+    console.log(movieId);
 
-  $.ajax({
-      "method": "GET",
-      "url": "../api/avg-rating?search=" + encodeURIComponent(movieId),
-      "data": {},
-      "datatype": "json",
-      "success": function(data) {
-          var avgRating = data[0].average_rating;
-          populateMovies(movieObject, avgRating);
-          console.log(avgRating);
-      },
-      "error": handleError
-  });
-  console.log(avgRating);
-  populateMovies(movieObject, avgRating);
+    $.get('../api/avg-rating?search=' + encodeURIComponent(movieId), function(response) {
+        var avgRating = response[0].average_rating;
+    });
+    console.log(avgRating);
+    populateMovies(movieObject, avgRating);
 
 }
+
+    // $.ajax({
+    //     "method": "GET",
+    //     "url": "../api/avg-rating?search=" + encodeURIComponent(movieId),
+    //     "data": {},
+    //     "datatype": "json",
+    //     "success": function(data) {
+    //         var avgRating = data[0].average_rating;
+    //         populateMovies(movieObject, avgRating);
+    //         console.log(avgRating);
+    //     },
+    //     "error": handleError
+    // });
+
 
 function getPoster(title) {
     var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
