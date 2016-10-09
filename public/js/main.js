@@ -258,24 +258,3 @@ function handleError(errorObject, textStatus, error) {
 // populateMovies();
 movieQuery("Horror");
 populateTop20();
-
-// nav event handlers
-
-// $("#action").on("click", function() {
-//    movieQuery("action");
-// });
-// $("#horror").on("click", function() {
-//    movieQuery("horror");
-// });
-// $("#comedy").on("click", function() {
-//    movieQuery("comedy");
-// });
-// $("#fantasy").on("click", function() {
-//    movieQuery("fantasy");
-// });
-// $("#drama").on("click", function() {
-//    movieQuery("drama");
-// });
-// $("ul li:nth-child(6)").on("click", function() {
-//    movieQuery();
-// });

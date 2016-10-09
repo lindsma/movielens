@@ -12,6 +12,7 @@
         background: #A9A9A9;
         margin-top: 30px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        display: flex;
 
         &:nth-child(even) {
             background: #D3D3D3;
@@ -22,9 +23,10 @@
             margin-top: 20px;
 
             &.movie-title {
-                font-size: 40px;
-                margin-left: 30px;
+                font-size: 30px;
+                margin-left: 20px;
                 width: 60%;
+                align-self: center;
             }
 
             &.avg-rating {
