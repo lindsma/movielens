@@ -44,7 +44,7 @@ function movieSearch(searchString) {
         "data": {},
         "datatype": "json",
         "success": function(data) {
-            if (data.movie_data.hasOwnProperty(title)) {
+            if (data.movie_data.hasOwnProperty("title")) {
                 for (var index = 0; index < data.movie_data.length; index++) {
                     var newData = data.movie_data[index];
                     populateMovies(newData);
