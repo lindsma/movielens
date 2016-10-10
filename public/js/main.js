@@ -40,10 +40,10 @@ function movieSearch(searchString) {
         "url": "/api/get_movies/" + encodeURIComponent(searchString),
         "data": {},
         "datatype": "json",
-        debugger,
         "success": function(data) {
             for (var index = 0; index < data.length; index++) {
                 var movieObject = data[index];
+                debugger;
                 populateMovies(movieObject);
             }
         },
