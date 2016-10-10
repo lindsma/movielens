@@ -46,25 +46,11 @@ function movieSearch(searchString) {
             }
         }
     });
-    // var apiKey =  'aecec41c5b24a3cdd29ce5c1491c5040';
-    // var titlePoster = this.data[index].title.substring(0, this.data[index].title.indexOf('('));
-    //  console.log(titlePoster);
-    //  var settings = {
-    //    "async": true,
-    //    "crossDomain": true,
-    //    "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
-    //    "method": "GET",
-    //    "processData": false,
-    //    "data": "{}"
-    //  };
-    //  $.ajax(settings).done(function(response) {
-    //     populateMovies(response.results[0].poster_path);
-    //  });
-    // console.log(poster);
 }
 //NavBar genre requests
 
 function movieQuery(response) {
+<<<<<<< HEAD
    $.ajax({
        "method": "GET",
        "url": "../api/genre/" + response,
@@ -104,6 +90,48 @@ function getRating(movieObject) {
 
 }
     function getPoster(title) {
+=======
+    $.ajax({
+        "method": "GET",
+        "url": "../api/genre/" + response,
+        "data": {},
+        "datatype": "json",
+        "success": function(data) {
+            for (var index = 0; index < data.length; index++) {
+                var movieObject = data[index];
+            }
+        },
+        "error": handleError
+    });
+
+  getRating(movieObject);
+}
+
+function getRating(movieObject) {
+
+  var movieId = movieObject.id;
+
+  console.log(movieId);
+
+  $.ajax({
+      "method": "GET",
+      "url": "../api/avg-rating?search=" + encodeURIComponent(movieId),
+      "data": {},
+      "datatype": "json",
+      "success": function(data) {
+          var avgRating = data[0].average_rating;
+          populateMovies(movieObject, avgRating);
+          console.log(avgRating);
+      },
+      "error": handleError
+  });
+  console.log(avgRating);
+  populateMovies(movieObject, avgRating);
+
+}
+
+function getPoster(title) {
+>>>>>>> master
     var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
     var titlePoster = title.substring(0, title.indexOf('('));
     var settings = {
@@ -117,7 +145,7 @@ function getRating(movieObject) {
     $.ajax(settings).done(function(response) {
         return response.results[0].poster_path;
     });
-  }
+}
 
 
 // rate movie
@@ -210,19 +238,26 @@ $('header').click(function(event) {
 // click on arrow down to expand movie details
 
 $('#container').on('click', 'p.expand-details', function(event) {
+    $(this).toggleClass('active');
     $('.movie-details').toggleClass('active');
 });
 
 // implement handlebars - home-template
 
 
+<<<<<<< HEAD
 function populateMovies(movieObject) {
     $('#content').empty('');
+=======
+function populateMovies(movieObject, avgRating) {
+    $('#content').empty('');
+    console.log(avgRating);
+>>>>>>> master
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var poster = getPoster(movieObject.title);
     var context = {
-        avgRating: "8.5",
+        rating: avgRating,
         moviePoster: poster,
         // moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
         movieTitle: movieObject.title,
@@ -240,7 +275,7 @@ function populateTop20() {
     var template = Handlebars.compile(source);
     var poster = this.poster_path;
     var context = {
-        avgRating: "8.5",
+        rating: avgRating,
         moviePoster: poster,
         // moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
         movieTitle: movieObject.title,
@@ -250,11 +285,11 @@ function populateTop20() {
     $(html).insertAfter("#search");
 }
 
-function populateErrors() {
+function populateErrors(errorObject) {
     var source = $('#error-template').html();
     var template = Handlebars.compile(source);
     var context = {
-        errorType: "404",
+        errorType: errorObject,
         errorMessage: "Oh s*&%! Try again.",
     };
     var html = template(context);
@@ -264,11 +299,26 @@ function populateErrors() {
 // error handlers
 
 function handleError(errorObject, textStatus, error) {
-    console.log(errorObject, textStatus, error);
-    populateErrors();
+    populateErrors(errorObject);
 }
+
+// get Avg rating
+
+// function getAvgRating(movieObject) {
+//     var movieId = movieObject.id;
+//     $.ajax({
+//         "method": "GET",
+//         "url": "../api/avg-rating?search=" + movieId,
+//         "data": {},
+//         "datatype": "json",
+//         "success": function(data) {
+//           var avgRating = data.average_rating;
+//           populateMovies(avgRating);
+//         }
+//     });
+// }
 
 // handleError();
 // populateMovies();
 //movieQuery("horror");
-populateTop20();
+// populateTop20();
