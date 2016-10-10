@@ -209,6 +209,6 @@ get '/api/get_movies/:title' do |title|
 
   top_users = Rating.all.where(movie_id: movie_info[:id]).where(rating: 5).limit(5)
 
-  payload = {'movie_info' => movie_info, 'rating' => average_rating, 'top_users' => top_users}
+  payload = {'movie_info' => movie_info, 'rating' => average_rating.round(1), 'top_users' => top_users}
   payload.to_json
 end
