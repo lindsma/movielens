@@ -199,11 +199,11 @@ get '/api/get_movies/:title' do
   movie_info = movie_data[0]
 
   average_rating = Rating.select(:rating).where(
-    movie_id: movie_info[:id]
+    movie_id: movie_data[:id]
   ).average(:rating)
   # this probably needs to be refactored.
   top_users = Rating.all.where(
-    movie_id: movie_info[:id]
+    movie_id: movie_data[:id]
   ).where(rating: 5).limit(5)
 
   movies_rating_and_users = { 'movie_data' => movie_data, 'rating' => average_rating.round(1), 'top_users' => top_users }
