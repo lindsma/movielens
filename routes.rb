@@ -38,7 +38,7 @@ get '/api/all-movies' do
   Movie.select(:id, :title).all.to_json
 end
 
-# These genre functions could probably be refactored to one function/call
+# These could probably be refactored to one function/call
 get '/api/genre/action' do
   action_movies = Movie.where(action: '1').all
   # action_id = action_movies.select('id')
@@ -199,11 +199,11 @@ get '/api/get_movies/:title' do
   movie_info = movie_data[0]
 
   average_rating = Rating.select(:rating).where(
-    movie_id: movie_data[:id]
+    movie_id: movie_info[:id]
   ).average(:rating)
   # this probably needs to be refactored.
   top_users = Rating.all.where(
-    movie_id: movie_data[:id]
+    movie_id: movie_info[:id]
   ).where(rating: 5).limit(5)
 
   movies_rating_and_users = { 'movie_data' => movie_data, 'rating' => average_rating.round(1), 'top_users' => top_users }
