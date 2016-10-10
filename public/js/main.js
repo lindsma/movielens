@@ -48,6 +48,7 @@ function movieSearch(searchString) {
             console.log(data.rating);
             console.log(data.movie_info.release_date);
             console.log(data.movie_info.url);
+            populateMovies(data);
         },
         "error": handleError
     });
@@ -207,17 +208,18 @@ $('#container').on('click', 'p.expand-details', function(event) {
 
 // implement handlebars - home-template
 
+
 function populateMovies(movieObject) {
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var poster = getPoster(movieObject.title);
     var context = {
-        rating: movieObject.average_rating,
+        rating: movieObject.rating,
         // moviePoster: poster,
-        releaseDate: movieObject.release_date,
-        movieTitle: movieObject.title,
-        overview: movieObject.url,
-        movieId: movieObject.id
+        releaseDate: movieObject.movie_info.release_date,
+        movieTitle: movieObject.movie_info.title,
+        overview: movieObject.movie_info.url,
+        movieId: movieObject.movie_info.id
     };
     var html = template(context);
     $(html).insertAfter("#search");
