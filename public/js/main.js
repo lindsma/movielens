@@ -45,12 +45,13 @@ function movieSearch(searchString) {
         "data": {},
         "datatype": "json",
         "success": function(data) {
-          console.log(data.results);
-          for (var index = 0 ; index < dataArray.length; index++) {
-
-            populateMovies(dataArray[index]);
-
-          }
+            Object.keys(data).forEach(function(title) {
+                console.log(title, obj[title]);
+            });
+            // dataArray.push(data);
+            // for (var index = 0 ; index < dataArray.length; index++) {
+            //   populateMovies(dataArray[index]);
+            // }
         },
         "error": handleError
     });
@@ -256,7 +257,7 @@ $('#container').on('click', 'p.expand-details', function(event) {
 
 
 function populateMovies(movieObject) {
-  console.log(movieObject);
+    console.log(movieObject);
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var context = {
