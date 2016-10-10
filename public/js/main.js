@@ -46,7 +46,7 @@ function movieSearch(searchString) {
         "datatype": "json",
         "success": function(data) {
             Object.keys(data).forEach(function(title) {
-                console.log(title, obj[title]);
+                console.log(title, data[title]);
             });
             // dataArray.push(data);
             // for (var index = 0 ; index < dataArray.length; index++) {
