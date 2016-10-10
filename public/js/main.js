@@ -46,14 +46,14 @@ function movieSearch(searchString) {
             "datatype": "json",
             "success": function(data) {
                     populateMovies(data);
-                }
+                },
                 // dataArray.push(data);
                 // for (var index = 0 ; index < dataArray.length; index++) {
                 //   populateMovies(dataArray[index]);
                 // }
-        },
         "error": handleError
-    }
+    });
+  }
 
     // function movieSearch(searchString) {
     //    var searchbar = $("#userInput").val("");
