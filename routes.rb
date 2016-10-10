@@ -7,11 +7,7 @@ require 'sinatra'
 require 'pry'
 require 'sinatra/cross_origin'
 
-get '/' do
- send_file 'public/index.html'
-end
-
-database_config = YAML::load(File.open('config/database.yml'))
+# database_config = YAML::load(File.open('config/database.yml'))
 
 before do
   ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
@@ -28,7 +24,8 @@ get '/foo' do
 end
 
 options '/*' do
-  response["Access-Control-Allow-Headers"] = "origin, x-requested-with, content-type"
+  response['Access-Control-Allow-Headers'] =
+    'origin, x-requested-with, content-type'
 end
 
 register Sinatra::CrossOrigin
@@ -41,47 +38,43 @@ get '/api/all-movies' do
   Movie.select(:id, :title).all.to_json
 end
 
-get '/api/movie-list' do
-  Movie.select(:id, :title).all.to_json
-end
-
 # These could probably be refactored to one function/call
 get '/api/genre/action' do
   action_movies = Movie.where(action: '1').all
-  action_id = action_movies.select('id')
-  action_movies = action_movies.select(
+  # action_id = action_movies.select('id')
+  action_movies.select(
     'id', 'title', 'release_date', 'url'
   ).to_json
 end
 
 get '/api/genre/horror' do
   horror_movies = Movie.where(horror: '1').all
-  horror_id = horror_movies.select('id')
-  horror_movies = horror_movies.select(
+  # horror_id = horror_movies.select('id')
+  horror_movies.select(
     'id', 'title', 'release_date', 'url'
   ).to_json
 end
 
 get '/api/genre/comedy' do
   comedy_movies = Movie.where(comedy: '1').all
-  comedy_id = comedy_movies.select('id')
-  comedy_movies = comedy_movies.select(
+  # comedy_id = comedy_movies.select('id')
+  comedy_movies.select(
     'id', 'title', 'release_date', 'url'
   ).to_json
 end
 
 get '/api/genre/fantasy' do
   fantasy_movies = Movie.where(fantasy: '1').all
-  fantasy_id = fantasy_movies.select('id')
-  fantasy_movies = fantasy_movies.select(
+  # fantasy_id = fantasy_movies.select('id')
+  fantasy_movies.select(
     'id', 'title', 'release_date', 'url'
   ).to_json
 end
 
 get '/api/genre/drama' do
   drama_movies = Movie.where(drama: '1').all
-  drama_id = drama_movies.select('id')
-  drama_movies = drama_movies.select(
+  # drama_id = drama_movies.select('id')
+  drama_movies.select(
     'id', 'title', 'release_date', 'url'
   ).to_json
 end
@@ -103,7 +96,7 @@ get '/api/avg-rating' do
   if !params['search'].nil?
     movie_info = Movie.where(id: params['search'])
     movie_data = movie_info[0]
-    movie_id = movie_data['id'].to_json
+    movie_data['id'].to_json
   end
 
   average_rating = Rating.where(
@@ -138,7 +131,7 @@ end
 #   # Rating.where(Movie.average('rating').round(2).to_json
 # end
 
-get '/api/test' do
+get '/api/search_title' do
   if !params['search'].nil?
     movie_data = Movie.where("title like (?)", "%#{params['search']}%")
     movie_info = movie_data[0]
@@ -154,11 +147,10 @@ get '/api/test' do
   end
 end
 
-
-  # average_rating = Rating.where(
-  #   movie_id: movie_info['id']
-  # ).average('rating').round(1).to_f.to_json
-  # p "#{movie_title} #{average_rating}"
+# get '/api/something' do
+# average_rating = Rating.where(
+#   movie_id: movie_info['id']
+# ).average('rating').round(1).to_f.to_json
 # end
 
 # enter a user ID and return all movie titles, ratings and movie id's.
@@ -201,14 +193,14 @@ get '/api/movies/all/:id' do
   movie_hash.to_json
 end
 
-get '/api/get_movies/:title' do |title|
-  movie_data = Movie.where(["title LIKE ?", "%#{params[:title]}%"])
+get '/api/get_movies/:title' do
+  movie_data = Movie.where(['title LIKE ?', "%#{params[:title]}%"])
   movie_info = movie_data[0]
 
   average_rating = Rating.select(:rating).where(movie_id: movie_info[:id]).average(:rating)
 
   top_users = Rating.all.where(movie_id: movie_info[:id]).where(rating: 5).limit(5)
 
-  payload = {'movie_info' => movie_info, 'rating' => average_rating.round(1), 'top_users' => top_users}
+  payload = {'movie_data' => movie_data, 'rating' => average_rating.round(1), 'top_users' => top_users}
   payload.to_json
 end
