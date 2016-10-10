@@ -40,7 +40,8 @@ function movieSearch(searchString) {
     var searchbar = $("#userInput").val("");
     $.ajax({
         "method": "GET",
-        "url": "/api/get_movies/" + encodeURIComponent(searchString),
+        // "url": "/api/get_movies/" + encodeURIComponent(searchString),
+        "url": 'https://shielded-taiga-96422.herokuapp.com/api/get_movies/' + encodeURIComponent(searchString),
         "data": {},
         "datatype": "json",
         "success": function(data) {
