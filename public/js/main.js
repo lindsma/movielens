@@ -37,7 +37,7 @@ $('#userInput').keypress(function(event) {
 //search bar requests
 function movieSearch(searchString) {
     var searchbar = $("#userInput").val("");
-    // var dataArray = [];
+    var dataArray = [];
     $.ajax({
         "method": "GET",
         "url": "/api/get_movies/" + encodeURIComponent(searchString),
@@ -47,8 +47,8 @@ function movieSearch(searchString) {
           dataArray.push(data);
           for (var index = 0 ; index < dataArray.length; index++) {
 
-            populateMovies(data[index]);
-          
+            populateMovies(dataArray[index]);
+
           }
         },
         "error": handleError
