@@ -35,7 +35,7 @@ configure do
 end
 
 get '/api/all-movies' do
-  Movie.select(:id, :title).all.to_json
+  Movie.select(:id, :title, :release_date, :url).all.to_json
 end
 
 # These could probably be refactored to one function/call
