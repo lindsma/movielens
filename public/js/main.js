@@ -37,19 +37,21 @@ $('#userInput').keypress(function(event) {
 //search bar requests
 function movieSearch(searchString) {
     var searchbar = $("#userInput").val("");
+    var dataArray = [];
     $.ajax({
         "method": "GET",
         "url": "/api/get_movies/" + encodeURIComponent(searchString),
         "data": {},
         "datatype": "json",
         "success": function(data) {
-          console.log(data.length);          
-          for (var key in data) {
-
-            var movieObject = data;
-            populateMovies(movieObject);
-
-          }
+          dataArray.push(data);
+          console.log(dataArray);
+          // for (var key in data) {
+          //
+          //   var movieObject = data;
+          //   populateMovies(movieObject);
+          //
+          // }
         },
         "error": handleError
     });
