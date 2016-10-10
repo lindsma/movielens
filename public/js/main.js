@@ -43,13 +43,14 @@ function movieSearch(searchString) {
         "success": function(data) {
             for (var index = 0; index < data.length; index++) {
                 var movieObject = data[index];
-                debugger;
-                populateMovies(movieObject);
+                // populateMovies(movieObject);
             }
         },
         "error": handleError
     });
-
+    console.log(movieObject);
+    console.log(this.movieObject);
+    populateMovies(movieObject);
 }
 
 //NavBar genre requests
@@ -62,13 +63,13 @@ function movieQuery(response) {
         "datatype": "json",
         "success": function(data) {
             for (var index = 0; index < data.length; index++) {
-                console.log(genre);
                 var movieObject = data[index];
             }
         },
         "error": handleError
     });
-
+    console.log(movieObject);
+    console.log(this.movieObject);
     populateMovies(movieObject);
 }
 
@@ -86,18 +87,18 @@ function movieQuery(response) {
 //
 // }
 
-    // $.ajax({
-    //     "method": "GET",
-    //     "url": "../api/avg-rating?search=" + encodeURIComponent(movieId),
-    //     "data": {},
-    //     "datatype": "json",
-    //     "success": function(data) {
-    //         var avgRating = data[0].average_rating;
-    //         populateMovies(movieObject, avgRating);
-    //         console.log(avgRating);
-    //     },
-    //     "error": handleError
-    // });
+// $.ajax({
+//     "method": "GET",
+//     "url": "../api/avg-rating?search=" + encodeURIComponent(movieId),
+//     "data": {},
+//     "datatype": "json",
+//     "success": function(data) {
+//         var avgRating = data[0].average_rating;
+//         populateMovies(movieObject, avgRating);
+//         console.log(avgRating);
+//     },
+//     "error": handleError
+// });
 
 
 // function getPoster(title) {
@@ -258,5 +259,6 @@ function populateErrors(errorObject) {
 // error handlers
 
 function handleError(errorObject, textStatus, error) {
-    populateErrors(errorObject);
+    $('#content').empty('');
+    populateErrors(textStatus);
 }
