@@ -34,14 +34,11 @@
 
     <script id="top20-template" type="text/x-handlebars-template">
         <div class="top20-container">
-            <h1 class="top20-header">Top Rated</h1>
+            <h1 class="top20-header">Flix of the Day</h1>
             <hr>
             <div class="top20-movie">
                 <ul class="movie-details">
                     <li class="movie-poster"><img class="movie-poster" src="{{moviePoster}}" /></li>
-                    <li><img src="styles/images/star_icon.png" alt="star rating icon" />
-                        <h3 class="avg-rating">{{rating}}</h3>
-                    </li>
                     <li><a href="#" class="overview">synopsis</a></li>
                     <li>
                         <h2 class="movie-title">{{movieTitle}}</h2></li>
@@ -69,10 +66,6 @@
                 <ul class="snapshot-list">
                     <li class="movie-title">
                         <h3 class="movie-title">{{movieTitle}}</h3></li>
-                    <li class="avg-rating">
-                        <p class="avg-rating">{{rating}}</p>
-                        <img src="styles/images/star_icon.png" alt="star rating icon" />
-                    </li>
                     <li class="expand-details">
                         <p class="expand-details" id="{{movieId}}">&#x21E9;</p>
                     </li>
@@ -80,16 +73,21 @@
             </div>
             <div class="movie-details {{movieId}}">
                 <ul class="items">
-                    <li class="item-detail release-date">released: {{releaseDate}}</li>
+                    <li class="item-detail release-date">released:<br> {{releaseDate}}</li>
                     <li class="movie-poster"><img class="movie-poster" src="{{moviePoster}}" alt="movie poster" /></li>
-                    <li class="item-detail genres">genre: {{genres}}</li>
                     <li class="item-detail overview">
                         <a href="{{overview}}">synopsis</a>
                     </li>
-                </ul>
-                <ul class="rating">
-                    <li class="star-1">
-                        <div class="star"></div>
+                    <li>
+                    <select class="rating" data-id="{{movieId}}">
+                      <option>rate movie</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="delete">delete</option>
+                    </select>
                     </li>
                 </ul>
             </div>
