@@ -11,7 +11,13 @@
 
 //After first keypress, this function takes over.
 
+<<<<<<< HEAD
 var $rows = $('#content');
+=======
+var movieObject = null;
+
+var $rows = $('.movies');
+>>>>>>> 1710e3c362f386a9c0cb152887442ac593b2c6d0
 $('#userInput').keyup(function() {
     var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
@@ -35,22 +41,24 @@ $('#userInput').keypress(function(event) {
 //search bar requests
 function movieSearch(searchString) {
     var searchbar = $("#userInput").val("");
+    var dataArray = [];
     $.ajax({
         "method": "GET",
         "url": "/api/get_movies/" + encodeURIComponent(searchString),
         "data": {},
         "datatype": "json",
         "success": function(data) {
-            for (var index = 0; index < data.length; index++) {
-                var movieObject = data[index];
-                // populateMovies(movieObject);
-            }
+          dataArray.push(data);
+          console.log(dataArray);
+          // for (var key in data) {
+          //
+          //   var movieObject = data;
+          //   populateMovies(movieObject);
+          //
+          // }
         },
         "error": handleError
     });
-    console.log(movieObject);
-    console.log(this.movieObject);
-    populateMovies(movieObject);
 }
 
 //NavBar genre requests
@@ -104,14 +112,11 @@ function getRating(movieObject) {
         "datatype": "json",
         "success": function(data) {
             for (var index = 0; index < data.length; index++) {
-                var movieObject = data[index];
+                populateMovies(data[index]);
             }
         },
         "error": handleError
     });
-    console.log(movieObject);
-    console.log(this.movieObject);
-    populateMovies(movieObject);
 }
 
 // function getRating(movieObject) {
@@ -297,18 +302,21 @@ function populateMovies(movieObject, avgRating) {
 >>>>>>> master
 =======
 function populateMovies(movieObject) {
+<<<<<<< HEAD
     $('#content').empty('');
 >>>>>>> master
+=======
+  console.log(movieObject);
+>>>>>>> 1710e3c362f386a9c0cb152887442ac593b2c6d0
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
-    var poster = getPoster(movieObject.title);
     var context = {
-        rating: movieObject.average_rating,
+        rating: movieObject.rating,
         // moviePoster: poster,
-        releaseDate: movieObject.release_date,
-        movieTitle: movieObject.title,
-        overview: movieObject.url,
-        movieId: movieObject.id
+        releaseDate: movieObject.movie_info.release_date,
+        movieTitle: movieObject.movie_info.title,
+        overview: movieObject.movie_info.url,
+        movieId: movieObject.movie_info.id
     };
     var html = template(context);
     $(html).insertAfter("#search");
