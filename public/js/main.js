@@ -110,7 +110,7 @@ function shuffle(data) {
        movieId: this.info.movieId,
      };
      var html = template(context);
-     $(html).insertAfter("#search");
+     $(html).prependTo("#content");
  };
  this.populate20(movieObject);
  }
@@ -261,3 +261,4 @@ function populateErrors(errorObject) {
     var html = template(context);
     $(html).prependTo("#content");
 }
+top20();
