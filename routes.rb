@@ -201,7 +201,7 @@ get '/api/movies/all/:id' do
   movie_hash.to_json
 end
 
-get '/api/movies/:title' do |title|
+get '/api/get_movies/:title' do |title|
   movie_data = Movie.where(["title LIKE ?", "%#{params[:title]}%"])
   movie_info = movie_data[0]
 
@@ -209,6 +209,6 @@ get '/api/movies/:title' do |title|
 
   top_users = Rating.all.where(movie_id: movie_info[:id]).where(rating: 5).limit(5)
 
-  payload = {'movie_info' => movie_info, 'rating' => rating, 'top_users' => top_users}
+  payload = {'movie_info' => movie_info, 'rating' => average_rating, 'top_users' => top_users}
   payload.to_json
 end
