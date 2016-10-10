@@ -34,20 +34,22 @@ $('#userInput').keypress(function(event) {
 
 //search bar requests
 function movieSearch(searchString) {
-  debugger;
     var searchbar = $("#userInput").val("");
     $.ajax({
         "method": "GET",
         "url": "/api/get_movies/" + encodeURIComponent(searchString),
         "data": {},
         "datatype": "json",
+        debugger,
         "success": function(data) {
             for (var index = 0; index < data.length; index++) {
-                populateMovies(data[index]);
+                var movieObject = data[index];
+                populateMovies(movieObject);
             }
         },
         "error": handleError
     });
+
 }
 
 //NavBar genre requests
