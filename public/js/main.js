@@ -48,7 +48,8 @@ function movieSearch(searchString) {
             console.log(data.rating);
             console.log(data.movie_info.release_date);
             console.log(data.movie_info.url);
-            populateMovies(data);
+            var movieObject = data;
+            populateMovies(movieObject);
         },
         "error": handleError
     });
@@ -210,6 +211,7 @@ $('#container').on('click', 'p.expand-details', function(event) {
 
 
 function populateMovies(movieObject) {
+  console.log(movieObject);
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var poster = getPoster(movieObject.title);
