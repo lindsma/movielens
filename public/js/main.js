@@ -44,7 +44,8 @@ function movieSearch(searchString) {
         "data": {},
         "datatype": "json",
         "success": function(data) {
-          console.log(data);
+          // var newObject = data[0];
+          console.log(data.movie_data);
         },
         "error": handleError
     });
