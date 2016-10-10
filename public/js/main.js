@@ -34,17 +34,22 @@ $('#userInput').keypress(function(event) {
 });
 
 
-//search bar requests
+// search bar requests
+
 function movieSearch(searchString) {
     var searchbar = $("#userInput").val("");
+<<<<<<< HEAD
   //  var dataArray = [];
+=======
+>>>>>>> master
     $.ajax({
         "method": "GET",
-        "url": "/api/get_movies/" + encodeURIComponent(searchString),
+        "url": "https://shielded-taiga-96422.herokuapp.com/api/get_movies/" + encodeURIComponent(searchString),
         "data": {},
         "datatype": "json",
         "success": function(data) {
           for (var index = 0; index < data.length; index++) {
+<<<<<<< HEAD
             new MovieDetails(data.results[index]);
               //populateMovies(data[index]);
           }
@@ -52,6 +57,59 @@ function movieSearch(searchString) {
       "error": handleError
   });
 }
+=======
+             return new MovieDetails(data.movie_data[index]);
+           }
+       },
+       "error": handleError
+   });
+ }
+
+
+
+// function movieSearch(searchString) {
+//    var searchbar = $("#userInput").val("");
+//  //  var dataArray = [];
+//    $.ajax({
+//        "method": "GET",
+//        "url": "/api/get_movies/" + encodeURIComponent(searchString),
+//        "data": {},
+//        "datatype": "json",
+//        "success": function(data) {
+//          for (var index = 0; index < data.length; index++) {
+//            return new MovieDetails(data.results[index]);
+//              //populateMovies(data[index]);
+//          }
+//      },
+//      "error": handleError
+//  });
+// }
+
+// function MovieDetails(movieObject) {
+//  console.log(movieObject);
+//  this.info = {
+//    movieId: movieObject.movie_info.id,
+//    title: movieObject.movie_info.title,
+//    overview: movieObject.movie_info.url,
+//    release: movieObject.movie_info.release_date,
+//    movieRating: movieObject.rating,
+//    poster: getposter(this.title)
+//  };
+//  console.log(movieObject);
+//    var source = $('#home-template').html();
+//    var template = Handlebars.compile(source);
+//    var context = {
+//        rating: this.movieRating,
+//         moviePoster: this.poster,
+//        releaseDate: this.release,
+//        movieTitle: this.title,
+//        overview: this.overview,
+//        movieId: this.movieId,
+//    };
+//    var html = template(context);
+//    $(html).insertAfter("#search");
+// }
+>>>>>>> master
 
 
 //NavBar genre requests
@@ -99,6 +157,7 @@ function movieQuery(response) {
 // });
 
 
+<<<<<<< HEAD
 function getPoster(title) {
     var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
     var titlePoster = title.substring(0, title.indexOf('('));
@@ -114,6 +173,23 @@ function getPoster(title) {
         return response.results[0].poster_path;
     });
 }
+=======
+// function getPoster(title) {
+//     var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
+//     var titlePoster = title.substring(0, title.indexOf('('));
+//     var settings = {
+//         "async": true,
+//         "crossDomain": true,
+//         "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
+//         "method": "GET",
+//         "processData": false,
+//         "data": "{}"
+//     };
+//     $.ajax(settings).done(function(response) {
+//         return response.results[0].poster_path;
+//     });
+// }
+>>>>>>> master
 
 
 // rate movie
@@ -208,6 +284,7 @@ $('#container').on('click', 'p.expand-details', function(event) {
 
 //Made a (probably pointless) constructor
 
+<<<<<<< HEAD
 function MovieDetails(movieObject) {
   console.log(movieObject);
   this.info = {
@@ -228,6 +305,19 @@ function MovieDetails(movieObject) {
         movieTitle: this.title,
         overview: this.overview,
         movieId: this.movieId,
+=======
+function populateMovies(movieObject) {
+    console.log(movieObject);
+    var source = $('#home-template').html();
+    var template = Handlebars.compile(source);
+    var context = {
+        rating: movieObject.rating,
+        // moviePoster: poster,
+        releaseDate: movieObject.movie_data.release_date,
+        movieTitle: movieObject.movie_data.title,
+        overview: movieObject.movie_data.url,
+        movieId: movieObject.movie_data.id
+>>>>>>> master
     };
     var html = template(context);
     $(html).insertAfter("#search");
