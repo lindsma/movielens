@@ -43,13 +43,12 @@ function movieSearch(searchString) {
         "data": {},
         "datatype": "json",
         "success": function(data) {
-            console.log("WOOT");
-            console.log(data.movie_info.title);
-            console.log(data.rating);
-            console.log(data.movie_info.release_date);
-            console.log(data.movie_info.url);
+          for (var key in obj) {
+            
             var movieObject = data;
             populateMovies(movieObject);
+
+          }
         },
         "error": handleError
     });
