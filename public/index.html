@@ -28,75 +28,74 @@
             <img src="styles/images/search_icon.png" class="search-icon" />
             <input id="userInput" type="text" placeholder="movie name...">
         </div>
-
         <div id="content">
-
-            <script id="home-template" type="text/x-handlebars-template">
-                <div class="movie-container">
-                    <div class="movie-snapshot">
-                        <ul class="snapshot-list">
-                            <li class="movie-title">
-                                <h3 class="movie-title">{{movieTitle}}</h3></li>
-                            <li class="avg-rating">
-                                <p class="avg-rating">{{rating}}</p>
-                                <img src="styles/images/star_icon.png" alt="star rating icon" />
-                            </li>
-                            <li class="expand-details">
-                                <p class="expand-details" id="{{movieId}}">&#x21E9;</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="movie-details {{movieId}}">
-                        <ul class="items">
-                            <li class="item-detail release-date">released: {{releaseDate}}</li>
-                            <li class="movie-poster"><img class="movie-poster" src="{{moviePoster}}" alt="movie poster" /></li>
-                            <li class="item-detail genres">genre: {{genres}}</li>
-                            <li class="item-detail overview">
-                                <a href="{{overview}}">synopsis</a>
-                            </li>
-                            <ul class="rating">
-                                <li class="star-1">
-                                    <div class="star"></div>
-                                </li>
-                            </ul>
-                    </div>
-                </div>
-            </script>
-
-            <script id="top20-template" type="text/x-handlebars-template">
-                <div class="top20-container">
-                    <h1 class="top20-header">Top Rated</h1>
-                    <hr>
-                    <div class="top20-movie">
-                        <ul class="movie-details">
-                            <li class="movie-poster"><img class="movie-poster" src="{{moviePoster}}" /></li>
-                            <li><img src="styles/images/star_icon.png" alt="star rating icon" />
-                                <h3 class="avg-rating">{{rating}}</h3>
-                            </li>
-                            <li><a href="#" class="overview">synopsis</a></li>
-                            <li>
-                                <h2 class="movie-title">{{movieTitle}}</h2></li>
-                        </ul>
-                    </div>
-                </div>
-            </script>
-
-            <script id="error-template" type="text/x-handlebars-template">
-                <div class="error-container">
-                    <ul class="error-list">
-                        <li class="error-image"><img src="styles/images/red_elephant_error.png" alt="elephant-error" /></li>
-                        <li class="error-header">
-                            <h1>{{errorType}}</h1></li>
-                        <li>
-                            <p class="error-message">{{errorMessage}}</p>
-                        </li>
-                    </ul>
-                </div>
-            </script>
         </div>
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script id="top20-template" type="text/x-handlebars-template">
+        <div class="top20-container">
+            <h1 class="top20-header">Top Rated</h1>
+            <hr>
+            <div class="top20-movie">
+                <ul class="movie-details">
+                    <li class="movie-poster"><img class="movie-poster" src="{{moviePoster}}" /></li>
+                    <li><img src="styles/images/star_icon.png" alt="star rating icon" />
+                        <h3 class="avg-rating">{{rating}}</h3>
+                    </li>
+                    <li><a href="#" class="overview">synopsis</a></li>
+                    <li>
+                        <h2 class="movie-title">{{movieTitle}}</h2></li>
+                </ul>
+            </div>
+        </div>
+    </script>
+
+    <script id="error-template" type="text/x-handlebars-template">
+        <div class="error-container">
+            <ul class="error-list">
+                <li class="error-image"><img src="styles/images/red_elephant_error.png" alt="elephant-error" /></li>
+                <li class="error-header">
+                    <h1>{{errorType}}</h1></li>
+                <li>
+                    <p class="error-message">{{errorMessage}}</p>
+                </li>
+            </ul>
+        </div>
+    </script>
+
+    <script id="home-template" type="text/x-handlebars-template">
+        <div class="movie-container">
+            <div class="movie-snapshot">
+                <ul class="snapshot-list">
+                    <li class="movie-title">
+                        <h3 class="movie-title">{{movieTitle}}</h3></li>
+                    <li class="avg-rating">
+                        <p class="avg-rating">{{rating}}</p>
+                        <img src="styles/images/star_icon.png" alt="star rating icon" />
+                    </li>
+                    <li class="expand-details">
+                        <p class="expand-details" id="{{movieId}}">&#x21E9;</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="movie-details {{movieId}}">
+                <ul class="items">
+                    <li class="item-detail release-date">released: {{releaseDate}}</li>
+                    <li class="movie-poster"><img class="movie-poster" src="{{moviePoster}}" alt="movie poster" /></li>
+                    <li class="item-detail genres">genre: {{genres}}</li>
+                    <li class="item-detail overview">
+                        <a href="{{overview}}">synopsis</a>
+                    </li>
+                  </ul>
+                    <ul class="rating">
+                        <li class="star-1">
+                            <div class="star"></div>
+                        </li>
+                    </ul>
+            </div>
+        </div>
+    </script>
+
     <script src="js/jquery.js"></script>
     <script src="js/handlebars.js"></script>
     <script src="js/main.js"></script>
