@@ -99,7 +99,7 @@ get '/api/avg-rating' do
     movie_data['id'].to_json
   end
 
-  average_rating = Rating.where(
+  Rating.where(
     movie_id: params['search']
   ).average('rating').round(1).to_json
 end
@@ -193,14 +193,19 @@ get '/api/movies/all/:id' do
   movie_hash.to_json
 end
 
+# main function for getting all movie info by title search
 get '/api/get_movies/:title' do
   movie_data = Movie.where(['title LIKE ?', "%#{params[:title]}%"])
   movie_info = movie_data[0]
 
-  average_rating = Rating.select(:rating).where(movie_id: movie_info[:id]).average(:rating)
+  average_rating = Rating.select(:rating).where(
+    movie_id: movie_info[:id]
+  ).average(:rating)
 
-  top_users = Rating.all.where(movie_id: movie_info[:id]).where(rating: 5).limit(5)
+  top_users = Rating.all.where(
+    movie_id: movie_info[:id]
+  ).where(rating: 5).limit(5)
 
-  payload = {'movie_data' => movie_data, 'rating' => average_rating.round(1), 'top_users' => top_users}
-  payload.to_json
+  movies_rating_and_users = { 'movie_data' => movie_data, 'rating' => average_rating.round(1), 'top_users' => top_users }
+  movies_rating_and_users.to_json
 end
