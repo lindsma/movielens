@@ -30,20 +30,21 @@ function movieSearch(searchString) {
 //NavBar genre requests
 
 function movieQuery(response) {
-  $.ajax({
-    "method": "GET",
-    "url": 'https://shielded-taiga-96422.herokuapp.com/api/genre/' + response,
-    "data": {},
-    "datatype": "json",
-    "success": function(data) {
-      for (var index = 0; index < 20; index++) {
-        console.log(data[index]);
-        new MovieDetails(data[index]);
-      }
-    },
-    "error": handleError
-  });
+    $.ajax({
+        "method": "GET",
+        "url": 'https://shielded-taiga-96422.herokuapp.com/api/genre/' + response,
+        "data": {},
+        "datatype": "json",
+        "success": function(data) {
+            for (var index = 0; index < 20; index++) {
+                new MovieDetails(data[index]);
+            }
+        },
+        "error": handleError
+    });
 }
+
+// movie object constructer
 
 function MovieDetails(movieObject) {
     this.info = {
@@ -51,8 +52,8 @@ function MovieDetails(movieObject) {
         title: movieObject.title,
         overview: movieObject.url,
         release: movieObject.release_date
-        //movieRating: movieObject.rating,
-        //  poster: getposter(this.title, this)
+            //movieRating: movieObject.rating,
+            //  poster: getposter(this.title, this)
     };
     this.MagicElements = function(movieObject) {
         var source = $('#home-template').html();
@@ -66,13 +67,13 @@ function MovieDetails(movieObject) {
             movieId: this.info.movieId,
         };
         var html = template(context);
-        $(html).insertAfter("#search");
+        $(html).prependTo("#content");
     };
     this.MagicElements(movieObject);
 }
 
 
-
+// get poster from the movie database
 
 function getPoster(title) {
     var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
@@ -130,17 +131,15 @@ $('.navBar').on('click', '.genre', function(event) {
     $(this).siblings(".genre").removeClass("active");
     $(this).toggleClass('active');
     var currentTab = $(this).attr('id');
-    $('#content').empty('');
+    $('#content').empty();
     movieQuery(currentTab);
-
 });
 
 // click on header to go back to main page
 
 $('header').click(function(event) {
+    $("#content").empty();
     $('.genre').removeClass('active');
-    $('.top20-container').removeClass('hidden');
-    $('.movie-container').addClass('hidden');
 });
 
 // click on arrow down to expand movie details
@@ -151,7 +150,15 @@ $('#container').on('click', 'p.expand-details', function(event) {
     $('.' + movieId).toggleClass('active');
 });
 
-// implement handlebars - home-template
+// error handlers
+
+function handleError(errorObject, textStatus, error) {
+    $('#content').empty();
+    console.log(errorObject);
+    populateErrors(errorObject.status);
+}
+
+// implement handlebars - genre and movie search result template
 
 function populateMovies(movieObject) {
     console.log(movieObject);
@@ -185,6 +192,8 @@ function populateTop20(movieObject) {
     $(html).insertAfter("#search");
 }
 
+// implement handlebars - error template
+
 function populateErrors(errorObject) {
     var source = $('#error-template').html();
     var template = Handlebars.compile(source);
@@ -193,13 +202,5 @@ function populateErrors(errorObject) {
         errorMessage: "Oh s*&%! Try again.",
     };
     var html = template(context);
-    $(html).insertAfter("#search");
-}
-
-// error handlers
-
-function handleError(errorObject, textStatus, error) {
-    $('#content').empty('');
-    console.log(errorObject);
-    populateErrors(errorObject.status);
+    $(html).prependTo("#content");
 }
