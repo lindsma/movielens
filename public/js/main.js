@@ -37,7 +37,7 @@ function movieSearch(searchString) {
     var searchbar = $("#userInput").val("");
     $.ajax({
         "method": "GET",
-        "url": "/api/movies?search=" + encodeURIComponent(searchString),
+        "url": "/api/movies/" + encodeURIComponent(searchString),
         "data": {},
         "datatype": "json",
         "success": function(data) {
@@ -49,7 +49,6 @@ function movieSearch(searchString) {
 }
 
 //NavBar genre requests
-
 
 function movieQuery(response) {
     $.ajax({
@@ -69,19 +68,19 @@ function movieQuery(response) {
     getRating(movieObject);
 }
 
-function getRating(movieObject) {
-
-    var movieId = movieObject.id;
-
-    console.log(movieId);
-
-    $.get('../api/avg-rating?search=' + encodeURIComponent(movieId), function(response) {
-        var avgRating = response[0].average_rating;
-    });
-    console.log(avgRating);
-    populateMovies(movieObject, avgRating);
-
-}
+// function getRating(movieObject) {
+//
+//     var movieId = movieObject.id;
+//
+//     console.log(movieId);
+//
+//     $.get('../api/avg-rating?search=' + encodeURIComponent(movieId), function(response) {
+//         var avgRating = response[0].average_rating;
+//     });
+//     console.log(avgRating);
+//     populateMovies(movieObject, avgRating);
+//
+// }
 
     // $.ajax({
     //     "method": "GET",
@@ -97,21 +96,21 @@ function getRating(movieObject) {
     // });
 
 
-function getPoster(title) {
-    var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
-    var titlePoster = title.substring(0, title.indexOf('('));
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
-        "method": "GET",
-        "processData": false,
-        "data": "{}"
-    };
-    $.ajax(settings).done(function(response) {
-        return response.results[0].poster_path;
-    });
-}
+// function getPoster(title) {
+//     var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
+//     var titlePoster = title.substring(0, title.indexOf('('));
+//     var settings = {
+//         "async": true,
+//         "crossDomain": true,
+//         "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
+//         "method": "GET",
+//         "processData": false,
+//         "data": "{}"
+//     };
+//     $.ajax(settings).done(function(response) {
+//         return response.results[0].poster_path;
+//     });
+// }
 
 
 // rate movie
@@ -145,11 +144,6 @@ function deleteRating(movieId) {
         }
     });
 }
-
-
-
-
-
 
 //If we're awesome, we'll get the movie title from fitch's database, then
 //use it to search the movie database for a movie poster.
@@ -211,16 +205,15 @@ $('#container').on('click', 'p.expand-details', function(event) {
 // implement handlebars - home-template
 
 
-function populateMovies(movieObject, avgRating) {
+function populateMovies(movieObject) {
     $('#content').empty('');
-    console.log(avgRating);
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var poster = getPoster(movieObject.title);
     var context = {
-        rating: avgRating,
-        moviePoster: poster,
-        // moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
+        rating: movieObject.average_rating,
+        // moviePoster: poster,
+        releaseDate: movieObject.release_date,
         movieTitle: movieObject.title,
         overview: movieObject.url
     };
@@ -231,14 +224,13 @@ function populateMovies(movieObject, avgRating) {
 
 // implement handlebars - top20-template
 
-function populateTop20() {
+function populateTop20(movieObject) {
     var source = $('#top20-template').html();
     var template = Handlebars.compile(source);
     var poster = this.poster_path;
     var context = {
-        rating: avgRating,
-        moviePoster: poster,
-        // moviePoster: "https://image.tmdb.org/t/p/w600_and_h900_bestv2/l1yltvzILaZcx2jYvc5sEMkM7Eh.jpg",
+        rating: movieObject.average_rating,
+        // moviePoster: poster,
         movieTitle: movieObject.title,
         overview: movieObject.url
     };
@@ -262,24 +254,3 @@ function populateErrors(errorObject) {
 function handleError(errorObject, textStatus, error) {
     populateErrors(errorObject);
 }
-
-// get Avg rating
-
-// function getAvgRating(movieObject) {
-//     var movieId = movieObject.id;
-//     $.ajax({
-//         "method": "GET",
-//         "url": "../api/avg-rating?search=" + movieId,
-//         "data": {},
-//         "datatype": "json",
-//         "success": function(data) {
-//           var avgRating = data.average_rating;
-//           populateMovies(avgRating);
-//         }
-//     });
-// }
-
-// handleError();
-// populateMovies();
-//movieQuery("horror");
-// populateTop20();
