@@ -37,7 +37,7 @@ $('#userInput').keypress(function(event) {
 //search bar requests
 function movieSearch(searchString) {
     var searchbar = $("#userInput").val("");
-    var dataArray = [];
+    // var dataArray = [];
     $.ajax({
         "method": "GET",
         "url": "/api/get_movies/" + encodeURIComponent(searchString),
@@ -45,13 +45,11 @@ function movieSearch(searchString) {
         "datatype": "json",
         "success": function(data) {
           dataArray.push(data);
-          console.log(dataArray);
-          // for (var key in data) {
-          //
-          //   var movieObject = data;
-          //   populateMovies(movieObject);
-          //
-          // }
+          for (var index = 0 ; index < dataArray.length; index++) {
+
+            populateMovies(data[index]);
+          
+          }
         },
         "error": handleError
     });
