@@ -44,11 +44,9 @@ function movieSearch(searchString) {
         "data": {},
         "datatype": "json",
         "success": function(data) {
-          for (var index = 0; index < 20; index++) {      
-            console.log(data.movie_data[0]);
-            console.log(data.movie_data[0][index]);
-          populateMovies(data.movie_data[0][index]);
-        }
+            for (var index = 0; index < 20; index++) {
+                populateMovies(data.movie_data[index]);
+            }
         },
         "error": handleError
     });
