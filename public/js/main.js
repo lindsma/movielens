@@ -38,19 +38,15 @@ $('#userInput').keypress(function(event) {
 
 function movieSearch(searchString) {
     var searchbar = $("#userInput").val("");
-    var dataArray = [];
     $.ajax({
             "method": "GET",
             "url": "/api/get_movies/" + encodeURIComponent(searchString),
             "data": {},
             "datatype": "json",
             "success": function(data) {
-              console.log(data);
-
-                // dataArray.push(data);
-                // for (var index = 0 ; index < dataArray.length; index++) {
-                //   populateMovies(dataArray[index]);
-                // }
+                for (var index = 0 ; index < data.length; index++) {
+                  populateMovies(data[index]);
+                }
               },
         "error": handleError
     });
