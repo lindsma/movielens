@@ -44,16 +44,11 @@ function movieSearch(searchString) {
         "datatype": "json",
         "success": function(data) {
             for (var index = 0; index < data.length; index++) {
-                return data[index];
-                // populateMovies(movieObject);
+                populateMovies(data[index]);
             }
         },
         "error": handleError
     });
-
-    movieObject = data[index];
-    console.log(movieObject);
-    populateMovies(movieObject);
 }
 
 //NavBar genre requests
@@ -66,14 +61,11 @@ function movieQuery(response) {
         "datatype": "json",
         "success": function(data) {
             for (var index = 0; index < data.length; index++) {
-                var movieObject = data[index];
+                populateMovies(data[index]);
             }
         },
         "error": handleError
     });
-    console.log(movieObject);
-    console.log(this.movieObject);
-    populateMovies(movieObject);
 }
 
 // function getRating(movieObject) {
