@@ -7,17 +7,13 @@
 //         movieSearch(searchString);
 //     }
 // });
-
+//
 
 //After first keypress, this function takes over.
 
-<<<<<<< HEAD
-var $rows = $('#content');
-=======
 var movieObject = null;
 
 var $rows = $('.movies');
->>>>>>> 1710e3c362f386a9c0cb152887442ac593b2c6d0
 $('#userInput').keyup(function() {
     var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
 
@@ -32,79 +28,79 @@ $('#userInput').keyup(function() {
 $('#userInput').keypress(function(event) {
     var searchString = $('#userInput').val();
     if (event.which == 13) {
-          movieSearch(searchString);
+        movieSearch(searchString);
         return false;
     }
 });
 
 
-//search bar requests
+// search bar requests
+
 function movieSearch(searchString) {
     var searchbar = $("#userInput").val("");
-    var dataArray = [];
     $.ajax({
         "method": "GET",
-        "url": "/api/get_movies/" + encodeURIComponent(searchString),
+        "url": "https://shielded-taiga-96422.herokuapp.com/api/get_movies/" + encodeURIComponent(searchString),
         "data": {},
         "datatype": "json",
         "success": function(data) {
-          dataArray.push(data);
-          console.log(dataArray);
-          // for (var key in data) {
-          //
-          //   var movieObject = data;
-          //   populateMovies(movieObject);
-          //
-          // }
-        },
-        "error": handleError
-    });
-}
-
-//NavBar genre requests
-
-function movieQuery(response) {
-<<<<<<< HEAD
-   $.ajax({
-       "method": "GET",
-       "url": "../api/genre/" + response,
-       "data": {},
-       "datatype": "json",
-       "success": function(data) {
-           for (var index = 0; index < data.length; index++) {
-               var movieObject = data[index];
+          for (var index = 0; index < data.length; index++) {
+             return new MovieDetails(data.movie_data[index]);
            }
        },
        "error": handleError
    });
+ }
 
- getRating(movieObject);
-}
 
-function getRating(movieObject) {
 
- var movieId = movieObject.id;
+// function movieSearch(searchString) {
+//    var searchbar = $("#userInput").val("");
+//  //  var dataArray = [];
+//    $.ajax({
+//        "method": "GET",
+//        "url": "/api/get_movies/" + encodeURIComponent(searchString),
+//        "data": {},
+//        "datatype": "json",
+//        "success": function(data) {
+//          for (var index = 0; index < data.length; index++) {
+//            return new MovieDetails(data.results[index]);
+//              //populateMovies(data[index]);
+//          }
+//      },
+//      "error": handleError
+//  });
+// }
 
- console.log(movieId);
+// function MovieDetails(movieObject) {
+//  console.log(movieObject);
+//  this.info = {
+//    movieId: movieObject.movie_info.id,
+//    title: movieObject.movie_info.title,
+//    overview: movieObject.movie_info.url,
+//    release: movieObject.movie_info.release_date,
+//    movieRating: movieObject.rating,
+//    poster: getposter(this.title)
+//  };
+//  console.log(movieObject);
+//    var source = $('#home-template').html();
+//    var template = Handlebars.compile(source);
+//    var context = {
+//        rating: this.movieRating,
+//         moviePoster: this.poster,
+//        releaseDate: this.release,
+//        movieTitle: this.title,
+//        overview: this.overview,
+//        movieId: this.movieId,
+//    };
+//    var html = template(context);
+//    $(html).insertAfter("#search");
+// }
 
- $.ajax({
-     "method": "GET",
-     "url": "../api/avg-rating?search=" + encodeURIComponent(movieId),
-     "data": {},
-     "datatype": "json",
-     "success": function(data) {
-         var avgRating = data[0].average_rating;
-         populateMovies(movieObject, avgRating);
-         console.log(avgRating);
-     },
-     "error": handleError
- });
- console.log(avgRating);
- populateMovies(movieObject, avgRating);
 
-}
-    function getPoster(title) {
-=======
+//NavBar genre requests
+
+function movieQuery(response) {
     $.ajax({
         "method": "GET",
         "url": "../api/genre/" + response,
@@ -133,38 +129,6 @@ function getRating(movieObject) {
 //
 // }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-function getPoster(title) {
->>>>>>> master
-    var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
-    var titlePoster = title.substring(0, title.indexOf('('));
-    var settings = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
-        "method": "GET",
-        "processData": false,
-        "data": "{}"
-    };
-    $.ajax(settings).done(function(response) {
-        return response.results[0].poster_path;
-    });
-}
-=======
-    // $.ajax({
-    //     "method": "GET",
-    //     "url": "../api/avg-rating?search=" + encodeURIComponent(movieId),
-    //     "data": {},
-    //     "datatype": "json",
-    //     "success": function(data) {
-    //         var avgRating = data[0].average_rating;
-    //         populateMovies(movieObject, avgRating);
-    //         console.log(avgRating);
-    //     },
-    //     "error": handleError
-    // });
-=======
 // $.ajax({
 //     "method": "GET",
 //     "url": "../api/avg-rating?search=" + encodeURIComponent(movieId),
@@ -177,7 +141,6 @@ function getPoster(title) {
 //     },
 //     "error": handleError
 // });
->>>>>>> ec72717b0d434108a6c76140583458e05c11c3b7
 
 
 // function getPoster(title) {
@@ -195,7 +158,6 @@ function getPoster(title) {
 //         return response.results[0].poster_path;
 //     });
 // }
->>>>>>> master
 
 
 // rate movie
@@ -235,7 +197,6 @@ function deleteRating(movieId) {
 
 /**var apiKey =  'aecec41c5b24a3cdd29ce5c1491c5040';
 var poster;
-
  var settings = {
    "async": true,
    "crossDomain": true,
@@ -248,7 +209,6 @@ var poster;
     poster = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2' + response.results[0].poster_path;
  });
 console.log(poster);
-
 **/
 
 
@@ -291,32 +251,17 @@ $('#container').on('click', 'p.expand-details', function(event) {
 // implement handlebars - home-template
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 function populateMovies(movieObject) {
-    $('#content').empty('');
-=======
-function populateMovies(movieObject, avgRating) {
-    $('#content').empty('');
-    console.log(avgRating);
->>>>>>> master
-=======
-function populateMovies(movieObject) {
-<<<<<<< HEAD
-    $('#content').empty('');
->>>>>>> master
-=======
-  console.log(movieObject);
->>>>>>> 1710e3c362f386a9c0cb152887442ac593b2c6d0
+    console.log(movieObject);
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var context = {
         rating: movieObject.rating,
         // moviePoster: poster,
-        releaseDate: movieObject.movie_info.release_date,
-        movieTitle: movieObject.movie_info.title,
-        overview: movieObject.movie_info.url,
-        movieId: movieObject.movie_info.id
+        releaseDate: movieObject.movie_data.release_date,
+        movieTitle: movieObject.movie_data.title,
+        overview: movieObject.movie_data.url,
+        movieId: movieObject.movie_data.id
     };
     var html = template(context);
     $(html).insertAfter("#search");
