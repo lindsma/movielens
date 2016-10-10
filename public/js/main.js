@@ -44,8 +44,9 @@ function movieSearch(searchString) {
         "data": {},
         "datatype": "json",
         "success": function(data) {
-          // var newObject = data[0];
-          console.log(data.movie_data);
+          for (var index = 0; index < 20; index++) {
+          populateMovies(data.movie_data[0][index]);
+        }
         },
         "error": handleError
     });
@@ -255,12 +256,12 @@ function populateMovies(movieObject) {
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var context = {
-        rating: movieObject.rating,
+        // rating: movieObject.rating,
         // moviePoster: poster,
-        releaseDate: movieObject.movie_data.release_date,
-        movieTitle: movieObject.movie_data.title,
-        overview: movieObject.movie_data.url,
-        movieId: movieObject.movie_data.id
+        releaseDate: movieObject.release_date,
+        movieTitle: movieObject.title,
+        overview: movieObject.url,
+        movieId: movieObject.id
     };
     var html = template(context);
     $(html).insertAfter("#search");
