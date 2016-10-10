@@ -214,7 +214,6 @@ function populateMovies(movieObject) {
   console.log(movieObject);
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
-    var poster = getPoster(movieObject.title);
     var context = {
         rating: movieObject.rating,
         // moviePoster: poster,
