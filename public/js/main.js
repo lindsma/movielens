@@ -45,7 +45,8 @@ function movieSearch(searchString) {
         "success": function(data) {
             console.log("WOOT");
             for (var index = 0; index < data.length; index++) {
-                populateMovies(data[index]);
+              console.log(data);
+                // populateMovies(data[index]);
             }
         },
         "error": handleError
