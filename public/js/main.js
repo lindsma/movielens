@@ -27,17 +27,33 @@ function movieSearch(searchString) {
     });
 }
 
+//NavBar genre requests
+
+function movieQuery(response) {
+  $.ajax({
+    "method": "GET",
+    "url": 'https://shielded-taiga-96422.herokuapp.com/api/genre/' + response,
+    "data": {},
+    "datatype": "json",
+    "success": function(data) {
+      for (var index = 0; index < 20; index++) {
+        console.log(data[index]);
+        new MovieDetails(data[index]);
+      }
+    },
+    "error": handleError
+  });
+}
+
 function MovieDetails(movieObject) {
-    console.log(movieObject);
     this.info = {
         movieId: movieObject.id,
         title: movieObject.title,
         overview: movieObject.url,
-        release: movieObject.release_date,
+        release: movieObject.release_date
         //movieRating: movieObject.rating,
         //  poster: getposter(this.title, this)
     };
-    console.log(movieObject);
     this.MagicElements = function(movieObject) {
         var source = $('#home-template').html();
         var template = Handlebars.compile(source);
@@ -56,22 +72,6 @@ function MovieDetails(movieObject) {
 }
 
 
-//NavBar genre requests
-
-function movieQuery(response) {
-    $.ajax({
-        "method": "GET",
-        "url": 'https://shielded-taiga-96422.herokuapp.com/api/genre' + response,
-        "data": {},
-        "datatype": "json",
-        "success": function(data) {
-            for (var index = 0; index < data.length; index++) {
-                new MovieDetails(data.movie_data[index]);
-            }
-        },
-        "error": handleError
-    });
-}
 
 
 function getPoster(title) {
@@ -200,5 +200,6 @@ function populateErrors(errorObject) {
 
 function handleError(errorObject, textStatus, error) {
     $('#content').empty('');
-    populateErrors(textStatus);
+    console.log(errorObject);
+    populateErrors(errorObject.status);
 }
