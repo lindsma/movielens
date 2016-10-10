@@ -2,6 +2,11 @@
     width: 50%;
     margin: 0 auto;
     font-family: $primaryFont;
+    overflow: hidden;
+    @include media(mobile) {
+        font-size: 20px;
+        width: 60%;
+    }
 
     &.hidden {
         display: none;
@@ -13,9 +18,10 @@
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         display: block;
         overflow: auto;
-
-        &:nth-child(even) {
-            background: #D3D3D3;
+        @include media(mobile) {
+            margin-left: auto;
+            margin-right: auto;
+            width: 90%;
         }
 
         ul {
@@ -32,31 +38,11 @@
                 width: 60%;
                 margin-left: 20px;
                 line-height: 100%;
-
+                @include media(desktop) {
+                    font-size: 26px;
+                }
                 @include media(mobile) {
-                  font-size: 24px;
-                }
-            }
-
-            &.avg-rating {
-                font-size: 25px;
-                border: 1px solid #red;
-                width: 20%;
-                margin-left: 0;
-                margin-top: 15px;
-                display: inline;
-                text-align: right;
-
-                p {
-                    float: left;
-                    text-align: right;
-                    width: 75%;
-                }
-
-                img {
-                    height: 25px;
-                    line-height: 80px;
-                    margin-left: 6px;
+                    font-size: 24px;
                 }
             }
 
@@ -67,7 +53,7 @@
                 width: 40px;
                 text-align: center;
                 float: right;
-                margin-right: 30px;
+                margin-right: 20px;
 
                 p {
                     line-height: 40px;
@@ -92,6 +78,13 @@
         border-left: 2px solid #333;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         overflow: auto;
+        @include media(mobile) {
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 0 0 10px;
+            font-size: 18px;
+        }
 
         &.active {
             display: block;
@@ -105,14 +98,18 @@
                 float: left;
                 width: 60%;
 
+                .release_date {
+                    line-height: 40px;
+                }
+
+                select.rating {
+                    margin-top: 30px;
+                }
+
                 &.movie-poster {
                     width: 40%;
                     float: right;
                     padding-left: 20%;
-                }
-
-                &.rating {
-                    padding-top: 15px;
                 }
             }
 
@@ -120,5 +117,6 @@
                 height: 150px;
             }
         }
+
     }
 }

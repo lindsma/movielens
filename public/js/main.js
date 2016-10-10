@@ -158,24 +158,6 @@ function handleError(errorObject, textStatus, error) {
     populateErrors(errorObject.status);
 }
 
-// implement handlebars - genre and movie search result template
-
-function populateMovies(movieObject) {
-    console.log(movieObject);
-    var source = $('#home-template').html();
-    var template = Handlebars.compile(source);
-    var context = {
-        // rating: movieObject.rating,
-        // moviePoster: poster,
-        releaseDate: movieObject.release_date,
-        movieTitle: movieObject.title,
-        overview: movieObject.url,
-        movieId: movieObject.id
-    };
-    var html = template(context);
-    $(html).insertAfter("#search");
-}
-
 // implement handlebars - top20-template
 
 function populateTop20(movieObject) {
