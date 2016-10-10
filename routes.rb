@@ -38,7 +38,7 @@ get '/api/all-movies' do
   Movie.select(:id, :title).all.to_json
 end
 
-# These genre functions could probably be refactored to one function/call
+# These could probably be refactored to one function/call
 get '/api/genre/action' do
   action_movies = Movie.where(action: '1').all
   # action_id = action_movies.select('id')

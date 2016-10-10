@@ -1,28 +1,3 @@
-// On first keypress, ajax search request is made.
-
-// $('#userInput').on("keyup", function(event) {
-//     if ($('#userInput').val().length > 2) {
-//         event.preventDefault();
-//         var searchString = $('#userInput').val();
-//         movieSearch(searchString);
-//     }
-// });
-//
-
-//After first keypress, this function takes over.
-
-var movieObject = null;
-
-var $rows = $('.movies');
-$('#userInput').keyup(function() {
-    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
-
-    $rows.show().filter(function() {
-        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-        return !~text.indexOf(val);
-    }).hide();
-});
-
 //if enter is pressed, the specific movie is searched
 
 $('#userInput').keypress(function(event) {
@@ -32,7 +7,6 @@ $('#userInput').keypress(function(event) {
         return false;
     }
 });
-
 
 // search bar requests
 
@@ -44,6 +18,7 @@ function movieSearch(searchString) {
 >>>>>>> master
     $.ajax({
         "method": "GET",
+<<<<<<< HEAD
         "url": "https://shielded-taiga-96422.herokuapp.com/api/get_movies/" + encodeURIComponent(searchString),
         "data": {},
         "datatype": "json",
@@ -66,6 +41,7 @@ function movieSearch(searchString) {
  }
 
 
+<<<<<<< HEAD
 
 // function movieSearch(searchString) {
 //    var searchbar = $("#userInput").val("");
@@ -118,17 +94,24 @@ function movieQuery(response) {
     $.ajax({
         "method": "GET",
         "url": "../api/genre/" + response,
+=======
+=======
+        // "url": "/api/get_movies/" + encodeURIComponent(searchString),
+        "url": 'https://shielded-taiga-96422.herokuapp.com/api/get_movies/' + encodeURIComponent(searchString),
+>>>>>>> master
         "data": {},
         "datatype": "json",
         "success": function(data) {
-            for (var index = 0; index < data.length; index++) {
-                populateMovies(data[index]);
+            for (var index = 0; index < 20; index++) {
+                new MovieDetails(data.movie_data[index]);
             }
         },
         "error": handleError
     });
 }
+>>>>>>> ada625909fc44e236646ac2809d4d31a3e546acf
 
+<<<<<<< HEAD
 // function getRating(movieObject) {
 //
 //     var movieId = movieObject.id;
@@ -190,7 +173,70 @@ function getPoster(title) {
 //     });
 // }
 >>>>>>> master
+=======
+//NavBar genre requests
+>>>>>>> master
 
+function movieQuery(response) {
+  $.ajax({
+    "method": "GET",
+    "url": 'https://shielded-taiga-96422.herokuapp.com/api/genre/' + response,
+    "data": {},
+    "datatype": "json",
+    "success": function(data) {
+      for (var index = 0; index < 20; index++) {
+        console.log(data[index]);
+        new MovieDetails(data[index]);
+      }
+    },
+    "error": handleError
+  });
+}
+
+function MovieDetails(movieObject) {
+    this.info = {
+        movieId: movieObject.id,
+        title: movieObject.title,
+        overview: movieObject.url,
+        release: movieObject.release_date
+        //movieRating: movieObject.rating,
+        //  poster: getposter(this.title, this)
+    };
+    this.MagicElements = function(movieObject) {
+        var source = $('#home-template').html();
+        var template = Handlebars.compile(source);
+        var context = {
+            //rating: this.info.movieRating,
+            // moviePoster: this.info.poster,
+            releaseDate: this.info.release,
+            movieTitle: this.info.title,
+            overview: this.info.overview,
+            movieId: this.info.movieId,
+        };
+        var html = template(context);
+        $(html).insertAfter("#search");
+    };
+    this.MagicElements(movieObject);
+}
+
+
+
+
+function getPoster(title) {
+    var apiKey = 'aecec41c5b24a3cdd29ce5c1491c5040';
+    var titlePoster = title.substring(0, title.indexOf('('));
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.themoviedb.org/3/search/movie?query=" + encodeURIComponent(titlePoster) + "&api_key=" + apiKey,
+        "method": "GET",
+        "processData": false,
+        "data": "{}"
+    };
+    $.ajax(settings).done(function(response) {
+        return response.results[0].poster_path;
+    });
+}
 
 // rate movie
 
@@ -224,6 +270,7 @@ function deleteRating(movieId) {
     });
 }
 
+<<<<<<< HEAD
 //If we're awesome, we'll get the movie title from fitch's database, then
 //use it to search the movie database for a movie poster.
 
@@ -244,6 +291,8 @@ console.log(poster);
 **/
 
 
+=======
+>>>>>>> ada625909fc44e236646ac2809d4d31a3e546acf
 // toggle classes
 
 // click on genre, populate with genre movies
@@ -255,13 +304,6 @@ $('.navBar').on('click', '.genre', function(event) {
     $('#content').empty('');
     movieQuery(currentTab);
 
-});
-// error template testing !!!!!!!!!!!!
-
-$('.search-icon').click(function(event) {
-    $('.top20-container').addClass('hidden');
-    $('.movie-container').addClass('hidden');
-    $('.error-container').removeClass('hidden');
 });
 
 // click on header to go back to main page
@@ -282,6 +324,7 @@ $('#container').on('click', 'p.expand-details', function(event) {
 
 // implement handlebars - home-template
 
+<<<<<<< HEAD
 //Made a (probably pointless) constructor
 
 <<<<<<< HEAD
@@ -306,23 +349,31 @@ function MovieDetails(movieObject) {
         overview: this.overview,
         movieId: this.movieId,
 =======
+=======
+>>>>>>> master
 function populateMovies(movieObject) {
     console.log(movieObject);
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var context = {
-        rating: movieObject.rating,
+        // rating: movieObject.rating,
         // moviePoster: poster,
+<<<<<<< HEAD
         releaseDate: movieObject.movie_data.release_date,
         movieTitle: movieObject.movie_data.title,
         overview: movieObject.movie_data.url,
         movieId: movieObject.movie_data.id
 >>>>>>> master
+=======
+        releaseDate: movieObject.release_date,
+        movieTitle: movieObject.title,
+        overview: movieObject.url,
+        movieId: movieObject.id
+>>>>>>> master
     };
     var html = template(context);
     $(html).insertAfter("#search");
 }
-
 
 // implement handlebars - top20-template
 
@@ -355,5 +406,11 @@ function populateErrors(errorObject) {
 
 function handleError(errorObject, textStatus, error) {
     $('#content').empty('');
+<<<<<<< HEAD
     populateErrors(textStatus);
   }
+=======
+    console.log(errorObject);
+    populateErrors(errorObject.status);
+}
+>>>>>>> master
