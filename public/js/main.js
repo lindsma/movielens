@@ -45,7 +45,7 @@ function movieSearch(searchString) {
         "data": {},
         "datatype": "json",
         "success": function(data) {
-          dataArray.push(data.results);
+          console.log(data.results);
           for (var index = 0 ; index < dataArray.length; index++) {
 
             populateMovies(dataArray[index]);
