@@ -43,13 +43,14 @@ function movieSearch(searchString) {
         "success": function(data) {
             for (var index = 0; index < data.length; index++) {
                 var movieObject = data[index];
-                debugger;
-                populateMovies(movieObject);
+                // populateMovies(movieObject);
             }
         },
         "error": handleError
     });
-
+    console.log(movieObject);
+    console.log(this.movieObject);
+    populateMovies(movieObject);
 }
 
 //NavBar genre requests
@@ -103,13 +104,13 @@ function getRating(movieObject) {
         "datatype": "json",
         "success": function(data) {
             for (var index = 0; index < data.length; index++) {
-                console.log(genre);
                 var movieObject = data[index];
             }
         },
         "error": handleError
     });
-
+    console.log(movieObject);
+    console.log(this.movieObject);
     populateMovies(movieObject);
 }
 
@@ -127,6 +128,7 @@ function getRating(movieObject) {
 //
 // }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 function getPoster(title) {
 >>>>>>> master
@@ -157,6 +159,20 @@ function getPoster(title) {
     //     },
     //     "error": handleError
     // });
+=======
+// $.ajax({
+//     "method": "GET",
+//     "url": "../api/avg-rating?search=" + encodeURIComponent(movieId),
+//     "data": {},
+//     "datatype": "json",
+//     "success": function(data) {
+//         var avgRating = data[0].average_rating;
+//         populateMovies(movieObject, avgRating);
+//         console.log(avgRating);
+//     },
+//     "error": handleError
+// });
+>>>>>>> ec72717b0d434108a6c76140583458e05c11c3b7
 
 
 // function getPoster(title) {
@@ -329,5 +345,6 @@ function populateErrors(errorObject) {
 // error handlers
 
 function handleError(errorObject, textStatus, error) {
-    populateErrors(errorObject);
+    $('#content').empty('');
+    populateErrors(textStatus);
 }
