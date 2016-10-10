@@ -201,7 +201,7 @@ get '/api/movies/all/:id' do
   movie_hash.to_json
 end
 
-get '/api/movies/:title' do |title|
+get '/api/get_movies/:title' do |title|
   movie_data = Movie.where(["title LIKE ?", "%#{params[:title]}%"])
   movie_info = movie_data[0]
 
