@@ -35,25 +35,69 @@ $('#userInput').keypress(function(event) {
 
 
 //search bar requests
+// function movieSearch(searchString) {
+//     var searchbar = $("#userInput").val("");
+//     var dataArray = [];
+//     $.ajax({
+//         "method": "GET",
+//         "url": "/api/get_movies/" + encodeURIComponent(searchString),
+//         "data": {},
+//         "datatype": "json",
+//         "success": function(data) {
+//           dataArray.push(data);
+//           for (var index = 0 ; index < dataArray.length; index++) {
+//
+//             populateMovies(dataArray[index]);
+//
+//           }
+//         },
+//         "error": handleError
+//     });
+// }
+
 function movieSearch(searchString) {
-    var searchbar = $("#userInput").val("");
-    var dataArray = [];
-    $.ajax({
-        "method": "GET",
-        "url": "/api/get_movies/" + encodeURIComponent(searchString),
-        "data": {},
-        "datatype": "json",
-        "success": function(data) {
-          dataArray.push(data);
-          for (var index = 0 ; index < dataArray.length; index++) {
-
-            populateMovies(dataArray[index]);
-
-          }
-        },
-        "error": handleError
-    });
+   var searchbar = $("#userInput").val("");
+ //  var dataArray = [];
+   $.ajax({
+       "method": "GET",
+       "url": "/api/get_movies/" + encodeURIComponent(searchString),
+       "data": {},
+       "datatype": "json",
+       "success": function(data) {
+         for (var index = 0; index < data.length; index++) {
+           new MovieDetails(data.results[index]);
+             //populateMovies(data[index]);
+         }
+     },
+     "error": handleError
+ });
 }
+
+function MovieDetails(movieObject) {
+ console.log(movieObject);
+ this.info = {
+   movieId: movieObject.movie_info.id,
+   title: movieObject.movie_info.title,
+   overview: movieObject.movie_info.url,
+   release: movieObject.movie_info.release_date,
+   movieRating: movieObject.rating,
+   poster: getposter(this.title)
+ };
+ console.log(movieObject);
+   var source = $('#home-template').html();
+   var template = Handlebars.compile(source);
+   var context = {
+       rating: this.movieRating,
+        moviePoster: this.poster,
+       releaseDate: this.release,
+       movieTitle: this.title,
+       overview: this.overview,
+       movieId: this.movieId,
+   };
+   var html = template(context);
+   $(html).insertAfter("#search");
+}
+
 
 //NavBar genre requests
 
@@ -210,21 +254,21 @@ $('#container').on('click', 'p.expand-details', function(event) {
 // implement handlebars - home-template
 
 
-function populateMovies(movieObject) {
-  console.log(movieObject);
-    var source = $('#home-template').html();
-    var template = Handlebars.compile(source);
-    var context = {
-        rating: movieObject.rating,
-        // moviePoster: poster,
-        releaseDate: movieObject.movie_info.release_date,
-        movieTitle: movieObject.movie_info.title,
-        overview: movieObject.movie_info.url,
-        movieId: movieObject.movie_info.id
-    };
-    var html = template(context);
-    $(html).insertAfter("#search");
-}
+// function populateMovies(movieObject) {
+//   console.log(movieObject);
+//     var source = $('#home-template').html();
+//     var template = Handlebars.compile(source);
+//     var context = {
+//         rating: movieObject.rating,
+//         // moviePoster: poster,
+//         releaseDate: movieObject.movie_info.release_date,
+//         movieTitle: movieObject.movie_info.title,
+//         overview: movieObject.movie_info.url,
+//         movieId: movieObject.movie_info.id
+//     };
+//     var html = template(context);
+//     $(html).insertAfter("#search");
+// }
 
 
 // implement handlebars - top20-template
