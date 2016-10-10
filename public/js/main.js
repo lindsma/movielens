@@ -65,7 +65,7 @@ function movieQuery(response) {
         "error": handleError
     });
 
-    getRating(movieObject);
+    populateMovies(movieObject);
 }
 
 // function getRating(movieObject) {
