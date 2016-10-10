@@ -43,8 +43,8 @@ function movieSearch(searchString) {
         "data": {},
         "datatype": "json",
         "success": function(data) {
-          for (var key in obj) {
-            
+          for (var key in data) {
+
             var movieObject = data;
             populateMovies(movieObject);
 
