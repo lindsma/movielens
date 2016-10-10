@@ -11,6 +11,8 @@
 
 //After first keypress, this function takes over.
 
+var movieObject = "";
+
 var $rows = $('.movies');
 $('#userInput').keyup(function() {
     var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
@@ -42,7 +44,7 @@ function movieSearch(searchString) {
         "datatype": "json",
         "success": function(data) {
             for (var index = 0; index < data.length; index++) {
-                var movieObject = data[index];
+                movieObject = data[index];
                 // populateMovies(movieObject);
             }
         },
