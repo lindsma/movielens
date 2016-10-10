@@ -44,6 +44,7 @@ function movieSearch(searchString) {
         "datatype": "json",
         "success": function(data) {
             console.log("WOOT");
+            console.log(data);
             for (var index = 0; index < data.length; index++) {
               console.log(data);
                 // populateMovies(data[index]);
