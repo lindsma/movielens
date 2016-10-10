@@ -44,6 +44,45 @@ function movieQuery(response) {
     });
 }
 
+// 20 random movies
+function Top20() {
+    $.ajax({
+        "method": "GET",
+        // "url": "/api/get_movies/" + encodeURIComponent(searchString),
+        "url": 'https://shielded-taiga-96422.herokuapp.com/api/all-movies',
+        "data": {},
+        "datatype": "json",
+        "success": function(data) {
+            //for (var index = 0; data.length; index++) {
+              console.log(data);
+                //new MovieDetails(data.movie_data[index]);
+                //shuffle(data.movie_data);
+            //}
+        },
+        "error": handleError
+    });
+}
+function shuffle(data) {
+  var currentIndex = data.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = data[currentIndex];
+    array[currentIndex] = data[randomIndex];
+    data[randomIndex] = temporaryValue;
+  }
+
+   new MovieDetails(data.movie_data[index]);
+ }
+
+
+
 // movie object constructer
 
 function MovieDetails(movieObject) {
@@ -140,6 +179,7 @@ $('.navBar').on('click', '.genre', function(event) {
 $('header').click(function(event) {
     $("#content").empty();
     $('.genre').removeClass('active');
+    top20();
 });
 
 // click on arrow down to expand movie details
