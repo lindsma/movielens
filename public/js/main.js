@@ -11,7 +11,7 @@
 
 //After first keypress, this function takes over.
 
-var movieObject = "";
+var movieObject = null;
 
 var $rows = $('.movies');
 $('#userInput').keyup(function() {
@@ -44,14 +44,15 @@ function movieSearch(searchString) {
         "datatype": "json",
         "success": function(data) {
             for (var index = 0; index < data.length; index++) {
-                movieObject = data[index];
+                return data[index];
                 // populateMovies(movieObject);
             }
         },
         "error": handleError
     });
+
+    movieObject = data[index];
     console.log(movieObject);
-    console.log(this.movieObject);
     populateMovies(movieObject);
 }
 
@@ -212,9 +213,7 @@ $('#container').on('click', 'p.expand-details', function(event) {
 
 // implement handlebars - home-template
 
-
 function populateMovies(movieObject) {
-    $('#content').empty('');
     var source = $('#home-template').html();
     var template = Handlebars.compile(source);
     var poster = getPoster(movieObject.title);
