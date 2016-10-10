@@ -65,7 +65,7 @@ function movieSearch(searchString) {
        "datatype": "json",
        "success": function(data) {
          for (var index = 0; index < data.length; index++) {
-           new MovieDetails(data.results[index]);
+           return new MovieDetails(data.results[index]);
              //populateMovies(data[index]);
          }
      },
