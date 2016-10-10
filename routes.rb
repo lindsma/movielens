@@ -11,7 +11,6 @@ get '/' do
  send_file 'public/index.html'
 end
 
-# Lori's stuff start
 database_config = YAML::load(File.open('config/database.yml'))
 
 before do
@@ -37,7 +36,6 @@ register Sinatra::CrossOrigin
 configure do
   enable :cross_origin
 end
-# lori's stuff
 
 get '/api/all-movies' do
   Movie.select(:id, :title).all.to_json
@@ -47,6 +45,7 @@ get '/api/movie-list' do
   Movie.select(:id, :title).all.to_json
 end
 
+# These could probably be refactored to one function/call
 get '/api/genre/action' do
   action_movies = Movie.where(action: '1').all
   action_id = action_movies.select('id')
@@ -91,7 +90,6 @@ end
 get '/api/movies' do
   if !params['search'].nil?
     movies = Movie.where('title like (?)', "%#{params['search']}%")
-    # Needs a massive refactor. but it works!
     if movies.empty?
       halt(404)
     end
@@ -135,16 +133,16 @@ post '/api/add_user' do
   halt(400)
 end
 
-get '/api/top20' do
-  Rating.where.average('rating').all.round(1).to_f.to_json
-  # Rating.where(Movie.average('rating').round(2).to_json
-end
+# get '/api/top20' do
+#   Rating.where.average('rating').all.round(1).to_f.to_json
+#   # Rating.where(Movie.average('rating').round(2).to_json
+# end
 
 get '/api/test' do
   if !params['search'].nil?
     movie_data = Movie.where("title like (?)", "%#{params['search']}%")
     movie_info = movie_data[0]
-    movie_title = movie_info['title']
+    movie_title = movie_info['id', 'title']
 
     # Needs a massive refactor. but it works!
 
@@ -183,13 +181,14 @@ end
 
 get '/api/movies/all/:id' do
   movie = Movie.select(
-    'title, imdb_url, id, avg(rating), count(rating), unknown_genre, action,' \
-    ' adventure, animation, children, comedy, crime, documentary, drama, ' \
-    'fantasy, film_noir, horror, musical, mystery, romance, sci_fi, thriller,' \
-    ' war, western' \
+    'id, title, release_date, video_release, url, unknown, action, adventure,' \
+    'animation, children, comedy, crime, documentary,' \
+    'drama, fantasy, filmnoir, horror,' \
+    'musical, mystery, romance, scifi,' \
+    'thriller, war, western'
   ).joins('INNER JOIN ratings ON movies.id = ratings.movie_id').where(
     id: params['id']
-  ).group('title, imdb_url, id').first
+  ).group('title, url, id').first
 
   ratings = Rating.select(:user_id, :rating).joins(
     'INNER JOIN users ON ratings.user_id = users.id'
@@ -200,4 +199,16 @@ get '/api/movies/all/:id' do
   movie_hash = movie.as_json
   movie_hash['ratings'] = ratings.as_json
   movie_hash.to_json
+end
+
+get '/api/movies/:title' do |title|
+  movie_data = Movie.where(["title LIKE ?", "%#{params[:title]}%"])
+  movie_info = movie_data[0]
+
+  average_rating = Rating.select(:rating).where(movie_id: movie_info[:id]).average(:rating)
+
+  top_users = Rating.all.where(movie_id: movie_info[:id]).where(rating: 5).limit(5)
+
+  payload = {'movie_info' => movie_info, 'rating' => rating, 'top_users' => top_users}
+  payload.to_json
 end
