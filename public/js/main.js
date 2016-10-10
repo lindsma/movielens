@@ -43,6 +43,7 @@ function movieSearch(searchString) {
         "data": {},
         "datatype": "json",
         "success": function(data) {
+          console.log(data.length);          
           for (var key in data) {
 
             var movieObject = data;
