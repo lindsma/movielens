@@ -258,8 +258,9 @@ $('header').click(function(event) {
 // click on arrow down to expand movie details
 
 $('#container').on('click', 'p.expand-details', function(event) {
-    $(this).toggleClass('active');
-    $('.movie-details').toggleClass('active');
+    var movieId = $(this).attr('id');
+    $("#" + movieId).toggleClass('active');
+    $('.' + movieId).toggleClass('active');
 });
 
 // implement handlebars - home-template
@@ -286,7 +287,8 @@ function populateMovies(movieObject) {
         // moviePoster: poster,
         releaseDate: movieObject.release_date,
         movieTitle: movieObject.title,
-        overview: movieObject.url
+        overview: movieObject.url,
+        movieId: movieObject.id
     };
     var html = template(context);
     $(html).insertAfter("#search");
