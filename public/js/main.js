@@ -1,5 +1,3 @@
-//if enter is pressed, the specific movie is searched
-
 $('#userInput').keypress(function(event) {
     var searchString = $('#userInput').val();
     if (event.which == 13) {
@@ -78,7 +76,6 @@ function shuffle(data) {
     data[randomIndex] = temporaryValue;
   }
     newArray = data;
-    console.log(newArray);
 
       function populate(newArray) {
         for (var index = 0; index < 20; index++) {
@@ -89,6 +86,7 @@ function shuffle(data) {
  }
 
  // implement handlebars - top20-template
+
  function RandomDetails(movieObject) {
      this.info = {
          movieId: movieObject.id,
@@ -100,10 +98,11 @@ function shuffle(data) {
      };
 
  this.populate20 = function(movieObject) {
-     var source = $('#top20-template').html();
-     var template = Handlebars.compile(source);
-     var poster = this.poster_path;
-     var context = {
+   var source = $('#home-template').html();
+   var template = Handlebars.compile(source);
+   var context = {
+       //rating: this.info.movieRating,
+       // moviePoster: this.info.poster,
        releaseDate: this.info.release,
        movieTitle: this.info.title,
        overview: this.info.overview,
@@ -161,8 +160,11 @@ function getPoster(title) {
         "data": "{}"
     };
     $.ajax(settings).done(function(response) {
-        return response.results[0].poster_path;
-    });
+      //console.log("https://image.tmdb.org/t/p/w500/" + response.results[0].poster_path);
+      for (var index = 0; index < 20; index++) {
+          new RandomDetails(respnse[index]);
+      }
+  });
 }
 
 // rate movie
