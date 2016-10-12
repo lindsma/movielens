@@ -60,6 +60,8 @@ function top20() {
         "error": handleError
     });
 }
+
+//Zach stole this and adapted it... It shuffles the entire movie array then olny displays 20.
 function shuffle(data) {
   var currentIndex = data.length, temporaryValue, randomIndex;
 
@@ -160,11 +162,9 @@ function getPoster(title) {
         "data": "{}"
     };
     $.ajax(settings).done(function(response) {
-      //console.log("https://image.tmdb.org/t/p/w500/" + response.results[0].poster_path);
-      for (var index = 0; index < 20; index++) {
-          new RandomDetails(respnse[index]);
-      }
-  });
+       return ("https://image.tmdb.org/t/p/w500/" + response.results[0].poster_path);
+
+     });
 }
 
 // rate movie
@@ -225,7 +225,10 @@ $('#container').on('click', 'p.expand-details', function(event) {
     var movieId = $(this).attr('id');
     $("#" + movieId).toggleClass('active');
     $('.' + movieId).toggleClass('active');
+    var title = $(this).find(".movie-title").text();
+    console.log(title);
 });
+
 
 // error handlers
 
@@ -235,21 +238,6 @@ function handleError(errorObject, textStatus, error) {
     populateErrors(errorObject.status);
 }
 
-// implement handlebars - top20-template
-
-function populateTop20(movieObject) {
-    var source = $('#top20-template').html();
-    var template = Handlebars.compile(source);
-    var poster = this.poster_path;
-    var context = {
-        rating: movieObject.average_rating,
-        // moviePoster: poster,
-        movieTitle: movieObject.title,
-        overview: movieObject.url
-    };
-    var html = template(context);
-    $(html).insertAfter("#search");
-}
 
 // implement handlebars - error template
 
