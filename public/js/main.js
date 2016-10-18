@@ -141,7 +141,7 @@ function MovieDetails(movieObject) {
             movieId: this.info.movieId,
         };
         var html = template(context);
-        $(html).prependTo("#content");
+        $(html).prependTo("#content").fadeIn();
     };
     this.MagicElements(movieObject);
 }
