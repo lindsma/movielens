@@ -9,7 +9,7 @@ Create a web application with an API using the MovieLens dataset.
 * HTML5
 * Sass 
 * JavaScript
-* JQuery 
+* jQuery 
 * AJAX 
 
 #### Iron Yard Homework
